@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.sass("resources/sass/app.scss", "css")
+    .js("resources/js/app.js", "js")
+    .tailwind("./tailwind.config.js")
+    .browserSync({
+        watch: true,
+        files: [
+            "public/themes/tailwind/js/**/*",
+            "public/themes/tailwind/css/**/*",
+            "public/**/*.+(html|php)",
+            "**/*.php",
+        ],
+        reloadDelay: 300,
+        proxy: {
+            target: "127.0.0.1:58",
+            ws: true,
+        },
+    })
+    .disableSuccessNotifications();
