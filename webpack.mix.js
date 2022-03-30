@@ -1,5 +1,7 @@
 const mix = require("laravel-mix");
 
+require('laravel-mix-tailwind');
+require('laravel-mix-purgecss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -24,7 +26,7 @@ mix.sass("resources/sass/app.scss", "css")
         ],
         reloadDelay: 300,
         proxy: {
-            target: "127.0.0.1:58",
+            target: "127.0.0.1:39",
             ws: true,
         },
     })

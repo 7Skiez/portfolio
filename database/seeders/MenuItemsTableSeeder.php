@@ -15,165 +15,393 @@ class MenuItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        $menu = Menu::where('name', 'admin')->firstOrFail();
+        \DB::table('menu_items')->delete();
 
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.dashboard'),
-            'url'     => '',
-            'route'   => 'voyager.dashboard',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+        \DB::table('menu_items')->insert(array(
+            0 =>
+            array(
+                'id' => 1,
+                'menu_id' => 1,
+                'title' => 'Dashboard',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-boat',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 1,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.media'),
-            'url'     => '',
-            'route'   => 'voyager.media.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
-                'icon_class' => 'voyager-images',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 5,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.users'),
-            'url'     => '',
-            'route'   => 'voyager.users.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 1,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2017-11-21 16:23:22',
+                'route' => 'voyager.dashboard',
+                'parameters' => NULL,
+            ),
+            1 =>
+            array(
+                'id' => 4,
+                'menu_id' => 1,
+                'title' => 'Users',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-person',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 3,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.roles'),
-            'url'     => '',
-            'route'   => 'voyager.roles.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 4,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-07-03 04:51:09',
+                'route' => 'voyager.users.index',
+                'parameters' => NULL,
+            ),
+            2 =>
+            array(
+                'id' => 7,
+                'menu_id' => 1,
+                'title' => 'Roles',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-lock',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 2,
-            ])->save();
-        }
-
-        $toolsMenuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.tools'),
-            'url'     => '',
-        ]);
-        if (!$toolsMenuItem->exists) {
-            $toolsMenuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 3,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-07-03 04:51:09',
+                'route' => 'voyager.roles.index',
+                'parameters' => NULL,
+            ),
+            3 =>
+            array(
+                'id' => 8,
+                'menu_id' => 1,
+                'title' => 'Tools',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-tools',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 9,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.menu_builder'),
-            'url'     => '',
-            'route'   => 'voyager.menus.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 10,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2022-03-15 12:44:31',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            4 =>
+            array(
+                'id' => 9,
+                'menu_id' => 1,
+                'title' => 'Menu Builder',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-list',
-                'color'      => null,
-                'parent_id'  => $toolsMenuItem->id,
-                'order'      => 10,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.database'),
-            'url'     => '',
-            'route'   => 'voyager.database.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => 8,
+                'order' => 1,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-05-20 21:08:37',
+                'route' => 'voyager.menus.index',
+                'parameters' => NULL,
+            ),
+            5 =>
+            array(
+                'id' => 10,
+                'menu_id' => 1,
+                'title' => 'Database',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-data',
-                'color'      => null,
-                'parent_id'  => $toolsMenuItem->id,
-                'order'      => 11,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.compass'),
-            'url'     => '',
-            'route'   => 'voyager.compass.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => 8,
+                'order' => 2,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-05-20 21:08:37',
+                'route' => 'voyager.database.index',
+                'parameters' => NULL,
+            ),
+            6 =>
+            array(
+                'id' => 11,
+                'menu_id' => 1,
+                'title' => 'Compass',
+                'url' => '/admin/compass',
+                'target' => '_self',
                 'icon_class' => 'voyager-compass',
-                'color'      => null,
-                'parent_id'  => $toolsMenuItem->id,
-                'order'      => 12,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.bread'),
-            'url'     => '',
-            'route'   => 'voyager.bread.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
-                'icon_class' => 'voyager-bread',
-                'color'      => null,
-                'parent_id'  => $toolsMenuItem->id,
-                'order'      => 13,
-            ])->save();
-        }
-
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => __('voyager::seeders.menu_items.settings'),
-            'url'     => '',
-            'route'   => 'voyager.settings.index',
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
+                'color' => NULL,
+                'parent_id' => 8,
+                'order' => 3,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-05-20 21:08:37',
+                'route' => NULL,
+                'parameters' => NULL,
+            ),
+            7 =>
+            array(
+                'id' => 12,
+                'menu_id' => 1,
+                'title' => 'Hooks',
+                'url' => '/admin/hooks',
+                'target' => '_self',
+                'icon_class' => 'voyager-hook',
+                'color' => '#000000',
+                'parent_id' => 8,
+                'order' => 5,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-06-22 20:55:55',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            8 =>
+            array(
+                'id' => 13,
+                'menu_id' => 1,
+                'title' => 'Settings',
+                'url' => '',
+                'target' => '_self',
                 'icon_class' => 'voyager-settings',
-                'color'      => null,
-                'parent_id'  => null,
-                'order'      => 14,
-            ])->save();
-        }
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 11,
+                'created_at' => '2017-11-21 16:23:22',
+                'updated_at' => '2018-07-03 04:51:04',
+                'route' => 'voyager.settings.index',
+                'parameters' => NULL,
+            ),
+            9 =>
+            array(
+                'id' => 14,
+                'menu_id' => 1,
+                'title' => 'Themes',
+                'url' => '/admin/themes/options/tailwind',
+                'target' => '_self',
+                'icon_class' => 'voyager-paint-bucket',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 12,
+                'created_at' => '2017-11-21 16:31:00',
+                'updated_at' => '2022-03-25 01:14:45',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            10 =>
+            array(
+                'id' => 31,
+                'menu_id' => 1,
+                'title' => 'BREAD',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-bread',
+                'color' => '#000000',
+                'parent_id' => 8,
+                'order' => 4,
+                'created_at' => '2018-06-22 20:53:25',
+                'updated_at' => '2018-06-22 20:54:13',
+                'route' => 'voyager.bread.index',
+                'parameters' => NULL,
+            ),
+            11 =>
+            array(
+                'id' => 32,
+                'menu_id' => 1,
+                'title' => 'Certifications',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-certificate',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 13,
+                'created_at' => '2022-03-13 07:05:04',
+                'updated_at' => '2022-03-13 07:05:04',
+                'route' => 'voyager.certifications.index',
+                'parameters' => NULL,
+            ),
+            12 =>
+            array(
+                'id' => 34,
+                'menu_id' => 3,
+                'title' => 'Projects',
+                'url' => 'My Best Projects',
+                'target' => '_self',
+                'icon_class' => 'projects',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 1,
+                'created_at' => '2022-03-14 06:47:37',
+                'updated_at' => '2022-03-21 12:09:49',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            13 =>
+            array(
+                'id' => 35,
+                'menu_id' => 3,
+                'title' => '*Social Media',
+                'url' => 'Find Me On',
+                'target' => '_self',
+                'icon_class' => 'media',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 2,
+                'created_at' => '2022-03-14 06:51:11',
+                'updated_at' => '2022-03-21 12:04:08',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            14 =>
+            array(
+                'id' => 36,
+                'menu_id' => 3,
+                'title' => 'Certifications',
+                'url' => 'Industry Recognized',
+                'target' => '_self',
+                'icon_class' => 'certifications',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 4,
+                'created_at' => '2022-03-14 06:51:55',
+                'updated_at' => '2022-03-21 08:59:17',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            15 =>
+            array(
+                'id' => 37,
+                'menu_id' => 3,
+                'title' => 'Skills',
+                'url' => 'Based on Uxcel Skill Assessment',
+                'target' => '_self',
+                'icon_class' => 'skills',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 3,
+                'created_at' => '2022-03-14 06:52:42',
+                'updated_at' => '2022-03-21 16:11:20',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            16 =>
+            array(
+                'id' => 38,
+                'menu_id' => 1,
+                'title' => 'Social Media',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-facebook',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 15,
+                'created_at' => '2022-03-15 09:45:01',
+                'updated_at' => '2022-03-15 09:49:28',
+                'route' => 'voyager.social_media.index',
+                'parameters' => 'null',
+            ),
+            17 =>
+            array(
+                'id' => 39,
+                'menu_id' => 1,
+                'title' => 'Media',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-images',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 16,
+                'created_at' => '2022-03-15 10:14:06',
+                'updated_at' => '2022-03-15 10:14:06',
+                'route' => 'voyager.media.index',
+                'parameters' => NULL,
+            ),
+            18 =>
+            array(
+                'id' => 40,
+                'menu_id' => 3,
+                'title' => 'Tools',
+                'url' => 'Powerful Toolkit',
+                'target' => '_self',
+                'icon_class' => 'tools',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 5,
+                'created_at' => '2022-03-15 12:39:49',
+                'updated_at' => '2022-03-21 12:09:34',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            19 =>
+            array(
+                'id' => 41,
+                'menu_id' => 1,
+                'title' => 'Tools',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-tools',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 18,
+                'created_at' => '2022-03-15 12:43:14',
+                'updated_at' => '2022-03-15 12:45:51',
+                'route' => 'voyager.tools.index',
+                'parameters' => 'null',
+            ),
+            20 =>
+            array(
+                'id' => 42,
+                'menu_id' => 3,
+                'title' => '*Contact Me',
+                'url' => 'Just Imagine',
+                'target' => '_self',
+                'icon_class' => 'contacts',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 6,
+                'created_at' => '2022-03-15 14:34:32',
+                'updated_at' => '2022-03-21 11:55:23',
+                'route' => NULL,
+                'parameters' => '',
+            ),
+            21 =>
+            array(
+                'id' => 43,
+                'menu_id' => 1,
+                'title' => 'Skills',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-params',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 19,
+                'created_at' => '2022-03-18 12:59:50',
+                'updated_at' => '2022-03-23 02:39:24',
+                'route' => 'voyager.skills.index',
+                'parameters' => 'null',
+            ),
+            22 =>
+            array(
+                'id' => 44,
+                'menu_id' => 1,
+                'title' => 'Projects',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-laptop',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 20,
+                'created_at' => '2022-03-22 11:50:22',
+                'updated_at' => '2022-03-22 11:50:22',
+                'route' => 'voyager.projects.index',
+                'parameters' => NULL,
+            ),
+            23 =>
+            array(
+                'id' => 45,
+                'menu_id' => 1,
+                'title' => 'Themes',
+                'url' => '/admin/themes',
+                'target' => '_self',
+                'icon_class' => 'voyager-paint-bucket',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 98,
+                'created_at' => '2022-03-25 01:14:45',
+                'updated_at' => '2022-03-25 01:14:45',
+                'route' => NULL,
+                'parameters' => NULL,
+            ),
+        ));
     }
 }

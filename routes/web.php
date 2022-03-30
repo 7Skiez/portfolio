@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('portfolio.home');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

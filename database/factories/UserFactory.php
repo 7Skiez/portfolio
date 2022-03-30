@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use TCG\Voyager\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -18,8 +21,15 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'role_id' => fn() => Role::all()->random()->id,
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
+            'avatar' => function() {
+                $locationDate = 'users/' . Carbon::now()->format('FY') . '/';
+                File::ensureDirectoryExists('public/storage/'. 'users/' . Carbon::now()->format('FY') . '/');
+                return $locationDate.app('Picsum')->image('public/storage/' .$locationDate , 256, 256, null, false);
+            },
+            'username' => $this->faker->userName(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

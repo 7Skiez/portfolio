@@ -16,16 +16,24 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (User::count() == 0) {
-            $role = Role::where('name', 'admin')->firstOrFail();
+        \DB::table('users')->delete();
 
-            User::create([
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
-                'password'       => bcrypt('password'),
-                'remember_token' => Str::random(60),
-                'role_id'        => $role->id,
-            ]);
-        }
+        \DB::table('users')->insert(array(
+            0 =>
+            array(
+                'id' => 1,
+                'role_id' => 1,
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'avatar' => 'users/default.png',
+                'username' => 'admin',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$ykKYwz1sD4m5SwSsiXDDWeZ8kefcjIi2n1rh8xmXaVyQTFlnWHapu',
+                'remember_token' => 'vmHBCghk8amQoI2W7sv8FFa6wfWOCMRXZThROChWDPoAq073mFlctRaoctIL',
+                'settings' => NULL,
+                'created_at' => '2022-03-29 22:10:34',
+                'updated_at' => '2022-03-29 22:10:34',
+            )
+        ));
     }
 }
