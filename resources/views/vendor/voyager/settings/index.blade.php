@@ -4,6 +4,16 @@
 
 @section('css')
     <style>
+
+        /* @import 'https://simonwep.github.io/gpickr/dist/gpickr.min.css'; */
+
+        /* .gpickr {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            max-width: max-content;
+        } */
+
         .panel-actions .voyager-trash {
             cursor: pointer;
         }
@@ -206,163 +216,52 @@
             background-color:#fff !important;
         }
 
-        /* Code By Webdevtrick ( https://webdevtrick.com ) */
-        .gradientContainer {
-            max-width: 600px;
-            margin: 2rem auto;
-            position: relative;
-            padding: 0 1.7rem;
+        @media (min-width: 640px) { 
+            .color{
+                max-width: 50%
+            }
+
+            .gradient{
+                max-width: 75%
+            }
         }
 
-        .l-gradeint {
-            display: block;
-            width: 100%;
-            height: 4rem;
-            border-radius: 10px
-
-        }
-
-        .gra-range {
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        .color-select {
-            appearance: none;
-            position: absolute;
-            top: 0;
-            border: 1px solid #212121;
-            border-radius: 9999px;
+        .gpickr-output{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
             outline: none;
-            height: 3.9rem;
-            padding: 0;
-            overflow: hidden;
-            background: none;
-            cursor: pointer;
-            transform: scale(1.2);
-            ;
-        }
-
-        input[type="color"]::-webkit-color-swatch-wrapper {
-            padding: 0;
-        }
-
-        input[type="color"]::-webkit-color-swatch {
             border: none;
-        }
-
-        .side1 {
-            left: 0;
-            background: var(--firstside);
-        }
-
-        .side2 {
-            right: 0;
-            background: var(--secondside);
-        }
-
-        /* range slider style */
-        input[type=range] {
-            height: 39px;
-            -webkit-appearance: none;
-            margin: 10px 0;
+            box-shadow: none;
             width: 100%;
-        }
-
-        input[type=range]:focus {
-            outline: none;
-        }
-
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 12px;
-            cursor: pointer;
-            animate: 0.2s;
-            box-shadow: 1px 1px 2px #A6A6A6;
-            background: #212121;
-            border-radius: 9999px;
-            border: 0px solid #F27B7F;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            /* box-shadow: 1px 1px 2px #A6A6A6; */
-            /* border: 1px solid rgba(0, 0, 0,0.1); */
-            height: 30px;
-            width: 30px;
-            border-radius: 9999px;
-            background: linear-gradient(0deg, rgba(127, 127, 127, 1), 50%, rgba(217, 217, 217, 1));
-            cursor: pointer;
-            -webkit-appearance: none;
-            margin-top: -10px;
-        }
-
-        input[type=range]:focus::-webkit-slider-runnable-track {
-            background: #212121;
-        }
-
-        input[type=range]::-moz-range-track {
-            width: 100%;
-            height: 12px;
-            cursor: pointer;
-            animate: 0.2s;
-            box-shadow: 1px 1px 2px #A6A6A6;
-            background: #212121;
+            height: 40px;
             border-radius: 4px;
-            border: 0px solid #F27B7F;
+            background-color: #fff;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 24px;
+            letter-spacing: normal;
+            color: #312e55;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 0;
+            padding-bottom: 0;
+            transition: all 0.15s ease;
+            box-shadow: 0px 0px 0px 2px #bbbfc5;
+        }
+        .gpickr-output:hover {
+            background-color: #d4e5ff;
+            box-shadow: none;
+        }
+        .gpickr-output:focus {
+            box-shadow: 0px 0px 0px 2px #6dbafd;
+            background-color: #e5f3ff;
         }
 
-        input[type=range]::-moz-range-thumb {
-            box-shadow: 1px 1px 2px #A6A6A6;
-            border: 2px solid #212121;
-            height: 30px;
-            width: 30px;
-            border-radius: 0px;
-            background: #00dd71;
-            cursor: pointer;
-        }
-
-        input[type=range]::-ms-track {
-            width: 100%;
-            height: 12px;
-            cursor: pointer;
-            animate: 0.2s;
-            background: transparent;
-            border-color: transparent;
-            color: transparent;
-        }
-
-        input[type=range]::-ms-fill-lower {
-            background: #212121;
-            border: 0px solid #F27B7F;
-            border-radius: 8px;
-            box-shadow: 1px 1px 2px #A6A6A6;
-        }
-
-        input[type=range]::-ms-fill-upper {
-            background: #212121;
-            border: 0px solid #F27B7F;
-            border-radius: 8px;
-            box-shadow: 1px 1px 2px #A6A6A6;
-        }
-
-        input[type=range]::-ms-thumb {
-            margin-top: 1px;
-            box-shadow: 1px 1px 2px #A6A6A6;
-            border: 2px solid #212121;
-            height: 30px;
-            width: 30px;
-            border-radius: 0px;
-            background: #00dd71;
-            cursor: pointer;
-        }
-
-        input[type=range]:focus::-ms-fill-lower {
-            background: #212121;
-        }
-
-        input[type=range]:focus::-ms-fill-upper {
-            background: #212121;
-        }
     </style>
 @stop
 
@@ -438,12 +337,21 @@
                                         <div id="{{ $setting->key }}" data-theme="{{ @$options->theme }}" data-language="{{ @$options->language }}" class="ace_editor min_height_400" name="{{ $setting->key }}">{{ $setting->value ?? '' }}</div>
                                         <textarea name="{{ $setting->key }}" id="{{ $setting->key }}_textarea" class="hidden">{{ $setting->value ?? '' }}</textarea>
                                     @elseif($setting->type == "color")
-                                        <input type="color" name="{{ $setting->key }}">
+                                        <div class="gpickr color"></div>
+                                        {{-- <div class="color-container {{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}"></div> --}}
+
+                                        {{-- <input type="color" name="{{ $setting->key }}" value="{{ $setting->value }}"> --}}
                                     @elseif($setting->type == "gradient")
                                         <?php 
                                             $options = json_decode($setting->value);
                                         ?>
-                                        <div class="gradientContainer">
+                                        {{-- <template> --}}
+                                        <div class="gpickr gradient">
+                                            {{-- <div class="{{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}"></div>
+                                            <textarea class="gradient-output {{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}" name="{{ $setting->key }}">{{ $setting->value ?? '' }}</textarea> --}}
+                                        </div>
+                                        {{-- </template> --}}
+                                        {{-- <div class="gradientContainer">
                                             <div class="l-gradeint"></div>
 
                                             <input type="color" class="color-select side1" value="{{ $options->colors[0][0] ?? '#00FFFF' }}"/>
@@ -451,11 +359,11 @@
                                             <input type="range" value="{{ $options->colors[0][1] ?? '255' }}" min="0" max="1" step="0.01" class="side1-alpha">
                                             <input type="range" value="{{ $options->colors[1][1] ?? '255' }}" min="0" max="1" step="0.01" class="side2-alpha">
                                             @if(isset($options->angle) || isset($options->hint))
-                                                <input type="range" value="{{ $options->angle ?? '180' }}" min="0" max="360" class="gra-angle">
+                                                <input type="range" x-model="angle" value="{{ $options->angle ?? '180' }}" min="0" max="360" class="gra-angle">
                                                 <input type="range" value="{{ $options->hint ?? '50' }}" min="0" max="100" class="gra-hint">
                                             @endif
-                                            <input name="{{ $setting->key }}" type="hidden" class="hiddenInput">
-                                        </div>
+                                            <textarea class="output-value" name="{{ $setting->key }}"></textarea>
+                                        </div> --}}
                                     @elseif($setting->type == "image" || $setting->type == "file")
                                         @if(isset( $setting->value ) && !empty( $setting->value ) && Storage::disk(config('voyager.storage.disk'))->exists($setting->value))
                                             <div class="img_settings_container">
@@ -632,6 +540,9 @@
 @stop
 
 @section('javascript')
+
+    <script src="{{ asset('./js/settings.js') }}"></script>
+
     <script>
         $('document').ready(function () {
             $('#toggle_options').click(function () {
@@ -669,49 +580,47 @@
             // Initiliaze rich text editor
             tinymce.init(window.voyagerTinyMCE.getConfig());
 
-            const hexToRgba = (hex, opacity) => {
+            // const hexToRgba = (hex, opacity) => {
 
-                let colors = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
-                        ,(m, r, g, b) => '#' + r + r + g + g + b + b)
-                .substring(1).match(/.{2}/g)
-                .map(x => parseInt(x, 16))
+            //     let colors = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+            //             ,(m, r, g, b) => '#' + r + r + g + g + b + b)
+            //     .substring(1).match(/.{2}/g)
+            //     .map(x => parseInt(x, 16))
 
-                return `rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, ${opacity})`
-            }
+            //     return `rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, ${opacity})`
+            // }
 
-            document.querySelectorAll('.gradientContainer').forEach(e => {
+            // document.querySelectorAll('.gradientContainer').forEach(e => {
 
-                updateGradient = (el) => {
-                    var angleInput = el.querySelector('.gra-angle')
-                    var hintInput = el.querySelector('.gra-hint')
-                    var firstSide = el.querySelector('.side1')
-                    var firstSideAlpha = el.querySelector('.side1-alpha')
-                    var secondSide = el.querySelector('.side2')
-                    var secondSideAlpha = el.querySelector('.side2-alpha')
+            //     updateGradient = (el) => {
+            //         var angleInput = el.querySelector('.gra-angle')
+            //         var hintInput = el.querySelector('.gra-hint')
+            //         var firstSide = el.querySelector('.side1')
+            //         var firstSideAlpha = el.querySelector('.side1-alpha')
+            //         var secondSide = el.querySelector('.side2')
+            //         var secondSideAlpha = el.querySelector('.side2-alpha')
 
-                    console.log(firstSide.style, secondSide.style)
-                    firstSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + firstSideAlpha.value + ') 100%)'
-                    secondSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + secondSideAlpha.value + ') 100%)'
+            //         firstSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + firstSideAlpha.value + ') 100%)'
+            //         secondSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + secondSideAlpha.value + ') 100%)'
                     
-                    if(angleInput && hintInput) {
+            //         if(angleInput && hintInput) {
 
-                        el.querySelector('.l-gradeint').style.background = `linear-gradient(${angleInput.value}deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, ${hintInput.value}%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-                        el.querySelector('.hiddenInput').value = JSON.stringify({
-                            'colors': [[firstSide.value, firstSideAlpha.value], [secondSide.value, secondSideAlpha.value]],
-                            'angle': angleInput.value,
-                            'hint': hintInput.value
-                            })
-                    } else {
-                        el.querySelector('.l-gradeint').style.background = `linear-gradient(90deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, 50%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-                        el.querySelector('.hiddenInput').value = JSON.stringify({'colors': [[firstSide.value, firstSideAlpha.value], [secondSide.value, secondSideAlpha.value]]})
-                    }
-                }
-                updateGradient(e.parentNode)
+            //             el.querySelector('.l-gradeint').style.background = `linear-gradient(${angleInput.value}deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, ${hintInput.value}%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
+            //             el.querySelector('.output-value').innerHTML = `linear-gradient(${angleInput.value}deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, ${hintInput.value}%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
 
-                e.querySelectorAll('input[type="color"],input[type="range"]').forEach($e => e.addEventListener('input', event => {
-                    updateGradient(event.target.parentNode)
-                }))
-            })
+            //         } else {
+
+            //             el.querySelector('.l-gradeint').style.background = `linear-gradient(90deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, 50%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
+            //             el.querySelector('.output-value').innerHTML = `linear-gradient(90deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, 50%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
+
+            //         }
+            //     }
+            //     updateGradient(e.parentNode)
+
+            //     e.querySelectorAll('input[type="color"],input[type="range"]').forEach($e => e.addEventListener('input', event => {
+            //         updateGradient(event.target.parentNode)
+            //     }))
+            // })
 
         });
     </script>
