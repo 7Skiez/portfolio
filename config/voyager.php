@@ -185,7 +185,7 @@ return [
 
     'primary_color' => '#22A7F0',
 
-    'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
+    'show_dev_tips' => false, // Show development tip "How To Use:" in Menu and Settings
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
@@ -206,7 +206,7 @@ return [
     ],
 
     // Activate compass when environment is NOT local
-    'compass_in_production' => false,
+    'compass_in_production' => true,
 
     'media' => [
         // The allowed mimetypes to be uploaded through the media-manager.
@@ -214,6 +214,8 @@ return [
         'allowed_mimetypes' => [
           'image/jpeg',
           'image/png',
+          'image/svg+xml',
+          'image/webp',
           'image/gif',
           'image/bmp',
           'video/mp4',
