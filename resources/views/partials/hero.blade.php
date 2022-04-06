@@ -35,13 +35,15 @@
 
         preg_match_all('/(?<=--).*?(?=--)/', setting('ivno.hero_items'), $matches);
 
+        array_map(fn($v, $k) => !($k & 1) ? $v : '', $matches[0], array_keys($matches[0]));
+
         if (count($matches[0])) {
             $splitMatches = array_chunk($matches[0], ceil(count($matches[0]) / 2));
-            $reduceBy = function (array $matches) {
-                return (setting('ivno.degree_rotation') * 2) / (count($matches) === 1 ? 2 : count($matches) - 1);
-            };
-            $degree1 = setting('ivno.degree_rotation');
-            $degree2 = setting('ivno.degree_rotation');
+
+            $reduceBy = fn($matches) => (setting('ivno.hero_items_degree_rotation') * 2) / (count($matches) === 1 ? 2 : count($matches) - 1);
+
+            $degree1 = setting('ivno.hero_items_degree_rotation');
+            $degree2 = setting('ivno.hero_items_degree_rotation');
         }
     ?>
 
@@ -86,11 +88,13 @@
                 </div>
             </div>
 
-            <h1 class="headline flex flex-row text-center justify-center items-end -mr-6 gradient text-gradient my-3 invisible text-center font-black text-6xl leading-10 tracking-[1.5rem] hover:tracking-wider transition-none duration-700 ease-out delay-150 transform translate-y-12 opacity-0 scale-10 sm:leading-none" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>
-                @foreach ($headlineCombo as $combo)
-                    <span>{{ $combo[0] }}</span><span>{{ $combo[1] }}</span>
-                @endforeach
-            </h1>
+            <div class="flex text-center justify-center">
+                <h1 class="headline flex flex-row w-max items-end -mr-6 bg-gradient text-gradient my-3 invisible font-black text-6xl leading-10 tracking-[1.5rem] hover:tracking-wider transition-none duration-700 ease-out delay-150 transform translate-y-12 opacity-0 scale-10 sm:leading-none" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>
+                    @foreach ($headlineCombo as $combo)
+                        <span>{{ $combo[0] }}</span><span>{{ $combo[1] }}</span>
+                    @endforeach
+                </h1>
+            </div>
 
             <div class="flex flex-row justify-center">
                 @if (isset($splitMatches) && count($splitMatches[0]))
@@ -101,9 +105,9 @@
                     </div>
                 @endif
                 <div class="basis-auto lg:basis-2/5 flex flex-col items-center mx-12 lg:mx-16">
-                    <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ $portfolio->subheadline }}</h2>
+                    <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ setting('ivno.subheadline') }}</h2>
                     <h2 class="text-xl lg:text-2xl font-medium text-center text-accent mx-auto mb-12">
-                        {!! $portfolio->description !!}
+                        {!! setting('ivno.description') !!}
                     </h2>
                     @if (count($portfolio->certifications))
                         <div class="flex flex-row flex-wrap justify-center">

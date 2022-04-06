@@ -16,7 +16,7 @@
 
                 @if ($ivno && menu('Ivno', '_json'))
                     @foreach (menu('Ivno', '_json') as $i => $section)
-                        <a @click="throttle(blinkText, 1000); mobileMenuOpen = false" href="#{{ $portfolioSections[$i]['id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
+                        <a @click="debounce(blinkText, 300); mobileMenuOpen = false" href="#{{ $portfolioSections[$i]['id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
                             {{ $portfolioSections[$i]['title'] }}
                         </a>
                     @endforeach

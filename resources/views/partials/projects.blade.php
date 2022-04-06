@@ -15,7 +15,7 @@
                                 <p class="text-slate-400 mt-4 text-sm sm:text-base"><span class="text-pink-500">&#60;p&#62;</span>{{ Illuminate\Support\Str::limit($project->description, 150, '...') }}<span class="text-pink-500">&#60;/p&#62;</span></p>
                                 <div class="flex items-center justify-start space-x-6 mt-4">
                                     <a href="{{ $project->link }}" class="flex items-center justify-center transition-all duration-1000 ease-out transform text-sm sm:text-base font-bold text-[#333644]">
-                                        <img src="{{ asset('themes/tailwind/images/link.svg') }}" alt="link icon" class="mr-1 sm:mr-2 scale-90"> {{ $project->link_title }}
+                                        <img src="{{ asset('storage/projects/link.png') }}" alt="link icon" class="mr-1 sm:mr-2 scale-90"> {{ $project->link_title }}
                                     </a>
                                     @if ($project->technologies)
                                         <div class="flex items-center justify-end flex-1 w-full h-full space-x-2 sm:space-x-4">
@@ -57,7 +57,7 @@
                                     <p class="text-slate-400 mt-4 text-sm sm:text-base"><span class="text-pink-500"></span>{{ Illuminate\Support\Str::limit($project->description, 150, '...') }}<span class="text-pink-500"></span></p>
                                     <div class="flex items-center justify-start space-x-6 mt-4">
                                         <a href="{{ $project->link }}" class="flex items-center justify-center transition-all duration-1000 ease-out transform text-sm sm:text-base font-bold text-[#333644]">
-                                            <img src="{{ asset('themes/tailwind/images/link.png') }}" alt="link icon" class="mr-1 sm:mr-2 scale-90"> {{ $project->link_title }}
+                                            <img src="{{ asset('/storage/projects/link.png') }}" alt="link icon" class="mr-1 sm:mr-2 scale-90"> {{ $project->link_title }}
                                         </a>
                                     </div>
                                 </div>

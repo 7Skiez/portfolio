@@ -33,16 +33,16 @@ class HomeController extends \App\Http\Controllers\Controller
 
     protected function seo($p)
     {
-        preg_match_all('/(?<=--).*?(?=--)/', setting($p.'_headline'), $headline);
-        $headlineCombo = array_map(fn($i) => explode("=", $i), $headline[0]);
+        preg_match_all('/(?<=--).*?(?=--)/', setting($p . '.headline'), $headline);
+        $headlineCombo = array_map(fn ($i) => explode("=", $i), $headline[0]);
         $headline = '';
-        foreach($headlineCombo as $combo)$headline .= $combo[0];
+        foreach ($headlineCombo as $combo) $headline .= $combo[0];
 
-        ($p === 'ivno') ? $description = preg_replace('/(\r\n|\n|\r)/', ' ', preg_replace('/(<([^>]+)>)/','', setting('ivno_description'))) : $description = ''; 
+        ($p === 'ivno') ? $description = preg_replace('/(\r\n|\n|\r)/', ' ', preg_replace('/(<([^>]+)>)/', '', setting('ivno.description'))) : $description = '';
 
         return (object)[
             'title'         => $headline,
-            'subheadline'   => setting($p . '_subheadline'),
+            'subheadline'   => setting($p . '.subheadline'),
             'description'   => $description,
             'image'         => User::where('username', '=', $p)->firstOrFail()->avatar,
             'type'          => 'website'
@@ -52,28 +52,28 @@ class HomeController extends \App\Http\Controllers\Controller
     protected function portfolio($p)
     {
         $portfolio = [
-            'domain_name' => setting($p . '_domain_name'),
+            'domain_name' => setting($p . '.domain_name'),
             'profile_pic' => User::where('username', '=', $p)->firstOrFail()->avatar,
-            'hero_items' => setting($p . '_hero_items'),
-            'bg_color' => setting($p . '_bg_color'),
-            'accent_color' => setting($p . '_accent_color'),
-            'logo' => setting($p . '_logo'),
-            'headline' => setting($p . '_headline'),
-            'subheadline' => setting($p . '_subheadline'),
-            'description' => setting($p . '_description'),
-            'projects_title' => setting($p . '_projects_title'),
-            'skills_title' => setting($p . '_skills_title'),
-            'certification_title' => setting($p . '_certification_title'),
+            'hero_items' => setting($p . '.hero_items'),
+            'bg_color' => setting($p . '.bg_color'),
+            'accent_color' => setting($p . '.accent_color'),
+            'logo' => setting($p . '.logo'),
+            'headline' => setting($p . '.headline'),
+            // 'subheadline' => setting($p . '.subheadline'),
+            'description' => setting($p . '.description'),
+            'projects_title' => setting($p . '.projects_title'),
+            'skills_title' => setting($p . '.skills_title'),
+            'certification_title' => setting($p . '.certification_title'),
             'owner_id' => User::where('username', '=', $p)->firstOrFail()->id,
-            'contacts' => setting($p . '_contact_me'),
+            'contacts' => setting($p . '.contact_me'),
         ];
 
         return (object) array_merge($portfolio, [
-            'projects' => Project::where('owner_id', '=', $portfolio['owner_id'])->where('featured', '!=', false)->orderBy('order', 'asc')->get(),
-            'media' => Medium::where('owner_id', '=', $portfolio['owner_id'])->where('featured', '!=', false)->orderBy('order', 'desc')->get(),
-            'skills' => Skill::where('owner_id', '=', $portfolio['owner_id'])->where('featured', '!=', false)->orderBy('order', 'desc')->get(),
-            'certifications' => Certification::where('owner_id', '=', $portfolio['owner_id'])->where('featured', '!=', false)->orderBy('order', 'desc')->get(),
-            'tools' => Tool::where('owner_id', '=', $portfolio['owner_id'])->where('featured', '!=', false)->orderBy('order', 'desc')->get()
+            'projects' => Project::where('owner_id', '=', $portfolio['owner_id'])->where('featured', true)->orderBy('order', 'asc')->get(),
+            'media' => Medium::where('owner_id', '=', $portfolio['owner_id'])->where('featured', true)->orderBy('order', 'desc')->get(),
+            'skills' => Skill::where('owner_id', '=', $portfolio['owner_id'])->where('featured', true)->orderBy('order', 'asc')->get(),
+            'certifications' => Certification::where('owner_id', '=', $portfolio['owner_id'])->where('featured', true)->orderBy('order', 'desc')->get(),
+            'tools' => Tool::where('owner_id', '=', $portfolio['owner_id'])->where('featured', true)->orderBy('order', 'desc')->get()
         ]);
     }
 
@@ -92,7 +92,7 @@ class HomeController extends \App\Http\Controllers\Controller
             $v->icon_class == 'skills' ? $id = $portfolioSections[$i]['id'] : null;
         }
 
-        $activeSlide = Project::where('owner_id', '=', $this->portfolio->owner_id)->where('featured', '!=', false)->where('active', '=', 1)->first();
+        $activeSlide = Project::where('owner_id', '=', $this->portfolio->owner_id)->where('featured', true)->where('active', 1)->first();
 
         return [
             'slider' => [
@@ -100,9 +100,12 @@ class HomeController extends \App\Http\Controllers\Controller
             ],
             'radarChart' => [
                 'id' => $id,
-                'skills' => $this->portfolio->skills->pluck('percentage', 'name'),
-                'colors' => [setting($this->portfolioOwner . '_radar_color_one'), setting($this->portfolioOwner . '_radar_color_two')],
-                'roundStrokes' => setting($this->portfolioOwner . '_radar_roundstrokes')
+                'radarItems' => $this->portfolio->skills->pluck('percentage', 'name'),
+                // 'colors' => [setting($this->portfolioOwner . '_radar_color_one'), setting($this->portfolioOwner . '_radar_color_two')],
+                'gradient' => setting($this->portfolioOwner .'.radar_area_gradient'),
+                'roundStrokes' => setting($this->portfolioOwner . '.radar_area_roundstrokes'),
+                'strokeWidth' => setting($this->portfolioOwner . '.radar_stroke_width'),
+                'dotRadius' => setting($this->portfolioOwner . '.radar_dot_radius')
             ]
         ];
     }

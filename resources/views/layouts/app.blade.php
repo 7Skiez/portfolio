@@ -69,7 +69,7 @@
                 background-size: 28px 28px;
             }
 
-            .gradient {
+            .bg-gradient {
                 background-image: {{ setting('ivno.main_gradient') }}
             }
 
@@ -111,11 +111,11 @@
         
     <main class="flex-grow overflow-x-hidden">
         @include('partials.hero')
-        @foreach (menu('Ivno', '_json') as $i => $section)
+        @foreach (myMenu('ivno', '_json') as $i => $section)
             @php
                 $dataType = $section->icon_class;
             @endphp
-            @if(isset($portfolio->{$dataType}))
+            @if(isset($portfolio->{$dataType}) && $section->featured)
                 @if(is_countable($portfolio->{$dataType}))
                     @if(count($portfolio->{$dataType}))
                         @include('partials.' . $dataType)
