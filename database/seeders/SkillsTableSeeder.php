@@ -6,221 +6,237 @@ use Illuminate\Database\Seeder;
 
 class SkillsTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
+        
 
         \DB::table('skills')->delete();
-
-        \DB::table('skills')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('skills')->insert(array (
+            0 => 
+            array (
                 'id' => 1,
                 'name' => 'PHP',
-                'percentage' => '0.80',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 1,
+                'order' => 37,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 17:53:24',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => 2,
                 'name' => 'Laravel',
-                'percentage' => '0.60',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 2,
+                'order' => 36,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:24:16',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            2 =>
-            array(
+            2 => 
+            array (
                 'id' => 3,
                 'name' => 'Java Script',
-                'percentage' => '0.55',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 3,
+                'order' => 35,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:09:13',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            3 =>
-            array(
+            3 => 
+            array (
                 'id' => 4,
                 'name' => 'Vue.Js',
-                'percentage' => '0.40',
+                'percentage' => '0',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 4,
+                'order' => 34,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 17:55:19',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            4 =>
-            array(
+            4 => 
+            array (
                 'id' => 5,
                 'name' => 'Tailwind',
-                'percentage' => '0.90',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 5,
+                'order' => 33,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:23:25',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            5 =>
-            array(
+            5 => 
+            array (
                 'id' => 6,
                 'name' => 'HTML',
-                'percentage' => '0.90',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 6,
+                'order' => 32,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:26:43',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            6 =>
-            array(
+            6 => 
+            array (
                 'id' => 7,
                 'name' => 'CSS',
-                'percentage' => '0.90',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 7,
+                'order' => 31,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:22:47',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            7 =>
-            array(
+            7 => 
+            array (
                 'id' => 8,
                 'name' => 'Research',
-                'percentage' => '0.95',
+                'percentage' => '1',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 8,
+                'order' => 28,
                 'featured' => 1,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:20:36',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            8 =>
-            array(
+            8 => 
+            array (
                 'id' => 9,
                 'name' => 'Aut hic.',
-                'percentage' => '0.03',
+                'percentage' => '0',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 9,
+                'order' => 30,
                 'featured' => 0,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:08:39',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            9 =>
-            array(
+            9 => 
+            array (
                 'id' => 10,
                 'name' => 'Quo.',
-                'percentage' => '0.20',
+                'percentage' => '0',
                 'image' => NULL,
                 'owner_id' => 1,
-                'order' => 10,
+                'order' => 29,
                 'featured' => 0,
                 'created_at' => '2021-12-19 12:08:28',
-                'updated_at' => '2021-12-28 18:08:46',
+                'updated_at' => '2022-04-02 16:59:23',
             ),
-            10 =>
-            array(
+            10 => 
+            array (
                 'id' => 11,
                 'name' => 'Interaction Design',
-                'percentage' => '0.90',
+                'percentage' => '90',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 2,
+                'order' => 146,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-25 17:25:22',
+                'updated_at' => '2022-04-06 20:13:57',
             ),
-            11 =>
-            array(
+            11 => 
+            array (
                 'id' => 12,
                 'name' => 'User Experience',
-                'percentage' => '0.80',
+                'percentage' => '80',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 3,
+                'order' => 143,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-23 13:37:03',
+                'updated_at' => '2022-04-06 20:13:36',
             ),
-            12 =>
-            array(
+            12 => 
+            array (
                 'id' => 13,
                 'name' => 'User Research',
-                'percentage' => '0.65',
+                'percentage' => '65',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 1,
+                'order' => 142,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-25 17:25:22',
+                'updated_at' => '2022-04-06 20:13:36',
             ),
-            13 =>
-            array(
+            13 => 
+            array (
                 'id' => 14,
                 'name' => 'Technical',
-                'percentage' => '0.95',
+                'percentage' => '95',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 4,
+                'order' => 144,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-18 22:40:22',
+                'updated_at' => '2022-04-06 20:13:57',
             ),
-            14 =>
-            array(
-                'id' => 15,
-                'name' => 'Process',
-                'percentage' => '0.95',
-                'image' => NULL,
-                'owner_id' => 2,
-                'order' => 5,
-                'featured' => 0,
-                'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-26 00:51:34',
-            ),
-            15 =>
-            array(
+            14 => 
+            array (
                 'id' => 16,
                 'name' => 'Visual Design',
-                'percentage' => '0.90',
+                'percentage' => '90',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 6,
+                'order' => 441,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-03-18 22:40:57',
+                'updated_at' => '2022-04-06 20:13:36',
             ),
-            16 =>
-            array(
-                'id' => 17,
-                'name' => 'Typing',
-                'percentage' => '0.50',
+            15 => 
+            array (
+                'id' => 22,
+                'name' => 'Process',
+                'percentage' => '95',
                 'image' => NULL,
                 'owner_id' => 2,
-                'order' => 11,
+                'order' => 145,
                 'featured' => 1,
-                'created_at' => '2022-03-26 18:14:34',
-                'updated_at' => '2022-03-26 18:14:34',
+                'created_at' => '2022-04-02 16:55:52',
+                'updated_at' => '2022-04-06 20:13:57',
+            ),
+            16 => 
+            array (
+                'id' => 23,
+                'name' => 'Typing',
+                'percentage' => '50',
+                'image' => NULL,
+                'owner_id' => 1,
+                'order' => 38,
+                'featured' => 1,
+                'created_at' => '2022-04-05 18:17:40',
+                'updated_at' => '2022-04-05 18:17:40',
+            ),
+            17 => 
+            array (
+                'id' => 24,
+                'name' => 'Gaming',
+                'percentage' => '36',
+                'image' => NULL,
+                'owner_id' => 2,
+                'order' => 147,
+                'featured' => 0,
+                'created_at' => '2022-04-06 08:21:29',
+                'updated_at' => '2022-04-06 20:14:28',
             ),
         ));
+        
+        
     }
 }

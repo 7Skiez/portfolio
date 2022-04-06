@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Exception;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         !(file_exists(public_path('\storage\\')) ? readlink(public_path('\storage\\')) === storage_path('app\public') : false) ? Artisan::call('storage:link') : null;
 
-        if (function_exists('request') && function_exists('setting')) {
+        if (function_exists('request') && function_exists('setting') && Schema::hasTable('settings')) {
             $requestedUrl = preg_replace("(^https?://)", "", request()->root());
 
             config([
