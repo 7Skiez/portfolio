@@ -42,4 +42,29 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class, 'owner_id');
+    }
+
+    public function mediums()
+    {
+        return $this->hasMany(Medium::class, 'owner_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(Skill::class, 'owner_id');
+    }
+
+    public function tools()
+    {
+        return $this->hasMany(Tool::class, 'owner_id');
+    }
 }

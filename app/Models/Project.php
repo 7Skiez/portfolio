@@ -4,17 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
     use HasFactory;
+    
+    public function scopeCurrentUser($query)
+    {
+        return $query->where('owner_id', Auth::user()->id);
+    }
 
-    public static function hasOwner() {return true;}
-    public static function hasOrder() {return true;}
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+    
     public static function setActive($id) {
-        self::where('id', '!=', $id)->where('owner_id', '=', auth()->user()->id)->where('active', '=', 1)->update(['active' => 0]);
+        self::whereBelongsTo(auth()->user())->where('id', '!=', $id)->where('active', '=', 1)->update(['active' => 0]);
+    }
+    
+    public function save(array $options = [])
+    {
+        // If no owner has been assigned, assign the current user's id as the owner of the workstation
+        if (!$this->owner_id && Auth::user()) {
+            $this->owner_id = Auth::user()->getKey();
+        }
+
+        $this->order = $this->max('order') + 1;
+
+        return parent::save();
     }
 
 }
