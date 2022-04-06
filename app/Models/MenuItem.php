@@ -15,4 +15,9 @@ class MenuItem extends \TCG\Voyager\Models\MenuItem
     {
         return $this->belongsTo(Menu::class);
     }
+
+    public function toggleFeature($id)
+    { 
+        return $this->find($id)->update(['featured' => (int)!$this->featured]);
+    }
 }

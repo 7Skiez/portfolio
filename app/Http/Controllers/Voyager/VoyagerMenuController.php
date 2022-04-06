@@ -117,14 +117,24 @@ class VoyagerMenuController extends BaseVoyagerMenuController
             ]);
     }
 
-    public function toggle_featured(Request $request)
+    public function feature_toggle(Request $request)
     {
         $id = $request->input('id');
 
         $menuItem = MenuItem::findOrFail($id);
 
         $this->authorize('edit', $menuItem->menu);
-        
-        $menuItem->update(['featured' => $request->input('featured')]);
+
+        $res = $menuItem->toggleFeature($id);
+
+        return $res ?
+            [
+                'message' => $menuItem->title . ' visibility updated',
+                'alert-type' => 'success',
+            ] :
+            [
+                'message' => $menuItem->title . ' visibility couldn\'t be updated',
+                'alert-type' => 'error',
+            ];
     }
 }

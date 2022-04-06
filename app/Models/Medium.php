@@ -19,6 +19,11 @@ class Medium extends Model
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
+    
+    public function toggleFeature($ids)
+    { 
+        return $this->whereIn('id', $ids)->update(['featured' => (int)!$this->featured]);
+    }
 
     public function save(array $options = [])
     {

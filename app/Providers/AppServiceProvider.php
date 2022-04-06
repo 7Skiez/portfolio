@@ -33,39 +33,40 @@ class AppServiceProvider extends ServiceProvider
 
         !(file_exists(public_path('\storage\\')) ? readlink(public_path('\storage\\')) === storage_path('app\public') : false) ? Artisan::call('storage:link') : null;
 
-        // if (Schema::hasTable('themes') && Theme::exists()) {
-        $requestedUrl = preg_replace("(^https?://)", "", request()->root());
+        if (function_exists('request') && function_exists('setting')) {
+            $requestedUrl = preg_replace("(^https?://)", "", request()->root());
 
-        config([
-            'requested_portfolio' => array_filter([
-                'jd' => $requestedUrl === preg_replace("(^https?://)", "", setting('jd.domain')),
-                'ivno' => $requestedUrl === preg_replace("(^https?://)", "", setting('ivno.domain'))
-            ])
-        ]);
+            config([
+                'requested_portfolio' => array_filter([
+                    'jd' => $requestedUrl === preg_replace("(^https?://)", "", setting('jd.domain')),
+                    'ivno' => $requestedUrl === preg_replace("(^https?://)", "", setting('ivno.domain'))
+                ])
+            ]);
 
-        config(['requested_domain' => setting(key(config('requested_portfolio')) . '.domain')]);
+            config(['requested_domain' => setting(key(config('requested_portfolio')) . '.domain')]);
 
-        $portfolioSections = [];
+            $portfolioSections = [];
 
-        if (key(config('requested_portfolio')) && menu(key(config('requested_portfolio')))) {
+            if (key(config('requested_portfolio')) && menu(key(config('requested_portfolio')))) {
 
-            foreach (menu(key(config('requested_portfolio')), '_json') as $i => $section) {
+                foreach (menu(key(config('requested_portfolio')), '_json') as $i => $section) {
 
-                $portfolioSections[$i]['menu'] = $section->title;
-                str_contains($section->title, '*') ? preg_match('/(?<=\*)[^\s]*(?=\s)|(?<=\*).*/', $section->title, $portfolioSections[$i]['id']) : $portfolioSections[$i]['id'] = $section->title;
-                $portfolioSections[$i]['id'] = is_array($portfolioSections[$i]['id']) ? reset($portfolioSections[$i]['id']) : $portfolioSections[$i]['id'];
-                $portfolioSections[$i]['title'] = str_replace('*', '', $section->title);
+                    $portfolioSections[$i]['menu'] = $section->title;
+                    str_contains($section->title, '*') ? preg_match('/(?<=\*)[^\s]*(?=\s)|(?<=\*).*/', $section->title, $portfolioSections[$i]['id']) : $portfolioSections[$i]['id'] = $section->title;
+                    $portfolioSections[$i]['id'] = is_array($portfolioSections[$i]['id']) ? reset($portfolioSections[$i]['id']) : $portfolioSections[$i]['id'];
+                    $portfolioSections[$i]['title'] = str_replace('*', '', $section->title);
+                }
+
+                config(['portfolioSections' => $portfolioSections]);
             }
 
-            config(['portfolioSections' => $portfolioSections]);
+            view()->composer('*', function ($view) use ($requestedUrl) {
+                $view->with('jd', ($requestedUrl === preg_replace("(^https?://)", "", setting('jd.domain'))));
+                $view->with('ivno', ($requestedUrl === preg_replace("(^https?://)", "", setting('ivno.domain'))));
+
+                $view->with('portfolioSections', config('portfolioSections'));
+            });
         }
-
-        view()->composer('*', function ($view) use ($requestedUrl) {
-            $view->with('jd', ($requestedUrl === preg_replace("(^https?://)", "", setting('jd.domain'))));
-            $view->with('ivno', ($requestedUrl === preg_replace("(^https?://)", "", setting('ivno.domain'))));
-
-            $view->with('portfolioSections', config('portfolioSections'));
-        });
     }
 
     /**

@@ -26,7 +26,7 @@
         @if ($ivno)
             <div class="relative flex flex-col w-full items-center justify-center">
                 <div class="relative w-full max-w-2xl flex items-center justify-center rounded-full scale-90 hover:scale-[100%] duration-300">
-                    <div class="absolute h-[48%] z-0">
+                    <div class="absolute w-[42%] z-0">
                         <img src="{{ Voyager::image(setting('ivno.skills_radar_bg')) }}" class="w-full h-full">
                     </div>
                     <div class="relative w-full radarChart z-10 text-accent font-medium text-sm hover:scale-[95%] duration-300"></div>

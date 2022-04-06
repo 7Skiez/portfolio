@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class Skill extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['featured'];
+
     use HasFactory;
-    
+
     public function scopeCurrentUser($query)
     {
         return $query->where('owner_id', Auth::user()->id);
@@ -18,6 +25,11 @@ class Skill extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function toggleFeature($ids)
+    { 
+        return $this->whereIn('id', $ids)->update(['featured' => (int)!$this->featured]);
     }
 
     public function save(array $options = [])
@@ -31,5 +43,4 @@ class Skill extends Model
 
         return parent::save();
     }
-
 }

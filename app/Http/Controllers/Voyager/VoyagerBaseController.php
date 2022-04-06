@@ -116,4 +116,39 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             'results'
         ));
     }
+
+    public function feature_toggle(Request $request)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Init array of IDs
+        $ids = $request->ids;
+
+        foreach ($ids as $id) {
+            $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+            // Check permission
+            $this->authorize('edit', $data);
+        }
+
+        $displayName = count($ids) > 1 ? $dataType->getTranslatedAttribute('display_name_plural') : $dataType->getTranslatedAttribute('display_name_singular');
+
+        $res = $data->toggleFeature($ids);
+        $data = $res
+            ? [
+                'message'    => strtolower($displayName).' visibility successfully updated',
+                'alert-type' => 'success',
+            ]
+            : [
+                'message'    => 'Sorry there was a problem trying to update visibility for selected '. strtolower($displayName),
+                'alert-type' => 'error',
+            ];
+
+        if ($res) {
+            event(new BreadDataUpdated($dataType, $data));
+        }
+
+        return $data;
+    }
 }

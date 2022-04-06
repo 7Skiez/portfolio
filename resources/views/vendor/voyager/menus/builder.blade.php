@@ -284,19 +284,35 @@
             });
 
 
+            $.debounce = function (func, wait, immediate) {
+                var timeout;
+                return function executedFunction() {
+                    var context = this;
+                    var args = arguments;
+                    var later = function () {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
             /**
              * Toggle Featured
              */
-             $('.item_actions').on('change', '.featured', function (e) {
+             $('.item_actions').on('change', '.featured', function(e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 id = $(e.currentTarget).data('id');
-                $.post('{{ route('voyager.menus.toggle_featured', ['menu' => $menu->id]) }}', {
+                $.post('{{ route('voyager.menus.feature_toggle', ['menu' => $menu->id]) }}', {
                     id: id,
-                    featured: Number(this.checked),
                     _token: '{{ csrf_token() }}'
                 }, function (data) {
-                    toastr.success("Section state updated");
+                    data['alert-type'] == 'success' ?
+                        toastr.success(data.message) :
+                        toastr.error(data.message);
                 });
             });
 

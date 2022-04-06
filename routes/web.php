@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Voyager\VoyagerSettingsController;
+use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Str;
+use TCG\Voyager\Events\RoutingAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +22,27 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('portfolio.ho
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
-    Route::get('settings/colors', [VoyagerSettingsController::class, 'colors'])->middleware('admin.user');
+    $namespacePrefix = '\\' . config('voyager.controllers.namespace') . '\\';
 
-    $namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';
+    Route::group(['middleware' => 'admin.user'], function () use ($namespacePrefix) {
+        event(new RoutingAdmin());
 
-    Route::post('menus/{menu}/featured', ['uses' => $namespacePrefix.'VoyagerMenuController@toggle_featured', 'as' => 'voyager.menus.toggle_featured']);
+        try {
+            foreach (Voyager::model('DataType')::all() as $dataType) {
+                $breadController = $dataType->controller
+                    ? Str::start($dataType->controller, '\\')
+                    : $namespacePrefix . 'VoyagerBaseController';
+
+                Route::post($dataType->slug . '/0', $breadController . '@feature_toggle')->name('voyager.'.$dataType->slug.'.feature_toggle');
+            }
+        } catch (\InvalidArgumentException $e) {
+            throw new \InvalidArgumentException("Custom routes hasn't been configured because: " . $e->getMessage(), 1);
+        } catch (\Exception $e) {
+            // do nothing, might just be because table not yet migrated.
+        }
+
+        Route::get('settings/colors', [VoyagerSettingsController::class, 'colors'])->middleware('admin.user');
+
+        Route::post('menus/{menu}/featured', ['uses' => $namespacePrefix . 'VoyagerMenuController@feature_toggle', 'as' => 'voyager.menus.feature_toggle']);
+    });
 });
-
-// Route::get('/fix', function () {
-//     dump(myMenu('admin', '_json'));
-//     die;
-// });
