@@ -5,15 +5,6 @@
 @section('css')
     <style>
 
-        /* @import 'https://simonwep.github.io/gpickr/dist/gpickr.min.css'; */
-
-        /* .gpickr {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            max-width: max-content;
-        } */
-
         .panel-actions .voyager-trash {
             cursor: pointer;
         }
@@ -338,32 +329,8 @@
                                         <textarea name="{{ $setting->key }}" id="{{ $setting->key }}_textarea" class="hidden">{{ $setting->value ?? '' }}</textarea>
                                     @elseif($setting->type == "color")
                                         <div class="gpickr color"></div>
-                                        {{-- <div class="color-container {{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}"></div> --}}
-
-                                        {{-- <input type="color" name="{{ $setting->key }}" value="{{ $setting->value }}"> --}}
                                     @elseif($setting->type == "gradient")
-                                        <?php 
-                                            $options = json_decode($setting->value);
-                                        ?>
-                                        {{-- <template> --}}
-                                        <div class="gpickr gradient">
-                                            {{-- <div class="{{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}"></div>
-                                            <textarea class="gradient-output {{ preg_replace('/.+?(?=\.)./', '', $setting->key) }}" name="{{ $setting->key }}">{{ $setting->value ?? '' }}</textarea> --}}
-                                        </div>
-                                        {{-- </template> --}}
-                                        {{-- <div class="gradientContainer">
-                                            <div class="l-gradeint"></div>
-
-                                            <input type="color" class="color-select side1" value="{{ $options->colors[0][0] ?? '#00FFFF' }}"/>
-                                            <input type="color" class="color-select side2" value="{{ $options->colors[1][0] ?? '#0000FF' }}"/>
-                                            <input type="range" value="{{ $options->colors[0][1] ?? '255' }}" min="0" max="1" step="0.01" class="side1-alpha">
-                                            <input type="range" value="{{ $options->colors[1][1] ?? '255' }}" min="0" max="1" step="0.01" class="side2-alpha">
-                                            @if(isset($options->angle) || isset($options->hint))
-                                                <input type="range" x-model="angle" value="{{ $options->angle ?? '180' }}" min="0" max="360" class="gra-angle">
-                                                <input type="range" value="{{ $options->hint ?? '50' }}" min="0" max="100" class="gra-hint">
-                                            @endif
-                                            <textarea class="output-value" name="{{ $setting->key }}"></textarea>
-                                        </div> --}}
+                                        <div class="gpickr gradient"></div>
                                     @elseif($setting->type == "image" || $setting->type == "file")
                                         @if(isset( $setting->value ) && !empty( $setting->value ) && Storage::disk(config('voyager.storage.disk'))->exists($setting->value))
                                             <div class="img_settings_container">
@@ -422,13 +389,15 @@
                                         @endif
                                     @endif
                                 </div>
-                                <div class="col-md-2 no-padding-left-right">
-                                    <select class="form-control group_select" name="{{ $setting->key }}_group">
-                                        @foreach($groups as $group)
-                                        <option value="{{ $group }}" {!! $setting->group == $group ? 'selected' : '' !!}>{{ $group }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                @if(Auth::user()->hasRole('admin'))
+                                    <div class="col-md-2 no-padding-left-right">
+                                        <select class="form-control group_select" name="{{ $setting->key }}_group" @>
+                                            @foreach($groups as $group)
+                                            <option value="{{ $group }}" {!! $setting->group == $group ? 'selected' : '' !!}>{{ $group }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                             </div>
                             @if(!$loop->last)
                                 <hr>
@@ -440,7 +409,6 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-primary pull-right">{{ __('voyager::settings.save') }}</button>
         </form>
 
         <div style="clear:both"></div>
@@ -580,48 +548,6 @@
             // Initiliaze rich text editor
             tinymce.init(window.voyagerTinyMCE.getConfig());
 
-            // const hexToRgba = (hex, opacity) => {
-
-            //     let colors = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
-            //             ,(m, r, g, b) => '#' + r + r + g + g + b + b)
-            //     .substring(1).match(/.{2}/g)
-            //     .map(x => parseInt(x, 16))
-
-            //     return `rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, ${opacity})`
-            // }
-
-            // document.querySelectorAll('.gradientContainer').forEach(e => {
-
-            //     updateGradient = (el) => {
-            //         var angleInput = el.querySelector('.gra-angle')
-            //         var hintInput = el.querySelector('.gra-hint')
-            //         var firstSide = el.querySelector('.side1')
-            //         var firstSideAlpha = el.querySelector('.side1-alpha')
-            //         var secondSide = el.querySelector('.side2')
-            //         var secondSideAlpha = el.querySelector('.side2-alpha')
-
-            //         firstSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + firstSideAlpha.value + ') 100%)'
-            //         secondSide.style['-webkit-mask-image'] = 'radial-gradient(rgba(0,0,0,1) 30%, rgba(0,0,0,' + secondSideAlpha.value + ') 100%)'
-                    
-            //         if(angleInput && hintInput) {
-
-            //             el.querySelector('.l-gradeint').style.background = `linear-gradient(${angleInput.value}deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, ${hintInput.value}%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-            //             el.querySelector('.output-value').innerHTML = `linear-gradient(${angleInput.value}deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, ${hintInput.value}%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-
-            //         } else {
-
-            //             el.querySelector('.l-gradeint').style.background = `linear-gradient(90deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, 50%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-            //             el.querySelector('.output-value').innerHTML = `linear-gradient(90deg, ${hexToRgba(firstSide.value, firstSideAlpha.value)}, 50%, ${hexToRgba(secondSide.value, secondSideAlpha.value)})`
-
-            //         }
-            //     }
-            //     updateGradient(e.parentNode)
-
-            //     e.querySelectorAll('input[type="color"],input[type="range"]').forEach($e => e.addEventListener('input', event => {
-            //         updateGradient(event.target.parentNode)
-            //     }))
-            // })
-
         });
     </script>
     <script type="text/javascript">
@@ -641,14 +567,25 @@
         <input type="hidden" id="upload_type_slug" value="settings">
     </div>
 
-    <script>
-        var options_editor = ace.edit('options_editor');
-        options_editor.getSession().setMode("ace/mode/json");
+    @if (Auth::user()->hasRole('admin'))        
+        <script>
+            var options_editor = ace.edit('options_editor');
+            options_editor.getSession().setMode("ace/mode/json");
 
-        var options_textarea = document.getElementById('options_textarea');
-        options_editor.getSession().on('change', function() {
-            console.log(options_editor.getValue());
-            options_textarea.value = options_editor.getValue();
+            var options_textarea = document.getElementById('options_textarea');
+            options_editor.getSession().on('change', function() {
+                console.log(options_editor.getValue());
+                options_textarea.value = options_editor.getValue();
+            });
+        </script>
+    @endif
+
+    <script>
+        let allElements = document.querySelectorAll("#{{ \Illuminate\Support\Str::slug($group) }} div.panel-body");
+        let Btn = '<button type="submit" class="btn btn-primary pull-right">Save</button>'
+        allElements.forEach(e => {
+            $(e).append(Btn)
         });
     </script>
+
 @stop

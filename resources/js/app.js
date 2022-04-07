@@ -597,12 +597,12 @@ if (document.querySelector(".mySwiper")) {
         let roundStrokes = response.data.radarChart.roundStrokes
         ? JSON.parse(response.data.radarChart.roundStrokes.toLowerCase())
         : false;
-
+        
         Object.keys(radarItems).forEach((item) => {
             data[0].push({
                 axis: item,
                 value: roundStrokes
-                    ? radarItems[item] * 0.0095
+                    ? radarItems[item] * 0.009
                     : radarItems[item] * 0.01,
             });
         });

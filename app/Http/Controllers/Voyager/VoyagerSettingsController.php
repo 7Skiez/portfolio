@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Voyager;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerSettingsController as BaseVoyagerSettingsController;
 
@@ -13,7 +14,9 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
         // Check permission
         $this->authorize('browse', Voyager::model('Setting'));
 
-        $data = Voyager::model('Setting')->orderBy('order', 'ASC')->get();
+        Auth::user()->hasRole('admin') ?
+            $data = Voyager::model('Setting')->orderBy('order', 'ASC')->get() :
+            $data = Voyager::model('Setting')->where('group', Auth::user()->username)->orderBy('order', 'ASC')->get();
 
         $settings = [];
         $settings[__('voyager::settings.group_general')] = [];
@@ -28,7 +31,9 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
             unset($settings[__('voyager::settings.group_general')]);
         }
 
-        $groups_data = Voyager::model('Setting')->select('group')->distinct()->get();
+        $groups_data = Auth::user()->hasRole('admin') ?
+            Voyager::model('Setting')->select('group')->distinct()->get() :
+            Voyager::model('Setting')->where('group', Auth::user()->username)->select('group')->distinct()->get();
         $groups = [];
         foreach ($groups_data as $group) {
             if ($group->group != '') {
@@ -44,16 +49,17 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
     public function colors()
     {
         $this->authorize('browse', Voyager::model('Setting'));
-        return Voyager::model('Setting')->where('key','like', auth()->user()->username . '%')->whereIn('type', ['color', 'gradient'])->orderBy('order', 'ASC')->select('key','type','value')->get();
-
+        return Voyager::model('Setting')->where('group', Auth::user()->username)->whereIn('type', ['color', 'gradient'])->orderBy('order', 'ASC')->select('key', 'type', 'value')->get();
     }
-    
+
     public function update(Request $request)
     {
         // Check permission
         $this->authorize('edit', Voyager::model('Setting'));
 
-        $settings = Voyager::model('Setting')->all();
+        $settings = Auth::user()->hasRole('admin') ?
+            Voyager::model('Setting')->all() :
+            Voyager::model('Setting')->where('group', Auth::user()->username)->get();
 
         foreach ($settings as $setting) {
             $content = $this->getContentBasedOnType($request, 'settings', (object) [
@@ -70,10 +76,13 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
                 continue;
             }
 
-            $key = preg_replace('/^' . \Str::slug($setting->group) . './i', '', $setting->key);
+            if (Auth::user()->hasRole('admin')) {
+                $key = preg_replace('/^' . \Str::slug($setting->group) . './i', '', $setting->key);
 
-            $setting->group = $request->input(str_replace('.', '_', $setting->key) . '_group');
-            $setting->key = implode('.', [\Str::slug($setting->group), $key]);
+                $setting->group = $request->input(str_replace('.', '_', $setting->key) . '_group');
+                $setting->key = implode('.', [\Str::slug($setting->group), $key]);
+            }
+
             $setting->value = $content;
             $setting->save();
         }
@@ -85,5 +94,4 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
             'alert-type' => 'success',
         ]);
     }
-
 }
