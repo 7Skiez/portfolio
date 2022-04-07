@@ -86,10 +86,9 @@ class HomeController extends \App\Http\Controllers\Controller
 
     function data()
     {
-        $portfolioSections = config('portfolioSections');
 
-        foreach (menu(key(config('requested_portfolio')), '_json') as $i => $v) {
-            $v->icon_class == 'skills' ? $id = $portfolioSections[$i]['id'] : null;
+        foreach (myMenu($this->portfolioOwner, '_json') as $i => $v) {
+            $v->icon_class == 'skills' ? $id = config('sections')[$i]['id'] : null;
         }
 
         $activeSlide = Project::where('owner_id', '=', $this->portfolio->owner_id)->where('featured', true)->where('active', 1)->first();
@@ -101,7 +100,6 @@ class HomeController extends \App\Http\Controllers\Controller
             'radarChart' => [
                 'id' => $id,
                 'radarItems' => $this->portfolio->skills->pluck('percentage', 'name'),
-                // 'colors' => [setting($this->portfolioOwner . '_radar_color_one'), setting($this->portfolioOwner . '_radar_color_two')],
                 'gradient' => setting($this->portfolioOwner .'.radar_area_gradient'),
                 'roundStrokes' => setting($this->portfolioOwner . '.radar_area_roundstrokes'),
                 'strokeWidth' => setting($this->portfolioOwner . '.radar_stroke_width'),

@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('description', 255)->nullable();
             $table->string('link')->nullable();
             $table->string('link_title')->nullable();
-            $table->jsonb('technologies')->default('[]')->nullable();
+            $table->jsonb('technologies')->nullable();
             $table->string('image')->nullable();
             $table->unsignedInteger('owner_id')->require();
             $table->unsignedInteger('order');

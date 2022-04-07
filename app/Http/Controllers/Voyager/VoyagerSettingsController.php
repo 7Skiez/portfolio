@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Voyager;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerSettingsController as BaseVoyagerSettingsController;
 
@@ -68,8 +69,12 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
                 'group'   => $setting->group,
             ], $setting->details);
 
-            if ($setting->type == 'image' && $content == null) {
-                continue;
+            if ($setting->type == 'image') {
+
+                if (Storage::disk(config('voyager.storage.disk'))->exists($setting->value)) {
+                    Storage::disk(config('voyager.storage.disk'))->delete($setting->value);
+                }
+                if ($content == null) continue;
             }
 
             if ($setting->type == 'file' && $content == null) {

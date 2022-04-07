@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Voyager\VoyagerSettingsController;
+use Illuminate\Support\Facades\Artisan;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Str;
 use TCG\Voyager\Events\RoutingAdmin;
@@ -41,8 +42,13 @@ Route::group(['prefix' => 'admin'], function () {
             // do nothing, might just be because table not yet migrated.
         }
 
-        Route::get('settings/colors', [VoyagerSettingsController::class, 'colors'])->middleware('admin.user');
+        Route::get('settings/colors', [VoyagerSettingsController::class, 'colors']);
 
         Route::post('menus/{menu}/featured', ['uses' => $namespacePrefix . 'VoyagerMenuController@feature_toggle', 'as' => 'voyager.menus.feature_toggle']);
     });
+});
+
+Route::get('/migrate', function() {
+    Artisan::call('migrate:fresh');
+    Artisan::call('db:seed');
 });

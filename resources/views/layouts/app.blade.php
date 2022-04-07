@@ -55,43 +55,33 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/fontawesome.min.css" integrity="sha512-r9kUVFtJ0e+8WIL8sjTUlHGbTLwlOClXhVqGgu4sb7ILdkBvM2uI+n/Fz3FN8u3VqJX7l9HLiXqXxkx2mZpkvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <style>
         @if($jd)
-
             .bg-color {
                 background-color: {{ setting('jd_bg_color') }}
             }
-
         @endif
-        
         @if($ivno)
-
             .bg-color {
                 background: radial-gradient(rgba(0, 0, 0, 0.9) 2px, {{ setting('ivno.bg_color') }} 10%);
                 background-size: 28px 28px;
             }
-
             .bg-gradient {
                 background-image: {{ setting('ivno.main_gradient') }}
             }
-
             .bg-accent {
                 background-color: {{ setting('ivno.accent_bg_color') }}
             }
-
             .text-accent {
                 color: {{ setting('ivno.accent_text_color') }}
             }
-
             .bg-glow {
                 background-image: {{ setting('ivno.footer_bg_glow') }}
             }
-            
             text {
                 background: {{ setting('ivno.accent_bg_color') }};
                 fill: {{ setting('ivno.accent_text_color') }};
                 border-radius: 1.2rem;
                 padding: 0.577rem 0.825rem
             }
-
         @endif
     </style>
 </head>
@@ -109,12 +99,12 @@
 
     @include('partials.header')
         
-    <main class="flex-grow overflow-x-hidden">
+    <main class="flex-grow overflow-x-hidden z-10">
         @include('partials.hero')
         @foreach (myMenu('ivno', '_json') as $i => $section)
-            @php
-                $dataType = $section->icon_class;
-            @endphp
+        
+            <?php $dataType = $section->icon_class; ?>
+
             @if(isset($portfolio->{$dataType}) && $section->featured)
                 @if(is_countable($portfolio->{$dataType}))
                     @if(count($portfolio->{$dataType}))

@@ -36,10 +36,10 @@
 @endif
 
 @if($ivno)
-    <section id="{{ $portfolioSections[$i]['id'] }}" class="relative w-full pt-24 xl:pt-40">
+    <section id="{{ $sections[$i]['id'] }}" class="relative w-full pt-24 xl:pt-40">
 
         @if($ivno)
-            <h2 class="mb-6 text-2xl xl:text-4xl font-bold leading-none text-white text-opacity-80 text-center">{{ $portfolioSections[$i]['title'] }}</h2>
+            <h2 class="mb-6 text-2xl xl:text-4xl font-bold leading-none text-white text-opacity-80 text-center">{{ $sections[$i]['title'] }}</h2>
             <h3 class="mb-12 text-sm xl:text-xl font-bold leading-none text-white text-opacity-30 text-center">{{ $section->url }}</h3>
         @endif
 

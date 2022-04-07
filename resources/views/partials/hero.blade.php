@@ -57,14 +57,14 @@
                     transform: rotate({{ $degree1 }}deg);
                     transform-origin: right;
                 }
-                @php $degree1 -= $reduceBy($splitMatches[0]) @endphp
+                <?php $degree1 -= $reduceBy($splitMatches[0]) ?>
             @endforeach
             @foreach($splitMatches[1] as $key => $match)
                 .right>div:nth-child({{ $key + 1 }}) {
                     transform: rotate({{ $degree2 * -1 }}deg);
                     transform-origin: left;
                 }
-                @php $degree2 -= $reduceBy($splitMatches[1]) @endphp
+                <?php $degree2 -= $reduceBy($splitMatches[1]) ?>
             @endforeach
         @endif
 
