@@ -26,13 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        try {
-            readlink(public_path('\storage\\'));
-        } catch (Exception) {
-            Artisan::call('cache:clear');
-        }
+        if(config('voyager.storage.disk') === 'public') {
+            try {
+                readlink(public_path('\storage\\'));
+            } catch (Exception) {
+                Artisan::call('cache:clear');
+            }
 
-        !(file_exists(public_path('\storage\\')) ? readlink(public_path('\storage\\')) === storage_path('app\public') : false) ? Artisan::call('storage:link') : null;
+            !(file_exists(public_path('\storage\\')) ? readlink(public_path('\storage\\')) === storage_path('app\public') : false) ? Artisan::call('storage:link') : null;
+        }
 
         if (function_exists('request') && function_exists('setting') && Schema::hasTable('settings')) {
             $requested_url = preg_replace("(^https?://)", "", request()->root());

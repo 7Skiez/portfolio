@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Faker Service Providers...
         App\Providers\FakerServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
     ],
 
     /*
