@@ -6,7 +6,7 @@
             <div class="flex justify-center backdrop-blur-lg bg-accent px-6 pb-4 pt-20 rounded-3xl" @click.away="showModal = false" x-transition:enter="motion-safe:ease-out duration-500" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100">
                 <div class="flex flex-col items-center py-3">
 
-                    <img src="{{ Voyager::image(\App\Models\User::first()->avatar) }}" alt="Developer" class="absolute -translate-y-1/2 top-0 w-36 h-36 object-scale-down rounded-full">
+                    <img src="{{ image(\App\Models\User::first()->avatar) }}" alt="Developer" class="absolute -translate-y-1/2 top-0 w-36 h-36 object-scale-down rounded-full">
 
                     <div class="flex flex-col grow items-center justify-center text-center">
                         <p class="text-base text-accent font-normal opacity-80 mb-3">Mohammad Javad Rakhisi</p>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="flex justify-center items-end w-full bg-glow h-max max-h-[25rem] xl:max-h-[60rem] overflow-hidden text-center mx-auto -mt-48">
-            <img class="max-w-fit select-none opacity-10 pointer-events-none object-scale-down" src="{{ Voyager::image(setting('ivno.footer_image')) }}" alt="footer image">
+            <img class="max-w-fit select-none opacity-10 pointer-events-none object-scale-down" src="{{ image(setting('ivno.footer_image')) }}" alt="footer image">
             <p class="absolute text-xs text-accent mb-2">Made With ❤️ By <a @click="showModal = true" class="font-bold text-base bg-gradient text-gradient cursor-pointer">MosbatSaz</a> Team | {{ date('Y') }}</p>
         </div>
     </footer>

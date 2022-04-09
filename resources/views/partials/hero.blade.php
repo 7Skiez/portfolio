@@ -81,9 +81,9 @@
                 <div class="relative p-6">
                     <div class="relative w-52 h-52 z-1 rounded-full overflow-hidden select-none">
                         <div class="absolute inline-block w-[14.5rem] h-[14.5rem] inset-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <img id="inner" src="{{ Voyager::image(setting('ivno.profile_bg_image')) }}" alt="ivno.background_image" class="w-full h-full object-cover duration-500">
+                            <img id="inner" src="{{ image(setting('ivno.profile_bg_image')) }}" alt="ivno.background_image" class="w-full h-full object-cover duration-500">
                         </div>
-                        <img src="{{ Voyager::image($portfolio->profile_pic) }}" alt="ivno.profile_pic" class="relative w-52 h-52 object-scale-down inline-block z-10">
+                        <img src="{{ image($portfolio->profile_pic) }}" alt="ivno.profile_pic" class="relative w-52 h-52 object-scale-down inline-block z-10">
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                         <div class="flex flex-row flex-wrap justify-center">
                             @foreach ($portfolio->certifications as $cert)
                             <a href="{{ $cert->link }}" target="_blank" class="mx-2 my-2">
-                                <img class="w-16 h-16 xl:w-20 xl:h-20 object-scale-down rounded-lg invert hover:scale-110 duration-300" src="{{ Voyager::image($cert->image) }}" alt="{{ $cert->name }}">
+                                <img class="w-16 h-16 xl:w-20 xl:h-20 object-scale-down rounded-lg invert hover:scale-110 duration-300" src="{{ image($cert->image) }}" alt="{{ $cert->name }}">
                             </a>
                             @endforeach
                         </div>

@@ -1,5 +1,21 @@
 <?php
 
+if (!function_exists('image')) {
+    function image($file, $default = '')
+    {
+        if (!empty($file)) {
+            try{
+                return str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url('Storage/'.$file));
+            }catch(Exception $e) {
+                return str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url('Storage/'.'settings/not-found.jpg'));
+            }
+        }
+
+        return $default;
+    }
+}
+
+
 if (!function_exists('myMenu')) {
     function myMenu($menuName, $type = null, array $options = [])
     {

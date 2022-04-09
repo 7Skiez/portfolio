@@ -8,7 +8,7 @@
             <div class="swiper-wrapper">
                 @foreach ($portfolio->projects as $project)
                     <div class="swiper-slide">
-                        <img src="{{ Voyager::image($project->image) }}" class="rounded-lg sm:rounded-xl">
+                        <img src="{{ image($project->image) }}" class="rounded-lg sm:rounded-xl">
                         <div class="p-6 -mt-4 bg-black/40 backdrop-blur-lg rounded-lg sm:rounded-xl transition-all duration-200 ease-in">
                             <h3 class="text-lg sm:text-xl font-semibold leading-6 text-wave-100"><span class="text-amber-500">&#60;h3&#62;</span>{{ $project->title }}<span class="text-amber-500">&#60;/h3&#62;</span></h3>
                             <div class="slide-details">
@@ -20,7 +20,7 @@
                                     @if ($project->technologies)
                                         <div class="flex items-center justify-end flex-1 w-full h-full space-x-2 sm:space-x-4">
                                             @foreach (json_decode($project->technologies) as $tech)
-                                                <img src="{{ Voyager::image($tech) }}" class="w-4 sm:w-6 h-4 sm:h-6 object-scale-down">
+                                                <img src="{{ image($tech) }}" class="w-4 sm:w-6 h-4 sm:h-6 object-scale-down">
                                             @endforeach
                                         </div>
                                     @endif
@@ -49,7 +49,7 @@
                 @foreach ($portfolio->projects as $project)
                     <div class="swiper-slide">
                         <div class="relative invisible opacity-0 transition-none duration-300">
-                            <img data-src="{{ Voyager::image($project->image) }}" class="relative w-full rounded-lg sm:rounded-3xl z-10 shadow text-accent swiper-lazy transition-none transform translate-y-4 delay-300 duration-700">
+                            <img data-src="{{ image($project->image) }}" class="relative w-full rounded-lg sm:rounded-3xl z-10 shadow text-accent swiper-lazy transition-none transform translate-y-4 delay-300 duration-700">
                             
                             <div class="slide-details-container pt-12 p-6 -mt-8 bg-accent rounded-lg sm:rounded-3xl z-1 invisible transition-none transform -translate-y-full delay-300 duration-700">
                                 <h3 class="text-lg sm:text-2xl font-semibold leading-6 text-wave-100"><span class="text-amber-500"></span>{{ $project->title }}<span class="text-amber-500"></span></h3>
