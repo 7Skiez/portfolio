@@ -153,8 +153,8 @@ window.debounce = function (func, wait, immediate) {
 
 /********** SWIPER **********/
 
-if (document.querySelector(".mySwiper")) {
-    axios.get("/api/data").then((response) => {
+axios.get("/api/data").then((response) => {
+    if (document.querySelector(".mySwiper")) {
         var swiper = new Swiper(".mySwiper", {
             effect: "coverflow",
             preloadImages: false,
@@ -258,8 +258,9 @@ if (document.querySelector(".mySwiper")) {
         swiper.on("init", () => hide());
         swiper.init();
         swiper.on("slideChange", () => hide());
+    }
 
-
+    if (document.querySelector(".radarChart")) {
         /********** RADAR CHART **********/
 
         function RadarChart(id, data, options) {
@@ -578,10 +579,6 @@ if (document.querySelector(".mySwiper")) {
         //////////////////////// Set-Up //////////////////////////////
         //////////////////////////////////////////////////////////////
 
-        // var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-        //     width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-        //     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-            
         var margin = { top: 110, right: 110, bottom: 110, left: 110 },
             width = 635 - margin.left - margin.right,
             height = width;
@@ -595,9 +592,9 @@ if (document.querySelector(".mySwiper")) {
         var data = [[]];
 
         let roundStrokes = response.data.radarChart.roundStrokes
-        ? JSON.parse(response.data.radarChart.roundStrokes.toLowerCase())
-        : false;
-        
+            ? JSON.parse(response.data.radarChart.roundStrokes.toLowerCase())
+            : false;
+
         Object.keys(radarItems).forEach((item) => {
             data[0].push({
                 axis: item,
@@ -703,7 +700,7 @@ if (document.querySelector(".mySwiper")) {
             });
 
         var color = d3.scale.ordinal().range(["url(#grad)"]);
-        
+
         var radarChartOptions = {
             w: width,
             h: height,
@@ -745,8 +742,8 @@ if (document.querySelector(".mySwiper")) {
         for (var i = 0; i < texts.length; i++) {
             makeBG(texts[i]);
         }
-    });
-}
+    }
+});
 
 /********** BLINK TEXT **********/
 

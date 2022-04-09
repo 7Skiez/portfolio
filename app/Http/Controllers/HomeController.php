@@ -91,11 +91,9 @@ class HomeController extends \App\Http\Controllers\Controller
             $v->icon_class == 'skills' ? $id = config('sections')[$i]['id'] : null;
         }
 
-        $activeSlide = Project::where('owner_id', '=', $this->portfolio->owner_id)->where('featured', true)->where('active', 1)->first();
-
         return [
             'slider' => [
-                'activeSlide' => $activeSlide ? $activeSlide->order : 2
+                'activeSlide' => $this->portfolio->projects->search(fn($i) => $i->active) +1 ?? 0
             ],
             'radarChart' => [
                 'id' => $id,

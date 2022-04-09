@@ -5,9 +5,9 @@ if (!function_exists('image')) {
     {
         if (!empty($file)) {
             try{
-                return str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url('Storage/'.$file));
+                return \Storage::disk(config('voyager.storage.disk'))->url(str_replace('\\', '/', $file));
             }catch(Exception $e) {
-                return str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url('Storage/'.'settings/not-found.jpg'));
+                
             }
         }
 

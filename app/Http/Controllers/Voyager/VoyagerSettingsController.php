@@ -50,7 +50,9 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
     public function colors()
     {
         $this->authorize('browse', Voyager::model('Setting'));
-        return Voyager::model('Setting')->where('group', Auth::user()->username)->whereIn('type', ['color', 'gradient'])->orderBy('order', 'ASC')->select('key', 'type', 'value')->get();
+        return Voyager::model('Setting')->where(function ($query) {
+            return Auth::user()->hasRole('admin') ? $query : $query->where('group', Auth::user()->username);
+        })->whereIn('type', ['color', 'gradient'])->orderBy('order', 'ASC')->select('key', 'type', 'value')->get();
     }
 
     public function update(Request $request)
@@ -69,16 +71,17 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
                 'group'   => $setting->group,
             ], $setting->details);
 
-            if ($setting->type == 'image') {
-
-                if (Storage::disk(config('voyager.storage.disk'))->exists($setting->value)) {
-                    Storage::disk(config('voyager.storage.disk'))->delete($setting->value);
-                }
-                if ($content == null) continue;
+            if ($setting->type == 'image' && $content == null) {
+                continue;
             }
 
             if ($setting->type == 'file' && $content == null) {
                 continue;
+            }
+
+            if ($setting->value && ($setting->type == 'image' || $setting->type == 'file')) {
+                if (Storage::disk(config('voyager.storage.disk'))->exists($setting->value))
+                    Storage::disk(config('voyager.storage.disk'))->delete($setting->value);
             }
 
             if (Auth::user()->hasRole('admin')) {
