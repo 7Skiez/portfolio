@@ -1,56 +1,68 @@
 <?php
 
-if (!function_exists('image')) {
-    function image($file, $default = '')
+if (!function_exists('toOneLine')) {
+    function toOneLine($string)
     {
-        if (!empty($file)) {
-            try{
-                return \Storage::disk(config('voyager.storage.disk'))->url(str_replace('\\', '/', $file));
-            }catch(Exception $e) {
-                
-            }
-        }
-
-        return $default;
+        return preg_replace('/\s\s+/', ' ', $string);
     }
 }
 
+if (!function_exists('removeTags')) {
+    function removeTags($string)
+    {
+        return preg_replace('/(<([^>]+)>)/', '', $string);
+    }
+}
+
+if (!function_exists('seo')) {
+    function seo(App\Models\User $owner)
+    {
+        return App\Facades\Portfolio::seo($owner);
+    }
+}
+
+if (!function_exists('image')) {
+    function image($file, $default = '')
+    {
+        return App\Facades\Portfolio::image($file, $default);
+    }
+}
+
+if (!function_exists('settingImage')) {
+    function settingImage($file, $default = '')
+    {
+        return App\Facades\Portfolio::image(App\Facades\Portfolio::setting(config('ownerUsername') . '.' . $file, $default));
+    }
+}
 
 if (!function_exists('myMenu')) {
     function myMenu($menuName, $type = null, array $options = [])
     {
-        return App\Models\Menu::display($menuName, $type, $options)->transform(function ($i) {
-            if ($i->featured) {
-                if ($i->parameters) {
-                    $newParameters = json_decode(json_encode($i->parameters));
-                    foreach ($newParameters as $key => $param) {
-                        if (str_starts_with($param, '*')) {
-                            eval(ltrim($param, '*\\'));
-                            preg_match('/(?<=\$).*?(?=\=)/', $param, $var);
-                            $newParameters->$key = ${$var[0]};
-                            $i->parameters = json_encode($newParameters);
-                            $i->href = route($i->route, (array)$i->parameters, true);
-                        }
-                    }
-                }
-                return $i;
-            }
-        })->filter();
+        return App\Facades\Portfolio::myMenu($menuName, $type, $options);
     }
 }
 
 if (!function_exists('fixPostgresSequence')) {
-
     function fixPostgresSequence()
     {
-        if (config('database.default') === 'pgsql') {
-            $tables = \DB::select('SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\' ORDER BY table_name;');
-            foreach ($tables as $table) {
-                if (\Schema::hasColumn($table->table_name, 'id')) {
-                    $seq = \DB::table($table->table_name)->max('id') + 1;
-                    \DB::select('SELECT setval(pg_get_serial_sequence(\'' . $table->table_name . '\', \'id\'), coalesce(' . $seq . ',1), false) FROM ' . $table->table_name);
+        return App\Facades\Portfolio::fixPostgresSequence();
+    }
+}
+
+if (!function_exists('listCachedKeys')) {
+    function listCachedKeys()
+    {
+        $storage = Cache::getStore(); // will return instance of FileStore
+        $filesystem = $storage->getFilesystem(); // will return instance of Filesystem
+        $dir = (\Cache::getDirectory());
+        $keys = [];
+        foreach ($filesystem->allFiles($dir) as $file1) {
+            if (is_dir($file1->getPath())) {
+                foreach ($filesystem->allFiles($file1->getPath()) as $file2) {
+                    $keys = array_merge($keys, [$file2->getRealpath() => unserialize(substr(\File::get($file2->getRealpath()), 10))]);
                 }
             }
         }
+        return $keys;
     }
 }
