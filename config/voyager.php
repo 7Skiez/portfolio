@@ -244,4 +244,8 @@ return [
            ],
        ]*/
     ],
+
+    'menu' => [
+        'cache' => true,
+    ],
 ];
