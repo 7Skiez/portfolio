@@ -2,10 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Portfolio;
+use App\Facades\Portfolio as PortfolioFacade;
 use Exception;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Facades\Voyager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,8 +20,15 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
+    {        
         $this->loadHelpers();
+
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Portfolio', PortfolioFacade::class);
+
+        $this->app->singleton('portfolio', function () {
+            return new Portfolio();
+        });
     }
 
     /**
@@ -26,49 +38,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(config('voyager.storage.disk') === 'public') {
+        Voyager::useModel('Menu', \App\Models\Menu::class);
+        Voyager::useModel('MenuItem', \App\Models\MenuItem::class);
+
+        if (config('voyager.storage.disk') === 'public') {
             try {
                 readlink(public_path('\storage\\'));
-            } catch (Exception) {
+            } catch (Exception $e) {
                 Artisan::call('cache:clear');
             }
-
             !(file_exists(public_path('\storage\\')) ? readlink(public_path('\storage\\')) === storage_path('app\public') : false) ? Artisan::call('storage:link') : null;
         }
 
-        if (function_exists('request') && function_exists('setting') && Schema::hasTable('settings')) {
-            $requested_url = preg_replace("(^https?://)", "", request()->root());
+        if (Schema::hasTable('settings')) {
+            $url = request()->root();
+            $portfolio = Voyager::model('Setting')->where('key', 'like', '%.domain')->where('value', 'like', $url)->first();
 
-            config([
-                'requested_portfolio' => array_filter([
-                    'jd' => $requested_url === preg_replace("(^https?://)", "", setting('jd.domain')),
-                    'ivno' => $requested_url === preg_replace("(^https?://)", "", setting('ivno.domain'))
-                ])
-            ]);
+            if ($portfolio) {
+                config(['owner' => User::where('username', '=', $portfolio->group)->first()]);
+                config(['ownerUsername' => config('owner')->username]);
+                config(['ownerMenu' => myMenu(config('ownerUsername'), '_json')]);
 
-            $portfolioOwner = key(config('requested_portfolio'));
-
-            config(['requested_domain' => setting($portfolioOwner . '.domain')]);
-
-            $sections = [];
-
-            if (config('requested_portfolio') && menu($portfolioOwner)) {
-                foreach (myMenu($portfolioOwner, '_json') as $i => $section) {
-                    $sections[$i]['menu'] = $section->title;
-                    str_contains($section->title, '*') ? preg_match('/(?<=\*)[^\s]*(?=\s)|(?<=\*).*/', $section->title, $sections[$i]['id']) : $sections[$i]['id'] = $section->title;
-                    $sections[$i]['id'] = is_array($sections[$i]['id']) ? reset($sections[$i]['id']) : $sections[$i]['id'];
-                    $sections[$i]['title'] = str_replace('*', '', $section->title);
-                }
+                view()->composer('*', function ($view) use ($url) {
+                    $view->with('jd', $url === setting('jd.domain'));
+                    $view->with('ivno', $url === setting('ivno.domain'));
+                    $view->with('menuItems', config('ownerMenu')->where('featured', 1));
+                });
             }
-
-            config(['sections' => $sections]);
-
-            view()->composer('*', function ($view) use ($requested_url, $sections) {
-                $view->with('jd', $requested_url === preg_replace("(^https?://)", "", setting('jd.domain')));
-                $view->with('ivno', $requested_url === preg_replace("(^https?://)", "", setting('ivno.domain')));
-
-                $view->with('sections', $sections);
-            });
         }
     }
 

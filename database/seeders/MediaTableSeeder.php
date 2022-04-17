@@ -29,7 +29,7 @@ class MediaTableSeeder extends Seeder
                 'order' => 1,
                 'featured' => 1,
                 'created_at' => '2022-03-15 09:34:00',
-                'updated_at' => '2022-03-15 09:52:00',
+                'updated_at' => '2022-04-12 00:14:37',
             ),
             1 => 
             array (
@@ -41,7 +41,7 @@ class MediaTableSeeder extends Seeder
                 'order' => 2,
                 'featured' => 1,
                 'created_at' => '2022-03-15 09:34:00',
-                'updated_at' => '2022-03-15 09:57:37',
+                'updated_at' => '2022-04-12 00:14:37',
             ),
             2 => 
             array (
@@ -53,7 +53,7 @@ class MediaTableSeeder extends Seeder
                 'order' => 3,
                 'featured' => 1,
                 'created_at' => '2022-03-15 09:34:00',
-                'updated_at' => '2022-03-15 09:57:46',
+                'updated_at' => '2022-04-12 00:14:37',
             ),
         ));
         

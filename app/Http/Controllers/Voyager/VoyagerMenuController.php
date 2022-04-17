@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Voyager;
 
-use App\Models\MenuItem;
+use App\Events\MenuUpdated;
+// use App\Models\MenuItem;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Http\Controllers\VoyagerMenuController as BaseVoyagerMenuController;
 
@@ -15,79 +15,54 @@ class VoyagerMenuController extends BaseVoyagerMenuController
     {
         $dataType = Voyager::model('DataType')->where('slug', '=', 'menus')->first();
 
-        $menu = app($dataType->model_name)->findOrFail($id);
+        $model = app($dataType->model_name);
 
-        $this->authorize('edit', $menu);
+        $this->authorize('edit', $model);
 
+        $query = $model->query();
+
+        if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
+
+            $query = $query->{$dataType->scope}();
+
+        }
+
+        $menu = $query->findOrFail($id);
+        
         $isModelTranslatable = is_bread_translatable(Voyager::model('MenuItem'));
-
         return Voyager::view('voyager::menus.builder', compact('menu', 'isModelTranslatable'));
+
     }
 
-
-    public function delete_menu($menu, $id)
+    public function order_item(Request $request)
     {
-        $item = MenuItem::findOrFail($id);
+        $menuItemOrder = json_decode($request->input('order'));
 
-        Gate::denyIf(fn ($user) => !$user->hasRole('admin'));
+        $this->orderMenu($menuItemOrder, null);
 
-        $this->authorize('edit', $item->menu);
-
-        $item->deleteAttributeTranslation('title');
-
-        $item->destroy($id);
-
-        return redirect()
-            ->route('voyager.menus.builder', [$menu])
-            ->with([
-                'message'    => __('voyager::menu_builder.successfully_deleted'),
-                'alert-type' => 'success',
-            ]);
+        $menuItem = Voyager::model('MenuItem')->findOrFail($menuItemOrder[0]->id);
+        
+        event(new MenuUpdated($menuItem));
     }
 
-    public function add_item(Request $request)
+    private function orderMenu(array $menuItems, $parentId)
     {
+        foreach ($menuItems as $index => $menuItem) {
+            $item = Voyager::model('MenuItem')->findOrFail($menuItem->id);
+            $item->order = $index + 1;
+            $item->parent_id = $parentId;
+            $item->save();
 
-        $dataType = Voyager::model('DataType')->where('slug', '=', 'menus')->first();
-
-        $menu = app($dataType->model_name);
-
-        Gate::denyIf(fn ($user) => !$user->hasRole('admin'));
-
-        $this->authorize('edit', $menu);
-
-        $data = $this->prepareParameters(
-            $request->all()
-        );
-
-        unset($data['id']);
-        $data['order'] = Voyager::model('MenuItem')->highestOrderMenuItem();
-
-        // Check if is translatable
-        $_isTranslatable = is_bread_translatable(Voyager::model('MenuItem'));
-        if ($_isTranslatable) {
-            // Prepare data before saving the menu
-            $trans = $this->prepareMenuTranslations($data);
+            if (isset($menuItem->children)) {
+                $this->orderMenu($menuItem->children, $item->id);
+            }
         }
-
-        $menuItem = Voyager::model('MenuItem')->create($data);
-
-        // Save menu translations
-        if ($_isTranslatable) {
-            $menuItem->setAttributeTranslations('title', $trans, true);
-        }
-
-        return redirect()
-            ->route('voyager.menus.builder', [$data['menu_id']])
-            ->with([
-                'message'    => __('voyager::menu_builder.successfully_created'),
-                'alert-type' => 'success',
-            ]);
     }
 
     public function update_item(Request $request)
     {
         $id = $request->input('id');
+
         Auth::user()->hasRole('admin') ?
             $data = $this->prepareParameters(
                 $request->except(['id'])
@@ -96,7 +71,7 @@ class VoyagerMenuController extends BaseVoyagerMenuController
                 $request->except(['id', 'route', 'parameters', 'icon_class', 'color', 'target', 'menu_id'])
             );
 
-        $menuItem = MenuItem::findOrFail($id);
+        $menuItem = Voyager::model('MenuItem')->findOrFail($id);
 
         $this->authorize('edit', $menuItem->menu);
 
@@ -109,6 +84,8 @@ class VoyagerMenuController extends BaseVoyagerMenuController
 
         $menuItem->update($data);
 
+        event(new MenuUpdated($menuItem));
+        
         return redirect()
             ->route('voyager.menus.builder', [$menuItem->menu_id])
             ->with([
@@ -119,13 +96,15 @@ class VoyagerMenuController extends BaseVoyagerMenuController
 
     public function feature_toggle(Request $request)
     {
-        $id = $request->input('id');
+        $id = json_decode($request->input('id'));
 
-        $menuItem = MenuItem::findOrFail($id);
+        $menuItem = Voyager::model('MenuItem')->findOrFail($id);
 
         $this->authorize('edit', $menuItem->menu);
 
-        $res = $menuItem->toggleFeature($id);
+        $res = $menuItem->toggleFeature([$id]);
+
+        if($res) event(new MenuUpdated($menuItem));
 
         return $res ?
             [

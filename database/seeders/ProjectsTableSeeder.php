@@ -29,11 +29,11 @@ class ProjectsTableSeeder extends Seeder
                     'technologies' => '[]',
                     'image' => 'projects/March2022/c6e85e96992d775cfd29372b148bb2c0.jpg',
                     'owner_id' => 2,
-                    'order' => 3,
+                    'order' => 27,
                     'active' => 0,
                     'featured' => 1,
                     'created_at' => '2022-03-14 14:22:52',
-                    'updated_at' => '2022-04-06 08:02:08',
+                    'updated_at' => '2022-04-17 10:56:17',
                 ),
                 1 => 
                 array (
@@ -45,11 +45,11 @@ class ProjectsTableSeeder extends Seeder
                     'technologies' => '[]',
                     'image' => 'projects/March2022/aadd12a8f563b58c09fcd9dced60e0d7.jpg',
                     'owner_id' => 2,
-                    'order' => 4,
-                    'active' => 1,
+                    'order' => 23,
+                    'active' => 0,
                     'featured' => 1,
                     'created_at' => '2022-03-14 14:22:52',
-                    'updated_at' => '2022-04-06 08:02:15',
+                    'updated_at' => '2022-04-17 10:56:17',
                 ),
                 2 => 
                 array (
@@ -61,11 +61,11 @@ class ProjectsTableSeeder extends Seeder
                     'technologies' => '[]',
                     'image' => 'projects/March2022/cb80947fea3973c3d054ff34bca4e01b.jpg',
                     'owner_id' => 2,
-                    'order' => 2,
-                    'active' => 0,
+                    'order' => 32,
+                    'active' => 1,
                     'featured' => 1,
                     'created_at' => '2022-03-14 14:22:52',
-                    'updated_at' => '2022-04-03 07:44:41',
+                    'updated_at' => '2022-04-17 10:56:40',
                 ),
                 3 => 
                 array (
@@ -77,11 +77,11 @@ class ProjectsTableSeeder extends Seeder
                     'technologies' => '[]',
                     'image' => 'projects/March2022/3e5560b26b628e032d146a74b14d8254.jpg',
                     'owner_id' => 2,
-                    'order' => 1,
+                    'order' => 31,
                     'active' => 0,
                     'featured' => 1,
                     'created_at' => '2022-03-14 14:22:52',
-                    'updated_at' => '2022-04-06 08:02:15',
+                    'updated_at' => '2022-04-17 10:56:40',
                 ),
             ));
         

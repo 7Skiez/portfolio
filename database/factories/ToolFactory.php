@@ -1,11 +1,10 @@
 <?php
 
-namespace Database\Factories\Wave;
+namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Wave\Tool;
-use Wave\User;
+use App\Models\User;
 
 class ToolFactory extends Factory
 {

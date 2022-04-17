@@ -27,15 +27,15 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_singular' => 'User',
                 'display_name_plural' => 'Users',
                 'icon' => 'voyager-person',
-                'model_name' => 'TCG\\Voyager\\Models\\User',
+                'model_name' => 'App\\Models\\User',
                 'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
-                'controller' => 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',
-                'description' => '',
+                'controller' => 'App\\Http\\Controllers\\Voyager\\VoyagerUserController',
+                'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
                 'created_at' => '2022-03-29 22:10:33',
-                'updated_at' => '2022-03-29 22:10:33',
+                'updated_at' => '2022-04-13 01:54:35',
             ),
             1 => 
             array (
@@ -53,7 +53,7 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":"currentUser"}',
                 'created_at' => '2022-03-29 22:10:33',
-                'updated_at' => '2022-04-03 12:17:16',
+                'updated_at' => '2022-04-17 22:09:57',
             ),
             2 => 
             array (

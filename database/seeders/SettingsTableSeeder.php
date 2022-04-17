@@ -54,17 +54,6 @@ class SettingsTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
-                'key' => 'site.google_analytics_tracking_id',
-                'display_name' => 'Google Analytics Tracking ID',
-                'value' => NULL,
-                'details' => '',
-                'type' => 'text',
-                'order' => 3,
-                'group' => 'Site',
-            ),
-            4 => 
-            array (
                 'id' => 5,
                 'key' => 'admin.bg_image',
                 'display_name' => 'Admin Background Image',
@@ -74,7 +63,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 5,
                 'group' => 'Admin',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 6,
                 'key' => 'admin.title',
@@ -85,7 +74,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 1,
                 'group' => 'Admin',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 7,
                 'key' => 'admin.description',
@@ -96,29 +85,29 @@ class SettingsTableSeeder extends Seeder
                 'order' => 2,
                 'group' => 'Admin',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 8,
                 'key' => 'admin.loader',
                 'display_name' => 'Admin Loader',
-                'value' => '',
+                'value' => 'settings\\April2022\\QRzcOB7aDSclRJ95rcDM.png',
                 'details' => '',
                 'type' => 'image',
                 'order' => 3,
                 'group' => 'Admin',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 9,
                 'key' => 'admin.icon_image',
                 'display_name' => 'Admin Icon Image',
-                'value' => '',
+                'value' => 'settings\\April2022\\Y0K0muClClEPBm1t0MIE.png',
                 'details' => '',
                 'type' => 'image',
                 'order' => 4,
                 'group' => 'Admin',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 10,
                 'key' => 'admin.google_analytics_client_id',
@@ -129,7 +118,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 1,
                 'group' => 'Admin',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 11,
                 'key' => 'ivno.domain',
@@ -140,29 +129,29 @@ class SettingsTableSeeder extends Seeder
                 'order' => 6,
                 'group' => 'ivno',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'key' => 'ivno.bg_color',
                 'display_name' => 'Background Color',
-            'value' => 'rgb(12, 4, 27)',
+            'value' => 'radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 2.00px,rgb(12, 4, 27) 10.00%)',
                 'details' => NULL,
-                'type' => 'color',
+                'type' => 'gradient',
                 'order' => 7,
                 'group' => 'ivno',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'key' => 'ivno.profile_bg_image',
                 'display_name' => 'Profile Background Image',
-                'value' => 'settings\\March2022\\UZW9ShLlnc1W90Nmd9C2.png',
-                'details' => NULL,
+                'value' => 'settings\\April2022\\RqsU9eUw7xaFRrD00cPK.png',
+                'details' => '{"resize":{"width":"256","height":null},"quality":"80%","upsize":true}',
                 'type' => 'image',
                 'order' => 8,
                 'group' => 'ivno',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 14,
                 'key' => 'ivno.main_gradient',
@@ -173,7 +162,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 10,
                 'group' => 'ivno',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 15,
                 'key' => 'ivno.accent_bg_color',
@@ -184,7 +173,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 9,
                 'group' => 'ivno',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 16,
                 'key' => 'ivno.accent_text_color',
@@ -192,21 +181,21 @@ class SettingsTableSeeder extends Seeder
             'value' => 'rgb(255, 255, 255)',
                 'details' => NULL,
                 'type' => 'color',
-                'order' => 12,
+                'order' => 11,
                 'group' => 'ivno',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 17,
                 'key' => 'ivno.logo',
                 'display_name' => 'Logo',
-                'value' => 'settings\\March2022\\RUeTQqh3llgCKbIVGWJJ.png',
-                'details' => NULL,
+                'value' => 'settings\\April2022\\PXaEA6BymFGiJwWbSLJm.png',
+                'details' => '{"resize":{"width":"64","height":null},"quality":"100%","upsize":true}',
                 'type' => 'image',
-                'order' => 11,
+                'order' => 12,
                 'group' => 'ivno',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 18,
                 'key' => 'ivno.logo_rotation',
@@ -217,21 +206,21 @@ class SettingsTableSeeder extends Seeder
                 'order' => 13,
                 'group' => 'ivno',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 19,
                 'key' => 'ivno.headline',
                 'display_name' => 'Headline',
-                'value' => '<p>--I=n--</p>
-<p>--V=e--</p>
-<p>--N=t--</p>
-<p>--O=r--</p>',
-                'details' => NULL,
+                'value' => '<p>&lt;-I=n-&gt;</p>
+<p>&lt;-V=e-&gt;</p>
+<p>&lt;-N=t-&gt;</p>
+<p>&lt;-O=r-&gt;</p>',
+                'details' => '{"prepare":true,"split":true}',
                 'type' => 'rich_text_box',
                 'order' => 14,
                 'group' => 'ivno',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 20,
                 'key' => 'ivno.subheadline',
@@ -242,7 +231,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 15,
                 'group' => 'ivno',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 21,
                 'key' => 'ivno.description',
@@ -256,23 +245,23 @@ class SettingsTableSeeder extends Seeder
                 'order' => 16,
                 'group' => 'ivno',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 22,
                 'key' => 'ivno.hero_items',
                 'display_name' => 'Hero Items',
-                'value' => '<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f607.png" width="24" height="24" />Design is about Life--</p>
-<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f62e.png" width="24" height="24" />Small Changes Big Achievments--</p>
-<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f607.png" width="24" height="24" />+2 Years of Exprience--</p>
-<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.5/png/unicode/32/1f60d.png" width="24" height="24" />I Love Feedback--</p>
-<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f609.png" width="24" height="24" />Creativity is Connecting the Dots--</p>
-<p>--<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f61c.png" width="24" height="24" />Small Changes Big Achievments--</p>',
-                'details' => NULL,
+                'value' => '<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f607.png" width="24" height="24" />Design is about Life-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f62e.png" width="24" height="24" />Small Changes Big Achievments-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f607.png" width="24" height="24" />+2 Years of Exprience-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.5/png/unicode/32/1f60d.png" width="24" height="24" />I Love Feedback-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f609.png" width="24" height="24" />Creativity is Connecting the Dots-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://cdn.joypixels.com/emoji/joypixels/6.0/png/unicode/32/1f61c.png" width="24" height="24" />Small Changes Big Achievments-&gt;</p>',
+                'details' => '{"prepare":true}',
                 'type' => 'rich_text_box',
                 'order' => 17,
                 'group' => 'ivno',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 23,
                 'key' => 'ivno.hero_items_degree_rotation',
@@ -283,18 +272,18 @@ class SettingsTableSeeder extends Seeder
                 'order' => 18,
                 'group' => 'ivno',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 24,
                 'key' => 'ivno.skills_radar_bg',
                 'display_name' => 'Skills Radar Background',
-                'value' => 'settings\\March2022\\8habSjMPbVhFkgwMMtlo.png',
-                'details' => NULL,
+                'value' => 'settings\\April2022\\6doUoqqjx4O4CGBeoKsV.png',
+                'details' => '{"resize":{"width":"256","height":null},"quality":"80%","upsize":true}',
                 'type' => 'image',
                 'order' => 19,
                 'group' => 'ivno',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 25,
                 'key' => 'ivno.radar_area_gradient',
@@ -305,7 +294,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 20,
                 'group' => 'ivno',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 26,
                 'key' => 'ivno.radar_area_roundstrokes',
@@ -316,22 +305,22 @@ class SettingsTableSeeder extends Seeder
                 'order' => 21,
                 'group' => 'ivno',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 27,
                 'key' => 'ivno.other_skills',
                 'display_name' => 'Other Skills',
-                'value' => '<p>--<img style="margin-right: 0.5rem;" src="http://localhost:3000/storage/code-circle.png" width="24" height="24" /><span style="white-space: pre-wrap;">Coding &lt;Hmtl, Css, Javascript &amp; Vue&gt;</span>--</p>
-<p>--<img style="margin-right: 0.5rem;" src="http://localhost:3000/storage/dollar-circle.png" width="24" height="24" /><span style="white-space: pre-wrap;">Marketing &amp; Business Skills</span>--</p>',
-                'details' => NULL,
+                'value' => '<p>&lt;-<img style="margin-right: 0.5rem;" src="https://drive.google.com/uc?id=1Y7ifTOxZzm1xc1eQw8h4E4X8jj0IGngg&amp;export=media" width="24" height="24" /><span style="white-space: pre-wrap;">Coding &lt;Hmtl, Css, Javascript &amp; Vue&gt;</span>-&gt;</p>
+<p>&lt;-<img style="margin-right: 0.5rem;" src="https://drive.google.com/uc?id=1NbLW1KzBCfhauvimhXpl2ZyaFxCfNlM9&amp;export=media" width="24" height="24" /><span style="white-space: pre-wrap;">Marketing &amp; Business Skills</span>-&gt;</p>',
+                'details' => '{"prepare":true}',
                 'type' => 'rich_text_box',
                 'order' => 24,
                 'group' => 'ivno',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 28,
-                'key' => 'ivno.contact_me',
+                'key' => 'ivno.contacts',
                 'display_name' => 'Contact Me',
                 'value' => '<p><a class="contact" href="mailto:amir.ivno@Gmail.com" target="_blank" rel="noopener">AMIR.IVNO<span style="opacity: 50%;">@Gmail.com</span></a></p>',
                 'details' => NULL,
@@ -339,18 +328,25 @@ class SettingsTableSeeder extends Seeder
                 'order' => 25,
                 'group' => 'ivno',
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 29,
                 'key' => 'ivno.footer_image',
                 'display_name' => 'Footer Image',
-                'value' => 'settings\\March2022\\Do5hWVuWpMkg7GQo210O.png',
-                'details' => NULL,
+                'value' => 'settings\\April2022\\aFQSeMUNgqNjgNTqU2ji.png',
+                'details' => '{
+"resize": {
+"width": "1000",
+"height": null
+},
+"quality": "70%",
+"upsize": false
+}',
                 'type' => 'image',
                 'order' => 26,
                 'group' => 'ivno',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 30,
                 'key' => 'ivno.footer_bg_glow',
@@ -361,7 +357,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 27,
                 'group' => 'ivno',
             ),
-            30 => 
+            29 => 
             array (
                 'id' => 31,
                 'key' => 'ivno.radar_dot_radius',
@@ -372,7 +368,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 22,
                 'group' => 'ivno',
             ),
-            31 => 
+            30 => 
             array (
                 'id' => 32,
                 'key' => 'ivno.radar_stroke_width',
@@ -381,6 +377,17 @@ class SettingsTableSeeder extends Seeder
                 'details' => NULL,
                 'type' => 'number',
                 'order' => 23,
+                'group' => 'ivno',
+            ),
+            31 => 
+            array (
+                'id' => 33,
+                'key' => 'ivno.google_analytics_tracking_id',
+                'display_name' => 'Google Analytics Tracking ID',
+                'value' => NULL,
+                'details' => '',
+                'type' => 'text',
+                'order' => 24,
                 'group' => 'ivno',
             ),
         ));

@@ -581,7 +581,7 @@
     @endif
 
     <script>
-        let allElements = document.querySelectorAll("#{{ \Illuminate\Support\Str::slug($group) }} div.panel-body");
+        let allElements = document.querySelectorAll(".tab-content div.panel-body");
         let Btn = '<button type="submit" class="btn btn-primary pull-right">Save</button>'
         allElements.forEach(e => {
             $(e).append(Btn)

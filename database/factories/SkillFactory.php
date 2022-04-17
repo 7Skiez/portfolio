@@ -1,10 +1,9 @@
 <?php
 
-namespace Database\Factories\Wave;
+namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Wave\Skill;
-use Wave\User;
+use App\Models\User;
 
 class SkillFactory extends Factory
 {

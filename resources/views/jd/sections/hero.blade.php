@@ -34,47 +34,18 @@
         $headlineCombo = array_map(fn($i) => explode("=", $i), $headline[0]);
 
         preg_match_all('/(?<=--).*?(?=--)/', setting('ivno.hero_items'), $matches);
-
         array_map(fn($v, $k) => !($k & 1) ? $v : '', $matches[0], array_keys($matches[0]));
 
         if (count($matches[0])) {
             $splitMatches = array_chunk($matches[0], ceil(count($matches[0]) / 2));
-
             $reduceBy = fn($matches) => (setting('ivno.hero_items_degree_rotation') * 2) / (count($matches) === 1 ? 2 : count($matches) - 1);
-
             $degree1 = setting('ivno.hero_items_degree_rotation');
             $degree2 = setting('ivno.hero_items_degree_rotation');
         }
     ?>
-
-    <style>
-        .left>div, .right>div {
-            margin: 1rem 0 1rem 0;
-        }
-        @if(isset($splitMatches))
-            @foreach($splitMatches[0] as $key => $match)
-                .left>div:nth-child({{ $key + 1 }}) {
-                    transform: rotate({{ $degree1 }}deg);
-                    transform-origin: right;
-                }
-                <?php $degree1 -= $reduceBy($splitMatches[0]) ?>
-            @endforeach
-            @foreach($splitMatches[1] as $key => $match)
-                .right>div:nth-child({{ $key + 1 }}) {
-                    transform: rotate({{ $degree2 * -1 }}deg);
-                    transform-origin: left;
-                }
-                <?php $degree2 -= $reduceBy($splitMatches[1]) ?>
-            @endforeach
-        @endif
-
-        .left>div:hover,
-        .right>div:hover {
-            transform: rotate(0)
-        }
-
-    </style>
-
+    {{-- {!! preg_replace('/  |\r\n|\n|\r/', '', view('partials.styles', compact('splitMatches','degree1','degree2','reduceBy'))->render()) !!} --}}
+    @include('partials.styles')
+    
     <div id="hero" class="relative flex items-center w-full">
         <div class="flex flex-col z-20 pt-28 pb-16 xl:pb-40 mx-auto w-full max-w-7xl">
             <div class="flex justify-center" >

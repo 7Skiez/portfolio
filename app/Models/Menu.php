@@ -14,15 +14,4 @@ class Menu extends \TCG\Voyager\Models\Menu
         if (!Auth::user()->hasRole('admin'))
             return $query->where('name', Auth::user()->username);
     }
-
-    public function items()
-    {
-        return $this->hasMany(MenuItem::class);
-    }
-
-    public function parent_items()
-    {
-        return $this->hasMany(MenuItem::class)
-            ->whereNull('parent_id');
-    }
 }

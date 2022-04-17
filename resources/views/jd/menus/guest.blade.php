@@ -10,9 +10,9 @@
     @endif
 
     @if($ivno)
-        @foreach (myMenu('ivno', '_json') as $i => $section)
-            <a @click="debounce(blinkText, 300)" href="#{{ $sections[$i]['id'] }}" class="text-base leading-6 text-accent transition duration-150 ease-in-out hover:text-wave-400 focus:outline-none focus:text-wave-400">
-                {{ $sections[$i]['id'] }}
+        @foreach ($sections as $i => $section)
+            <a @click="debounce(blinkText, 300)" href="#{{ $section['id'] }}" class="text-base leading-6 text-accent transition duration-150 ease-in-out hover:text-wave-400 focus:outline-none focus:text-wave-400">
+                {{ $section['title'] }}
             </a>
         @endforeach
     @endif

@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories\Wave;
+namespace Database\Factories;
 
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Wave\Project;
+use App\Models\User;
 
 class ProjectFactory extends Factory
 {

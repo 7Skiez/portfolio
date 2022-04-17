@@ -349,7 +349,7 @@
             $bulkFeatureBtn.click($.debounce(function(e) {
                 var ids = [];
                 var $checkedBoxes = $('#dataTable input[type=checkbox]:checked').not('.select_all');
-                var $labels = $checkedBoxes.parent().parent().find('td .featured-label');
+                var $featureLabels = $checkedBoxes.parent().parent().find('td .featured-label');
                 var count = $checkedBoxes.length;
                 if (count) {
                     // Gather IDs
@@ -362,7 +362,7 @@
                             ids: ids,
                             _token: '{{ csrf_token() }}'
                         }, function (data) {
-                            $.each($labels, function () {
+                            $.each($featureLabels, function () {
                                 if($(this).text() == 'Yes') {
                                     $(this).css('transition', 'all 0.5s ease')
                                     $(this).text('No')
@@ -382,6 +382,58 @@
                     toastr.warning('Nothing Selected To Toggle');
                 }
             }, 250))
+
+            $("td .featured-label").css('cursor', 'pointer')
+            $("td .featured-label").click($.debounce(function(e){
+                let id = [$(e.target).parent().parent().find('input[type=checkbox]')[0].value]
+                $.post('{{ route('voyager.'.$dataType->slug.'.feature_toggle') }}', {
+                        ids: id,
+                        _token: '{{ csrf_token() }}'
+                    }, function (data) {
+                        if($(e.target).text() == 'Yes') {
+                            $(e.target).css('transition', 'all 0.5s ease')
+                            $(e.target).text('No')
+                            $(e.target).removeClass('label-info').addClass('label-primary')
+                        } else {
+                            $(e.target).css('transition', 'all 0.5s ease')
+                            $(e.target).text('Yes')
+                            $(e.target).removeClass('label-primary').addClass('label-info')
+                        }
+                        data['alert-type'] == 'success' ?
+                            toastr.success(data.message) :
+                            toastr.error(data.message);
+                    });  
+            }, 250));
+
+            let $activeLabels = $('td .active-label')
+            $activeLabels.css('cursor', 'pointer')
+            $("td .active-label").click($.debounce(function(e){
+                if($(e.target).text() == 'No'){
+
+                    let id = [$(e.target).parent().parent().find('input[type=checkbox]')[0].value]
+                    $.post('{{ route('voyager.'.$dataType->slug.'.set_active') }}', {
+                        id: id,
+                        _token: '{{ csrf_token() }}'
+                    }, function (data) {
+                        console.log(data)
+                        $activeLabels.not(e.target).each(function (){
+                            $(this).css('transition', 'all 0.5s ease')
+                            $(this).text('No')
+                            $(this).removeClass('label-info').addClass('label-primary')
+                        })
+                        $(e.target).css('transition', 'all 0.5s ease')
+                        $(e.target).text('Yes')
+                        $(e.target).removeClass('label-primary').addClass('label-info')
+
+                        data['alert-type'] == 'success' ?
+                            toastr.success(data.message) :
+                            toastr.error(data.message);
+                    })
+                }else {
+                    toastr.warning('{{ $dataType->getTranslatedAttribute('display_name_singular') }} already active');
+                }
+
+            }, 250));
 
 
             @if (!$dataType->server_side)

@@ -1,11 +1,9 @@
 <?php
 
-namespace Database\Factories\Wave;
+namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Wave\Medium;
-use Wave\User;
 
 class MediumFactory extends Factory
 {

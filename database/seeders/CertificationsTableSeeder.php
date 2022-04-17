@@ -30,7 +30,7 @@ class CertificationsTableSeeder extends Seeder
                 'order' => 1,
                 'featured' => 1,
                 'created_at' => '2022-03-14 14:26:10',
-                'updated_at' => '2022-03-14 14:31:24',
+                'updated_at' => '2022-04-17 05:01:47',
             ),
             1 => 
             array (

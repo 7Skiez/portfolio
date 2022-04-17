@@ -1,12 +1,7 @@
 <section id="{{ $sections[$i]['id'] }}" class="relative w-full pt-24 xl:pt-36 xl:pb-4">
 
-    @if($jd)<h2 class="mb-12 text-lg xl:text-2xl font-bold leading-none text-white text-opacity-30 text-center">&#60;{{ $section->title }}&#62;</h2>@endif
-
-    @if($ivno)
-        <h2 class="mb-6 text-2xl xl:text-4xl font-bold leading-none text-white text-opacity-80 text-center">{{ $sections[$i]['title'] }}</h2>
-        <h3 class="text-sm xl:text-xl font-bold leading-none text-white text-opacity-30 text-center">{{ $section->url }}</h3>
-    @endif
-
+    @include('partials.section_title')
+    
     <div class="relative flex items-center justify-center w-full">
         @if ($jd)
             <div class="relative flex flex-col p-6 sm:p-8 space-y-2 shadow-xl bg-black/40 rounded-lg sm:rounded-xl backdrop-blur">

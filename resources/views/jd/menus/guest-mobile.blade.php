@@ -13,13 +13,11 @@
                     @endforeach
                 @endif
 
-                @if ($ivno && menu('ivno', '_json'))
-                    @foreach (myMenu('ivno', '_json') as $i => $section)
-                            <a @click="debounce(blinkText, 300); mobileMenuOpen = false" href="#{{ $sections[$i]['id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
-                                {{ $sections[$i]['title'] }}
-                            </a>
-                    @endforeach
-                @endif
+                @foreach ($sections as $i => $section)
+                    <a @click="debounce(blinkText, 300); mobileMenuOpen = false" href="#{{ $section['id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
+                        {{ $section['title'] }}
+                    </a>
+                @endforeach
             </nav>
         </div>
     </div>

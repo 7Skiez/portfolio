@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Featureable;
+use App\Models\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class Skill extends Model
      */
     protected $fillable = ['featured'];
 
-    use HasFactory;
+    use HasFactory, Featureable, HasOwner;
 
     public function scopeCurrentUser($query)
     {
@@ -25,22 +27,5 @@ class Skill extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'owner_id');
-    }
-
-    public function toggleFeature($ids)
-    { 
-        return $this->whereIn('id', $ids)->update(['featured' => (int)!$this->featured]);
-    }
-
-    public function save(array $options = [])
-    {
-        // If no owner has been assigned, assign the current user's id as the owner of the workstation
-        if (!$this->owner_id && Auth::user()) {
-            $this->owner_id = Auth::user()->getKey();
-        }
-
-        $this->order = $this->max('order') + 1;
-
-        return parent::save();
     }
 }

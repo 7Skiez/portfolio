@@ -69,7 +69,7 @@ class VoyagerSettingsController extends BaseVoyagerSettingsController
                 'type'    => $setting->type,
                 'field'   => str_replace('.', '_', $setting->key),
                 'group'   => $setting->group,
-            ], $setting->details);
+            ], json_decode($setting->details));
 
             if ($setting->type == 'image' && $content == null) {
                 continue;

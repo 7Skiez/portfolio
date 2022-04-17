@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Voyager\VoyagerSettingsController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Str;
 use TCG\Voyager\Events\RoutingAdmin;
@@ -34,7 +35,8 @@ Route::group(['prefix' => 'admin'], function () {
                     ? Str::start($dataType->controller, '\\')
                     : $namespacePrefix . 'VoyagerBaseController';
 
-                Route::post($dataType->slug . '/0', $breadController . '@feature_toggle')->name('voyager.'.$dataType->slug.'.feature_toggle');
+                Route::post($dataType->slug . '/0', $breadController . '@feature_toggle')->name('voyager.' . $dataType->slug . '.feature_toggle');
+                Route::post($dataType->slug . '/1', $breadController . '@set_active')->name('voyager.' . $dataType->slug . '.set_active');
             }
         } catch (\InvalidArgumentException $e) {
             throw new \InvalidArgumentException("Custom routes hasn't been configured because: " . $e->getMessage(), 1);
@@ -44,11 +46,15 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('settings/colors', [VoyagerSettingsController::class, 'colors']);
 
-        Route::post('menus/{menu}/featured', ['uses' => $namespacePrefix . 'VoyagerMenuController@feature_toggle', 'as' => 'voyager.menus.feature_toggle']);
-    });
-});
+        Route::post('menus/{menu}/featured', ['uses' => $namespacePrefix . 'VoyagerMenuController@feature_toggle', 'as' => 'voyager.menus.toggle_feature']);
 
-Route::get('/migrate', function() {
-    Artisan::call('migrate:fresh');
-    Artisan::call('db:seed');
+        Route::get('/migrate', function () {
+            Artisan::call('migrate:fresh');
+            Artisan::call('db:seed');
+        });
+
+        Route::get('/listcachedkeys', function () {
+            return listCachedKeys();
+        });
+    });
 });

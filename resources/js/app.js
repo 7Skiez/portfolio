@@ -12,6 +12,7 @@ window.csrf = document
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import * as d3 from "d3";
+window.$ = require("jquery");
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /********** Debounce **********/
 
-window.debounce = function (func, wait, immediate) {
+document.debounce = function (func, wait, immediate) {
     var timeout;
 
     return function executedFunction() {
@@ -84,7 +85,7 @@ window.debounce = function (func, wait, immediate) {
         x: 0,
         y: 0,
         updatePosition: function (event) {
-            var e = event || window.event;
+            var e = event || document.event;
             this.x = e.clientX - this._x;
             this.y = (e.clientY - this._y) * -1;
         },
@@ -557,7 +558,11 @@ axios.get("/api/data").then((response) => {
                     tooltip
                         .attr("x", newX)
                         .attr("y", newY)
-                        .text(Format(d.value))
+                        .text(
+                            roundStrokes
+                                ? Format(d.value * 1.1 + 0.01)
+                                : Format(d.value)
+                        )
                         .transition()
                         .duration(200)
                         .style("opacity", 1);
@@ -713,11 +718,11 @@ axios.get("/api/data").then((response) => {
         //Call function to draw the Radar chart
         RadarChart(".radarChart", data, radarChartOptions);
 
-        function makeBG(elem) {
+        function makeBG(e) {
             var svgns = "http://www.w3.org/2000/svg";
-            var bounds = elem.getBBox();
+            var bounds = e.getBBox();
             var bg = document.createElementNS(svgns, "rect");
-            var style = getComputedStyle(elem);
+            var style = getComputedStyle(e);
             var padding_top = parseInt(style["padding-top"]);
             var padding_left = parseInt(style["padding-left"]);
             var padding_right = parseInt(style["padding-right"]);
@@ -734,20 +739,19 @@ axios.get("/api/data").then((response) => {
             );
             bg.setAttribute("fill", style["background-color"]);
             bg.setAttribute("rx", style["border-radius"]);
-            elem.parentNode.insertBefore(bg, elem);
+            e.parentNode.insertBefore(bg, e);
         }
 
         var texts = document.querySelectorAll("g.axis > text");
 
-        for (var i = 0; i < texts.length; i++) {
-            makeBG(texts[i]);
-        }
+        texts.forEach((t) => makeBG(t));
+        // makeBG(texts[i]);
     }
 });
 
 /********** BLINK TEXT **********/
 
-window.blinkText = function (e) {
+document.blinkText = function (e) {
     const section = document.querySelector(
         "#" + e.target.getAttribute("href").match(/[^#]*$/)[0] + " h2"
     );
@@ -762,9 +766,9 @@ window.blinkText = function (e) {
 
 /********** UPDATE URL **********/
 
-window.updateUrl = function () {
-    let x = window.innerWidth / 2 + window.scrollX;
-    let y = window.innerHeight / 2 + window.scrollY;
+document.updateUrl = function () {
+    let x = document.innerWidth / 2 + document.scrollX;
+    let y = document.innerHeight / 2 + document.scrollY;
     let minDist = 50000;
     let minDistEl = null;
 
@@ -789,4 +793,98 @@ window.updateUrl = function () {
 
 /********** BLINK TEXT **********/
 
-window.addEventListener("scroll", debounce(updateUrl, 100));
+document.addEventListener("scroll", document.debounce(document.updateUrl, 100));
+
+(function () {
+    // var $pointer;
+    // if (typeof ptr == "string") {
+    //     $pointer = $(ptr);
+    // } else if (typeof ptr == "object") {
+    //     $pointer = ptr;
+    // }
+    const magnification = 1.1
+    const magnifierSize = 125
+    // magnification = +magnification;
+
+    const container = document.querySelector("body")
+
+    const onMouseMoveHandler = function (e) {
+            // $(this).css("cursor", "none");
+            $(".magnify").css("display", "flex");
+            var imagePos = $(this).offset();
+            // if (magnifierSize == undefined) {
+            //     magnifierSize = "150px";
+            // }
+
+            $(".magnify").css({
+                "background-size": 28 * magnification + "px " + 28 * magnification + "px",
+                width: magnifierSize,
+                height: magnifierSize,
+            });
+
+            $(".magnify2").css({
+                "background-size": 28 * magnification * 1.2 + "px " + 28 * magnification * 1.2 +"px",
+                width: magnifierSize * 0.5,
+                height: magnifierSize * 0.5,
+            });
+
+            //Setting a few more...
+            var magnifyOffset = +($(".magnify").width() / 2);
+            // var rightSide = +(imagePos.left + $(this).width());
+            // var bottomSide = +(imagePos.top + $(this).height());
+
+            var magnifyOffset2 = +($(".magnify2").width() / 2);
+
+                // if (
+                //     e.pageX < +(imagePos.left - magnifyOffset / 6) ||
+                //     e.pageX > +(rightSide + magnifyOffset / 6) ||
+                //     e.pageY < +(imagePos.top - magnifyOffset / 6) ||
+                //     e.pageY > +(bottomSide + magnifyOffset / 6)
+                // ) {
+                //     $(".magnify").hide();
+                //     $(document).unbind("mousemove");
+                // }
+                var backgroundPos ="" -((e.pageX - imagePos.left) * magnification - magnifyOffset) + "px " + -((e.pageY - imagePos.top) * magnification - magnifyOffset) + "px";
+                var backgroundPos2 ="" -((e.pageX - imagePos.left) * magnification * 1.2 - magnifyOffset2) + "px " + -((e.pageY - imagePos.top) * magnification * 1.2 - magnifyOffset2) + "px";
+
+                // console.log(e.pageX, container.getBoundingClientRect().width, e.pageY, container.getBoundingClientRect().height)
+
+                var cursorInMagnifiableArea = {
+                    x: (e.pageX > magnifyOffset) && (e.pageX < (container.getBoundingClientRect().width - magnifyOffset)),
+                    y: (e.pageY > magnifyOffset) && (e.pageY < (container.getBoundingClientRect().height - magnifyOffset))
+                }
+
+                if(cursorInMagnifiableArea.x) {
+                    $(".magnify").css({
+                        left: e.pageX - magnifyOffset,
+                        "background-position": backgroundPos,
+                    });
+                }
+
+                if(cursorInMagnifiableArea.y) {
+                    $(".magnify").css({
+                        top: e.pageY - magnifyOffset,
+                        "background-position": backgroundPos,
+                    });
+                }
+
+                $(".magnify2").css({
+                    "background-position": backgroundPos2,
+                });
+
+                // console.log("triggered");
+            }
+
+            container.onmousemove = document.debounce(onMouseMoveHandler, 9.5);
+        // },
+        // function () {}
+    // );
+})();
+
+$("body").prepend('<div class="magnify"></div>');
+$(".magnify").prepend('<div class="magnify2"></div>');
+
+// document.addEventListener(
+//     "mousemove",
+//     document.debounce(()=>, 100)
+// );

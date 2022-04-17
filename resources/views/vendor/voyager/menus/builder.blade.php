@@ -290,7 +290,7 @@
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 id = $(e.currentTarget).data('id');
-                $.post('{{ route('voyager.menus.feature_toggle', ['menu' => $menu->id]) }}', {
+                $.post('{{ route('voyager.menus.toggle_feature', ['menu' => $menu->id]) }}', {
                     id: id,
                     _token: '{{ csrf_token() }}'
                 }, function (data) {

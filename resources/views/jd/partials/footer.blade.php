@@ -1,5 +1,3 @@
-<!-- Section 1 -->
-
 @if ($ivno)
     <footer x-data="{ 'showModal': false }" @keydown.escape="showModal = false">
         <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto backdrop-blur-lg bg-black/30 transition-none transform opacity-0 invisible" data-replace='{"invisible": "visible", "opacity-0": "opacity-100", "transition-none": "transition-all"}' x-show="showModal">
@@ -40,8 +38,7 @@
 
                             <a href="mailto:id4mjr@gmail.com" target="_blank" class="backdrop-blur-lg hover:bg-[#25D366] w-9 h-9 fill-[#25D366] hover:fill-white border-green-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-green-500/50 cursor-pointer duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="-2 -2 28 28">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z" />
                                 </svg>
                             </a>
 
@@ -61,12 +58,7 @@
             <p class="absolute text-xs text-accent mb-2">Made With ❤️ By <a @click="showModal = true" class="font-bold text-base bg-gradient text-gradient cursor-pointer">MosbatSaz</a> Team | {{ date('Y') }}</p>
         </div>
     </footer>
-
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> --}}
 @endif
-
-<!-- Swiper JS -->
-{{-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> --}}
 
 <script src="{{ asset('js/app.js') }}"></script>
 

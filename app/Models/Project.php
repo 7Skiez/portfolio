@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Featureable;
+use App\Models\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory, Featureable, HasOwner;
     
+    protected $fillable = [
+        'active',
+        'featured',
+    ];
+
     public function scopeCurrentUser($query)
     {
         return $query->where('owner_id', Auth::user()->id);
@@ -20,25 +27,8 @@ class Project extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
     
-    public static function setActive($id) {
-        self::whereBelongsTo(auth()->user())->where('id', '!=', $id)->where('active', '=', 1)->update(['active' => 0]);
-    }
-    
-    public function toggleFeature($ids)
-    { 
-        return $this->whereIn('id', $ids)->update(['featured' => (int)!$this->featured]);
-    }
-    
-    public function save(array $options = [])
-    {
-        // If no owner has been assigned, assign the current user's id as the owner of the workstation
-        if (!$this->owner_id && Auth::user()) {
-            $this->owner_id = Auth::user()->getKey();
-        }
-
-        $this->order = $this->max('order') + 1;
-
-        return parent::save();
+    public function setActive($id) {
+        return $this->whereBelongsTo(auth()->user())->where('id', '!=', $id)->where('active', '=', 1)->update(['active' => 0]);
     }
 
 }
