@@ -581,10 +581,9 @@
     @endif
 
     <script>
-        let allElements = document.querySelectorAll(".tab-content div.panel-body");
-        let Btn = '<button type="submit" class="btn btn-primary pull-right">Save</button>'
-        allElements.forEach(e => {
-            $(e).append(Btn)
+        let settings = document.querySelectorAll(".tab-content div.panel-body"); 
+        settings.forEach(e => {
+            $(e).append('<button type="submit" class="btn btn-primary pull-right">Save</button>')
         });
     </script>
 

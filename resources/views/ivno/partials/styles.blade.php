@@ -18,17 +18,22 @@
     .bg-glow {
         background-image: {{ Portfolio::setting(config('ownerUsername').'.footer_bg_glow') }}
     }
-    .magnify{
+    .outerMagnifier{
         border-radius: 50%;
         position: absolute;
         z-index: 0;
         background-image: {{ Portfolio::setting(config('ownerUsername').'.bg_color') }};
-        display: none;
+        width: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size') }}px;
+        height: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size') }}px;
+        {{-- visibility: hidden; --}}
+        display: flex;
         align-items: center;
         justify-content: center;
     }
-    .magnify2{
+    .innerMagnifier{
         border-radius: 50%;
-        background-image: {{ Portfolio::setting(config('ownerUsername').'.bg_color') }}
+        background-image: {{ Portfolio::setting(config('ownerUsername').'.bg_color') }};
+        width: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size')*0.5 }}px;
+        height: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size')*0.5 }}px;
     }
 @endsection

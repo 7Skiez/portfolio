@@ -4,19 +4,6 @@ import ReactDOM from "react-dom/client";
 
 import ReactGPicker from "react-gcolor-picker";
 
-// export default function App() {
-//   const onChange = (value) => {
-//     console.log(value);
-//   };
-
-//   return (
-//     <ReactGPicker value='linear-gradient(0deg, rgb(255, 177, 153) 0%, rgb(255, 8, 68) 100%)' gradient="true" debounceMS="300" popupWidth="480" defaultColors={['linear-gradient(0deg, rgb(255, 177, 153) 0%, rgb(255, 8, 68) 100%)','linear-gradient(270deg, rgb(251, 171, 126) 8.00%, rgb(247, 206, 104) 92.00%)']} onChange={onChange} />
-
-//   );
-// }
-
-// ReactDOM.createRoot(document.getElementById("gradient")).render(<App />);
-
 fetch("/admin/settings/colors")
     .then((res) => res.json())
     .then((json) => {

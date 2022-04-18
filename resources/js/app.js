@@ -12,7 +12,7 @@ window.csrf = document
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import * as d3 from "d3";
-window.$ = require("jquery");
+// window.$ = require("jquery");
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
@@ -796,95 +796,51 @@ document.updateUrl = function () {
 document.addEventListener("scroll", document.debounce(document.updateUrl, 100));
 
 (function () {
-    // var $pointer;
-    // if (typeof ptr == "string") {
-    //     $pointer = $(ptr);
-    // } else if (typeof ptr == "object") {
-    //     $pointer = ptr;
-    // }
-    const magnification = 1.1
-    const magnifierSize = 125
-    // magnification = +magnification;
 
     const container = document.querySelector("body")
+    const outerMag = document.createElement('div')
+    outerMag.classList.add('outerMagnifier', 'invisible')
+    outerMag.setAttribute('data-replace', '{ "invisible": "visible" }')
+    const innerMag = document.createElement('div')
+    innerMag.classList.add('innerMagnifier')
+
+    container.insertBefore(outerMag, container.firstChild)
+    outerMag.insertBefore(innerMag, outerMag.firstChild)
+
+    //Setting a few more...
+    const outerMagOffset = +(outerMag.getBoundingClientRect().width / 2);
+    const innerMagOffset = +(innerMag.getBoundingClientRect().width / 2);
+
+    const magnification = 1.1
+    const outerMagBGSize = 28 * magnification + "px " + 28 * magnification + "px"
+    const innerMagBGSize = 28 * magnification * 1.2 + "px " + 28 * magnification * 1.2 +"px"
+
+    let left, top = null
 
     const onMouseMoveHandler = function (e) {
-            // $(this).css("cursor", "none");
-            $(".magnify").css("display", "flex");
-            var imagePos = $(this).offset();
-            // if (magnifierSize == undefined) {
-            //     magnifierSize = "150px";
-            // }
 
-            $(".magnify").css({
-                "background-size": 28 * magnification + "px " + 28 * magnification + "px",
-                width: magnifierSize,
-                height: magnifierSize,
-            });
+        const outerMagBGPos ="" -(e.pageX * magnification - outerMagOffset) + "px " + -(e.pageY * magnification - outerMagOffset) + "px";
+        const innerMagBGPos ="" -(e.pageX * magnification * 1.2 - innerMagOffset) + "px " + -(e.pageY * magnification * 1.2 - innerMagOffset) + "px";
 
-            $(".magnify2").css({
-                "background-size": 28 * magnification * 1.2 + "px " + 28 * magnification * 1.2 +"px",
-                width: magnifierSize * 0.5,
-                height: magnifierSize * 0.5,
-            });
+        var inMagnifiableArea = {
+            x: (e.pageX > outerMagOffset) && (e.pageX < (container.getBoundingClientRect().width - outerMagOffset)),
+            y: (e.pageY > outerMagOffset) && (e.pageY < (container.getBoundingClientRect().height - outerMagOffset))
+        }
 
-            //Setting a few more...
-            var magnifyOffset = +($(".magnify").width() / 2);
-            // var rightSide = +(imagePos.left + $(this).width());
-            // var bottomSide = +(imagePos.top + $(this).height());
+        if(inMagnifiableArea.x) left = e.pageX - outerMagOffset + 'px'
+        if(inMagnifiableArea.y) top = e.pageY - outerMagOffset + 'px'
 
-            var magnifyOffset2 = +($(".magnify2").width() / 2);
+        outerMag.style.cssText = `
+            background-size: ${outerMagBGSize};
+            background-position: ${outerMagBGPos};
+            left: ${left};
+            top: ${top};
+        `
+        innerMag.style.cssText = `
+            background-size: ${innerMagBGSize};
+            background-position: ${innerMagBGPos};
+        `
+    }
 
-                // if (
-                //     e.pageX < +(imagePos.left - magnifyOffset / 6) ||
-                //     e.pageX > +(rightSide + magnifyOffset / 6) ||
-                //     e.pageY < +(imagePos.top - magnifyOffset / 6) ||
-                //     e.pageY > +(bottomSide + magnifyOffset / 6)
-                // ) {
-                //     $(".magnify").hide();
-                //     $(document).unbind("mousemove");
-                // }
-                var backgroundPos ="" -((e.pageX - imagePos.left) * magnification - magnifyOffset) + "px " + -((e.pageY - imagePos.top) * magnification - magnifyOffset) + "px";
-                var backgroundPos2 ="" -((e.pageX - imagePos.left) * magnification * 1.2 - magnifyOffset2) + "px " + -((e.pageY - imagePos.top) * magnification * 1.2 - magnifyOffset2) + "px";
-
-                // console.log(e.pageX, container.getBoundingClientRect().width, e.pageY, container.getBoundingClientRect().height)
-
-                var cursorInMagnifiableArea = {
-                    x: (e.pageX > magnifyOffset) && (e.pageX < (container.getBoundingClientRect().width - magnifyOffset)),
-                    y: (e.pageY > magnifyOffset) && (e.pageY < (container.getBoundingClientRect().height - magnifyOffset))
-                }
-
-                if(cursorInMagnifiableArea.x) {
-                    $(".magnify").css({
-                        left: e.pageX - magnifyOffset,
-                        "background-position": backgroundPos,
-                    });
-                }
-
-                if(cursorInMagnifiableArea.y) {
-                    $(".magnify").css({
-                        top: e.pageY - magnifyOffset,
-                        "background-position": backgroundPos,
-                    });
-                }
-
-                $(".magnify2").css({
-                    "background-position": backgroundPos2,
-                });
-
-                // console.log("triggered");
-            }
-
-            container.onmousemove = document.debounce(onMouseMoveHandler, 9.5);
-        // },
-        // function () {}
-    // );
+    container.onmousemove = document.debounce(onMouseMoveHandler, 8);
 })();
-
-$("body").prepend('<div class="magnify"></div>');
-$(".magnify").prepend('<div class="magnify2"></div>');
-
-// document.addEventListener(
-//     "mousemove",
-//     document.debounce(()=>, 100)
-// );
