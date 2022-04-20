@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Str;
+use Spatie\FlareClient\View;
 use TCG\Voyager\Events\RoutingAdmin;
 
 /*
@@ -57,4 +58,8 @@ Route::group(['prefix' => 'admin'], function () {
             return listCachedKeys();
         });
     });
+});
+
+Route::get('/particles', function () {
+    return View('particles');
 });
