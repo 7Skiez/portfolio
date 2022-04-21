@@ -3,7 +3,7 @@
         <div class="pt-16 pb-24 space-y-6">
             <nav class="grid row-gap-8">
                 @foreach ($menuItems as $item)
-                    <a @click="document.debounce(document.blinkText, 300); mobileMenuOpen = false" href="#{{ $item['section_id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
+                    <a @click="blinkText; mobileMenuOpen = false" href="#{{ $item['section_id'] }}" class="flex items-center text-base font-medium leading-6 text-accent px-12 py-3 space-x-3 transition duration-150 ease-in-out rounded-md">
                         {{ $item['title'] }}
                     </a>
                 @endforeach

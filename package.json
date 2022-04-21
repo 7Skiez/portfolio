@@ -71,6 +71,7 @@
         "react-gcolor-picker": "^1.2.4",
         "stats.js": "^0.17.0",
         "swiper": "^8.1.1",
-        "three": "^0.139.2"
+        "three": "^0.139.2",
+        "throttle-debounce": "^4.0.1"
     }
 }

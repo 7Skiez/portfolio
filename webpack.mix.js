@@ -63,18 +63,18 @@ mix.sass("resources/sass/app.scss", "css")
             ],
         };
     })
-    .browserSync({
-        watch: true,
-        files: [
-            "public/themes/tailwind/js/**/*",
-            "public/themes/tailwind/css/**/*",
-            "public/**/*.+(html|php)",
-            "**/*.php",
-        ],
-        reloadDelay: 10,
-        proxy: {
-            target: "127.0.0.1:39",
-            ws: true,
-        },
-    })
+    // .browserSync({
+    //     watch: true,
+    //     files: [
+    //         "public/themes/tailwind/js/**/*",
+    //         "public/themes/tailwind/css/**/*",
+    //         "public/**/*.+(html|php)",
+    //         "**/*.php",
+    //     ],
+    //     reloadDelay: 10,
+    //     proxy: {
+    //         target: "127.0.0.1:39",
+    //         ws: true,
+    //     },
+    // })
     .disableSuccessNotifications();

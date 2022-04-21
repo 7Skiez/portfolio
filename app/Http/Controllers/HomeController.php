@@ -28,7 +28,7 @@ class HomeController extends \App\Http\Controllers\Controller
             ],
             'radarChart' => [
                 'id' => myMenu(config('ownerUsername'), '_json')->where('icon_class', '\App\Models\Skill')->first()->section_id,
-                'radarItems' => config('owner')->skills->pluck('percentage', 'name'),
+                'radarItems' => config('owner')->skills()->featured()->pluck('percentage', 'name'),
                 'gradient' => Portfolio::setting(config('ownerUsername') . '.radar_area_gradient'),
                 'roundStrokes' => Portfolio::setting(config('ownerUsername') . '.radar_area_roundstrokes'),
                 'strokeWidth' => Portfolio::setting(config('ownerUsername') . '.radar_stroke_width'),
