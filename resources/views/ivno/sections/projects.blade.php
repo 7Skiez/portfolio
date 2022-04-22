@@ -1,7 +1,6 @@
-<section id="{{ $section->id }}" class="relative w-full pt-24 xl:pt-40">
+@extends('app.section.wrapper', compact('section'))
 
-    @include(config('ownerUsername') . '.sections.partials.title')
-
+@section('body')
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             @foreach ($section->items as $project)
@@ -25,5 +24,4 @@
             @endforeach
         </div>
     </div>
-
-</section>
+@overwrite

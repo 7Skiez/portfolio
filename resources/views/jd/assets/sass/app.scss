@@ -1,0 +1,182 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer utilities {
+  .bg-trans {
+    background: transparent !important;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+}
+
+[x-cloak] {
+  display: none;
+}
+
+header .overlay {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 150%);
+}
+
+.fade-edge {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 25%, rgba(0,0,0,.8) 75%, rgba(0,0,0,0) 100%);
+}
+
+/****** CSS Particles **********/
+
+/* Config */
+// $color-bg: #1e1e1e;
+$color-particle: rgba(255, 255, 255, 0.4);
+$spacing: 2560px;
+$multiplier: 5;
+$time-1: calc(60s*$multiplier);
+$time-2: calc(120s*$multiplier);
+$time-3: calc(180s*$multiplier);
+$time-4: calc(200s*$multiplier);
+
+/* mixins */
+@function particles($max) {
+  $val: 0px 0px $color-particle;
+  @for $i from 1 through $max {
+    $val: #{$val}, random($spacing)+px random($spacing)+px $color-particle;
+  }
+  @return $val;
+}
+
+@mixin particles($max) {
+  box-shadow: particles(150);
+  border-radius: 50%;
+}
+
+.animation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle, .particle:after {
+  background: transparent;
+}
+
+.particle:after {
+  position: absolute;
+  content: "";
+  top: $spacing;
+}
+
+.particle-1 {
+  animation: animParticle $time-1 linear infinite;
+  @include particles(1000);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-1:after {
+  @include particles(900);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-2 {
+  animation: animParticle $time-2 linear infinite;
+  @include particles(800);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-2:after {
+  @include particles(500);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-3:after {
+  @include particles(1100);
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+}
+
+.particle-4 {
+  animation: animParticle $time-4 linear infinite;
+  @include particles(1200);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-4:after {
+  @include particles(700);
+  height: 1px;
+  width: 1px;
+}
+
+@keyframes animParticle {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY($spacing * -1);
+  }
+}
+
+.text-gradient {
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.axis:hover {
+  transform: scale(1.02);
+  transition-duration: 300ms;
+}
+
+.contact:hover {
+  transform: scale(1.1);
+}
+
+.select-none {
+  user-select: none;
+}
+
+h1.headline span {
+  display: inline-flex;
+}
+
+h1.headline span:nth-child(even) {
+  overflow: hidden;
+  transition: ease-in-out 0.7s;
+  color: white;
+  letter-spacing: -1em;
+  font-size: 3.25rem;
+  line-height: 1.05
+} 
+
+h1.headline:hover span:nth-child(even) {
+  letter-spacing: 0.05em
+}
+
+/****** Scrollbar **********/
+
+::-webkit-scrollbar {
+  background: rgb(32, 35, 36);
+  width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(72, 78, 81);
+  border-radius: 50px;
+  border: 4.5px solid rgb(32, 35, 36);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(85, 92, 96);
+}

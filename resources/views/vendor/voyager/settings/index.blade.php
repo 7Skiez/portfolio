@@ -509,7 +509,7 @@
 
 @section('javascript')
 
-    <script src="{{ asset('./js/settings.js') }}"></script>
+    <script src="{{ asset(config('ownerUsername').'/js/settings.js') }}"></script>
 
     <script>
         $('document').ready(function () {

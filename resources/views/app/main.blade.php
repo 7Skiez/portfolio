@@ -38,21 +38,20 @@
         <meta name="description" content="{{ $seo->description }}">
     @endif
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- {!! preg_replace('/  |\r\n|\n|\r/','',view('partials.styles')->render()) !!} --}}
+    <link href="{{ asset(config('ownerUsername').'/css/app.css') }}" rel="stylesheet">
+
     @include(config('ownerUsername').'.partials.styles')
 </head>
 
 <body class="flex flex-col min-h-screen bg-color cursor-default">
 
-    @include('app.partials.header')
+    @include(config('ownerUsername').'.partials.header')
 
     <main class="flex-grow overflow-x-hidden z-10">
 
         @include(config('ownerUsername').'.sections.hero')
 
         @foreach ($sections as $title => $section)
-            {{-- @dump(config('ownerUsername') . '.sections.' . $title) --}}
             @include(config('ownerUsername') . '.sections.' . $title)
         @endforeach
         

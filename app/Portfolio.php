@@ -104,62 +104,25 @@ class Portfolio extends \TCG\Voyager\Voyager
 
     function myMenu($menuName, $type = null, array $options = [])
     {
-        // return Cache::rememberForever('portfolio_menu_' . $menuName, function () use ($menuName, $type, $options) {
-            return $this->model('Menu')->display($menuName, $type, $options)->transform(function ($i) {
-                str_contains($i->title, '*') ? preg_match('/(?<=\*)[^\s]*(?=\s)|(?<=\*).*/', $i->title, $sectionId) : $sectionId = $i->title;
-                $i->section_id = is_array($sectionId) ? reset($sectionId) : $sectionId;
-                $i->title = str_replace('*', '', $i->title);
-                if ($i->parameters) {
-                    $newParameters = json_decode(json_encode($i->parameters));
-                    foreach ($newParameters as $key => $param) {
-                        if (str_starts_with($param, '*')) {
-                            eval(ltrim($param, '*\\'));
-                            preg_match('/(?<=\$).*?(?=\=)/', $param, $var);
-                            $newParameters->$key = ${$var[0]};
-                            $i->parameters = json_encode($newParameters);
-                            $i->href = route($i->route, (array)$i->parameters, true);
-                        }
+        return $this->model('Menu')->display($menuName, $type, $options)->transform(function ($i) {
+            str_contains($i->title, '*') ? preg_match('/(?<=\*)[^\s]*(?=\s)|(?<=\*).*/', $i->title, $sectionId) : $sectionId = $i->title;
+            $i->section_id = is_array($sectionId) ? reset($sectionId) : $sectionId;
+            $i->title = str_replace('*', '', $i->title);
+            if ($i->parameters) {
+                $newParameters = json_decode(json_encode($i->parameters));
+                foreach ($newParameters as $key => $param) {
+                    if (str_starts_with($param, '*')) {
+                        eval(ltrim($param, '*\\'));
+                        preg_match('/(?<=\$).*?(?=\=)/', $param, $var);
+                        $newParameters->$key = ${$var[0]};
+                        $i->parameters = json_encode($newParameters);
+                        $i->href = route($i->route, (array)$i->parameters, true);
                     }
                 }
-                return $i;
-            })->filter();
-        // });
+            }
+            return $i;
+        })->filter();
     }
-
-    // found link from https://stackoverflow.com/questions/34053585/how-do-i-get-a-list-of-all-models-in-laravel
-    // and then finally found on https://gist.github.com/mohammad425/231242958edb640601108bdea7bcf9ac
-    // public function belongings(): array
-    // {
-    //     $composer = json_decode(file_get_contents(base_path('composer.json')), true);
-    //     $models = [];
-    //     foreach ((array)data_get($composer, 'autoload.psr-4') as $namespace => $path) {
-    //         $models = array_merge(collect(\File::allFiles(base_path($path)))
-    //             ->map(function ($item) use ($namespace) {
-    //                 $path = $item->getRelativePathName();
-    //                 return sprintf(
-    //                     '\%s%s',
-    //                     $namespace,
-    //                     strtr(substr($path, 0, strrpos($path, '.')), '/', '\\')
-    //                 );
-    //             })
-    //             ->filter(function ($class) {
-    //                 $valid = false;
-    //                 if (class_exists($class)) {
-    //                     $reflection = new \ReflectionClass($class);
-    //                     $valid = $reflection->isSubclassOf(\Illuminate\Database\Eloquent\Model::class) &&
-    //                         !$reflection->isAbstract();
-    //                 }
-    //                 return $valid;
-    //             })
-    //             ->values()
-    //             ->toArray(), $models);
-    //     }
-    //     $modelInstances = [];
-    //     foreach ($models as $model) {
-    //         $modelInstances[] = app($model);
-    //     }
-    //     return $modelInstances;
-    // }
 
     function fixPostgresSequence()
     {

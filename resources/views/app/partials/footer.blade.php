@@ -4,11 +4,11 @@
 
 </footer>
 
-<script src="{{ asset('js/app.js') }}"></script>
+    @yield('javascript')
 
-@if (Portfolio::setting('site.google_analytics_tracking_id', ''))
+@if (Portfolio::setting(config('ownerUsername').'.google_analytics_tracking_id', ''))
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ Portfolio::setting('site.google_analytics_tracking_id') }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ Portfolio::setting(config('ownerUsername').'.google_analytics_tracking_id') }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -17,6 +17,6 @@
         }
         gtag('js', new Date());
 
-        gtag('config', '{{ Portfolio::setting('site.google_analytics_tracking_id') }}');
+        gtag('config', '{{ Portfolio::setting(config('ownerUsername').'.google_analytics_tracking_id') }}');
     </script>
 @endif

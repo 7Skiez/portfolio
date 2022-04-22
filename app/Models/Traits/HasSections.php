@@ -35,7 +35,7 @@ trait HasSections
                                 $modelInstances[$model->getTable()] = (object)[
                                     'id' => config('ownerMenu')->where('icon_class', '\\' . get_class($model))->first()->section_id,
                                     'title' => config('ownerMenu')->where('icon_class', '\\' . get_class($model))->first()->title,
-                                    'subheadline' =>  config('ownerMenu')->where('icon_class', '\\' . get_class($model))->first()->url,
+                                    'subtitle' =>  config('ownerMenu')->where('icon_class', '\\' . get_class($model))->first()->url,
                                     'items' => $model->whereBelongsTo($this)->featured()->get()
                                 ];
                             }
@@ -49,7 +49,7 @@ trait HasSections
                     $modelInstances[$model] = (object)[
                         'id' =>  config('ownerMenu')->where('icon_class', 'like', $model)->first()->section_id,
                         'title' =>  config('ownerMenu')->where('icon_class', 'like', $model)->first()->title,
-                        'subheadline' =>  config('ownerMenu')->where('icon_class', 'like', $model)->first()->url,
+                        'subtitle' =>  config('ownerMenu')->where('icon_class', 'like', $model)->first()->url,
                         'items' => Portfolio::setting(config('ownerUsername') . '.' . $model)
                     ];
                 }

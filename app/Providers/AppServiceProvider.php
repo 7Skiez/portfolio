@@ -53,7 +53,6 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('settings')) {
             $url = request()->root();
             $portfolio = Voyager::model('Setting')->where('key', 'like', '%.domain')->where('value', 'like', $url)->first();
-
             if ($portfolio) {
                 config(['owner' => User::where('username', '=', $portfolio->group)->first()]);
                 config(['ownerUsername' => config('owner')->username]);

@@ -1,0 +1,1 @@
+<h3 class="mb-12 text-sm xl:text-xl font-bold leading-none text-white text-opacity-30 text-center">{{ $subtitle }}</h3>

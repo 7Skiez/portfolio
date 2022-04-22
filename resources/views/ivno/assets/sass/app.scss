@@ -1,0 +1,83 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer utilities {
+  .bg-trans {
+    background: transparent !important;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+}
+
+[x-cloak] {
+  display: none;
+}
+
+header .overlay {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 150%);
+}
+
+.fade-edge {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 25%, rgba(0,0,0,.8) 75%, rgba(0,0,0,0) 100%);
+}
+
+.text-gradient {
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.axis:hover {
+  transform: scale(1.02);
+  transition-duration: 300ms;
+}
+
+.contact:hover {
+  transform: scale(1.1);
+}
+
+.select-none {
+  user-select: none;
+}
+
+h1.headline span {
+  display: inline-flex;
+}
+
+h1.headline span:nth-child(even) {
+  overflow: hidden;
+  transition: ease-in-out 0.7s;
+  color: white;
+  letter-spacing: -1em;
+  font-size: 3.25rem;
+  line-height: 1.05
+} 
+
+h1.headline:hover span:nth-child(even) {
+  letter-spacing: 0.05em
+}
+
+/****** Scrollbar **********/
+
+::-webkit-scrollbar {
+  background: rgb(32, 35, 36);
+  width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(72, 78, 81);
+  border-radius: 50px;
+  border: 4.5px solid rgb(32, 35, 36);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(85, 92, 96);
+}
