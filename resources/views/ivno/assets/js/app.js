@@ -16,6 +16,7 @@ import { replaceClasses } from "../../../app/assets/js/replaceClasses";
 import { drawRadarChart } from "../../../app/assets/js/radarChart";
 import { mySwiper } from "../../../app/assets/js/swiper";
 import { shiftBackground } from '../../../app/assets/js/shiftBackground'
+import { heroItems } from "../../../app/assets/js/heroItems";
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
@@ -28,8 +29,13 @@ replaceClasses();
 shiftBackground();
 
 /********** SWIPER **********/
-mySwiper();
-drawRadarChart();
+
+fetch("/api/data").then(res => res.json()).then(response => {
+    heroItems(response, 'rotate');
+    mySwiper(response);
+    drawRadarChart(response);
+})
+
 /********** BLINK TEXT **********/
 
 window.blinkText = debounce(1000, function (e) {

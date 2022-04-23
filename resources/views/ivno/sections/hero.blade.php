@@ -3,46 +3,8 @@
 @section('script')
     <?php
         $items = Portfolio::setting('ivno.hero_items');
-
-        if (count($items)) {
-            $splitItems = array_chunk($items, ceil(count($items) / 2));
-            $reduceBy = fn($i) => (Portfolio::setting('ivno.hero_items_degree_rotation') * 2) / (count($i) === 1 ? 2 : count($i) - 1);
-            $degree1 = $degree2 = Portfolio::setting('ivno.hero_items_degree_rotation');
-        }
+        if (count($items)) {$splitItems = array_chunk($items, ceil(count($items) / 2));}
     ?>
-
-    <style>
-        .left>div, .right>div {
-            margin: 1rem 0 1rem 0;
-        }
-        @if (isset($splitItems))
-
-            @foreach ($splitItems[0] as $key => $item)
-            
-                .left>div:nth-child({{ $key + 1 }}) {
-                    transform: rotate({{ $degree1 }}deg);
-                    transform-origin: right;
-                }
-
-                <?php $degree1 -= $reduceBy($splitItems[0]); ?>
-            @endforeach
-
-            @foreach ($splitItems[1] as $key => $item)
-
-                .right>div:nth-child({{ $key + 1 }}) {
-                    transform: rotate({{ $degree2 * -1 }}deg);
-                    transform-origin: left;
-                }
-
-                <?php $degree2 -= $reduceBy($splitItems[1]); ?>
-            @endforeach
-
-        @endif
-
-        .left>div:hover, .right>div:hover {
-            transform: rotate(0)
-        }
-    </style>
 @overwrite
 
 @section('content')

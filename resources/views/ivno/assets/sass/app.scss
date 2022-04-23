@@ -81,3 +81,21 @@ h1.headline:hover span:nth-child(even) {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(85, 92, 96);
 }
+
+#hero {
+  .left>div, .right>div {
+    margin: 1rem 0 1rem 0
+  } 
+
+  .left>div{
+    transform-origin: right;
+  }
+
+  .right>div{
+    transform-origin: left;
+  }
+  
+  .left>div:hover, .right>div:hover {
+    transform: rotate(0deg) !important
+  } 
+}

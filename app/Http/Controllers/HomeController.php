@@ -25,6 +25,7 @@ class HomeController extends \App\Http\Controllers\Controller
     public function data()
     {
         return array_filter([
+            'hero_items' => Portfolio::setting(config('ownerUsername') . '.hero_items_degree_rotation') | Portfolio::setting(config('ownerUsername') . '.hero_items_distance_center'),
             'slider' => array_filter([
                 'activeSlide' => config('owner')->projects->search(fn ($i) => $i->active) + 1 ?? 0
             ]),

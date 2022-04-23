@@ -1,4 +1,17 @@
-<div class="relative flex items-center w-full">
+@extends('app.partials.hero')
+
+@section('script')
+    <?php
+        $items = Portfolio::setting(config('ownerUsername').'.hero_items');
+
+        if (count($items)) {
+            $splitItems = array_chunk($items, ceil(count($items) / 2));
+
+        }
+    ?>
+@overwrite
+
+{{-- <div class="relative flex items-center w-full">
     <div class="relative z-20 mx-auto w-full max-w-7xl">
         <div class="flex flex-col items-center justify-center pt-28 sm:pt-44 md:pb-12 xl:pb-40 lg:flex-row">
             <div class="flex flex-col items-center lg:mb-0">
@@ -20,8 +33,63 @@
                            <code class="flex-auto relative block overflow-auto p-4 bg-trans">{{ Portfolio::setting('jd_description') }}</code>
                         </pre>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+@section('content')
+
+    <div class="flex flex-row w-full justify-center">
+        @if (isset($splitItems) && count($splitItems[0]))
+            <div class="left basis-[30%] hidden xl:flex flex-col items-center justify-center">
+                @foreach ($splitItems[0] as $item)
+                    <div class="cube transition duration-1000">
+                        {!! $item !!}
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        <div class="basis-auto lg:basis-2/5 flex flex-col items-center mx-8 lg:mx-16">
+
+            <div class="relative flex justify-center items-center w-52 h-52 z-1 rounded-full overflow-hidden select-none">
+                <img id="profile_bg_img" src="{{ settingImage('profile_bg_image') }}" alt="profile_bg_image" class="w-[110%] h-[110%] max-w-none object-scale-down duration-500">
+                <img src="{{ image(config('owner')->avatar) }}" alt="IVNO" class="absolute w-52 h-52 object-cover z-10">
+            </div>
+
+            <div class="flex text-center justify-center">
+                <h1 class="headline flex flex-row w-max items-end -mr-6 bg-gradient text-gradient my-3 invisible font-black text-6xl leading-10 tracking-[1.5rem] hover:tracking-wider transition-none duration-700 ease-out delay-150 transform translate-y-12 opacity-0 scale-10 sm:leading-none" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>
+                    @foreach (Portfolio::setting('ivno.headline') as $combo)
+                        <span>{{ $combo[0] }}</span><span>{{ $combo[1] }}</span>
+                    @endforeach
+                </h1>
+            </div>
+            
+            <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ Portfolio::setting('ivno.subheadline') }}</h2>
+            <h2 class="text-xl lg:text-2xl font-medium text-center text-accent mx-auto mb-12">
+                {!! Portfolio::setting('ivno.description') !!}
+            </h2>
+            @if (count(config('owner')->certifications))
+                <div class="flex flex-row flex-wrap justify-center">
+                    @foreach (config('owner')->certifications as $cert)
+                        <a href="{{ $cert->link }}" target="_blank" class="mx-2 my-2">
+                            <img class="w-16 h-16 xl:w-20 xl:h-20 object-scale-down rounded-lg invert hover:scale-110 duration-300" src="{{ image($cert->image) }}" alt="{{ $cert->name }}">
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+        @if (isset($splitItems) && count($splitItems[1]))
+            <div class="right basis-[30%] hidden xl:flex flex-col items-center justify-center">
+                @foreach ($splitItems[1] as $item)
+                    <div class="cube transition duration-1000">
+                        {!! $item !!}
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
+@overwrite

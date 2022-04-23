@@ -14,6 +14,7 @@ window.debounce = debounce;
 import { replaceClasses } from "../../../app/assets/js/replaceClasses";
 import { createBarChart } from "../../../app/assets/js/barChart";
 import { mySwiper } from "../../../app/assets/js/swiper";
+import { heroItems } from "../../../app/assets/js/heroItems";
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
@@ -21,90 +22,13 @@ import { mySwiper } from "../../../app/assets/js/swiper";
 
 replaceClasses();
 
-/********** SHIFT BACKGROUND **********/
-
-(function () {
-    // Init
-    var container = document.querySelector("#hero > div"),
-        inner = document.getElementById("inner");
-
-    // Mouse
-    var mouse = {
-        _x: 0,
-        _y: 0,
-        x: 0,
-        y: 0,
-        updatePosition: function (event) {
-            var e = event || document.event;
-            this.x = e.clientX - this._x;
-            this.y = (e.clientY - this._y) * -1;
-        },
-        setOrigin: function (e) {
-            this._x = e.offsetLeft + Math.floor(e.offsetWidth / 2);
-            this._y = e.offsetTop + Math.floor(e.offsetHeight / 2);
-        },
-        show: function () {
-            return "(" + this.x + ", " + this.y + ")";
-        },
-    };
-
-    // Track the mouse position relative to the center of the container.
-    mouse.setOrigin(container);
-
-    //----------------------------------------------------
-
-    var counter = 0;
-    var refreshRate = 10;
-    var isTimeToUpdate = function () {
-        return counter++ % refreshRate === 0;
-    };
-
-    //----------------------------------------------------
-
-    var onMouseEnterHandler = function (event) {
-        update(event);
-    };
-
-    var onMouseLeaveHandler = function () {
-        inner.style = "";
-    };
-
-    var onMouseMoveHandler = function (event) {
-        if (isTimeToUpdate()) {
-            update(event);
-        }
-    };
-
-    //----------------------------------------------------
-
-    var update = function (event) {
-        mouse.updatePosition(event);
-        updateTransformStyle(
-            (mouse.x / inner.offsetHeight / 2).toFixed(2),
-            (mouse.y / inner.offsetWidth / 2).toFixed(2)
-        );
-    };
-
-    var updateTransformStyle = function (x, y) {
-        // var style = "rotateX(" + x + "deg) rotateY(" + y + "deg)";
-        var style = "translate(" + x * 5 + "px," + y * -5 + "px)";
-        inner.style.transform = style;
-        inner.style.webkitTransform = style;
-        inner.style.mozTranform = style;
-        inner.style.msTransform = style;
-        inner.style.oTransform = style;
-    };
-
-    //--------------------------------------------------------
-
-    container.onmousemove = throttle(30, onMouseMoveHandler);
-    container.onmouseleave = onMouseLeaveHandler;
-    container.onmouseenter = onMouseEnterHandler;
-})();
-
 /********** SWIPER **********/
-mySwiper();
-createBarChart();
+
+fetch("/api/data").then(res => res.json()).then(response => {
+    heroItems(response, 'displace');
+    mySwiper(response);
+    createBarChart(response);
+})
 /********** BLINK TEXT **********/
 
 window.blinkText = debounce(1000, function (e) {
