@@ -16,11 +16,20 @@ import { createBarChart } from "../../../app/assets/js/barChart";
 import { mySwiper } from "../../../app/assets/js/swiper";
 import { heroItems } from "../../../app/assets/js/heroItems";
 
+import * as THREE from 'three'
+
+import App from './interactive-particles/src/scripts/App';
+
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
  */
 
 replaceClasses();
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new App();
+	window.app.init();
+});
 
 /********** SWIPER **********/
 
@@ -69,72 +78,3 @@ window.onscroll = throttle(150, function () {
         window.history.replaceState(null, null, urlHash);
     }
 });
-
-/********** Magnify Around Cursor **********/
-
-(function () {
-    const container = document.querySelector("body");
-    const outerMag = document.createElement("div");
-    outerMag.classList.add("outerMagnifier", "invisible");
-    outerMag.setAttribute("data-replace", '{ "invisible": "visible" }');
-    const innerMag = document.createElement("div");
-    innerMag.classList.add("innerMagnifier");
-
-    container.insertBefore(outerMag, container.firstChild);
-    outerMag.insertBefore(innerMag, outerMag.firstChild);
-
-    //Setting a few more...
-    const outerMagOffset = +(outerMag.getBoundingClientRect().width / 2);
-    const innerMagOffset = +(innerMag.getBoundingClientRect().width / 2);
-
-    const magnification = 1.1;
-    const outerMagBGSize =
-        28 * magnification + "px " + 28 * magnification + "px";
-    const innerMagBGSize =
-        28 * magnification * 1.2 + "px " + 28 * magnification * 1.2 + "px";
-
-    let left,
-        top = null;
-
-    const onMouseMoveHandler = function (e) {
-        const outerMagBGPos =
-            "" -
-            (e.pageX * magnification - outerMagOffset) +
-            "px " +
-            -(e.pageY * magnification - outerMagOffset) +
-            "px";
-        const innerMagBGPos =
-            "" -
-            (e.pageX * magnification * 1.2 - innerMagOffset) +
-            "px " +
-            -(e.pageY * magnification * 1.2 - innerMagOffset) +
-            "px";
-
-        var inMagnifiableArea = {
-            x:
-                e.pageX > outerMagOffset &&
-                e.pageX <
-                    container.getBoundingClientRect().width - outerMagOffset,
-            y:
-                e.pageY > outerMagOffset &&
-                e.pageY <
-                    container.getBoundingClientRect().height - outerMagOffset,
-        };
-
-        if (inMagnifiableArea.x) left = e.pageX - outerMagOffset + "px";
-        if (inMagnifiableArea.y) top = e.pageY - outerMagOffset + "px";
-
-        outerMag.style.cssText = `
-            background-size: ${outerMagBGSize};
-            background-position: ${outerMagBGPos};
-            left: ${left};
-            top: ${top};
-        `;
-        innerMag.style.cssText = `
-            background-size: ${innerMagBGSize};
-            background-position: ${innerMagBGPos};
-        `;
-    };
-
-    container.onmousemove = throttle(75, onMouseMoveHandler);
-})();

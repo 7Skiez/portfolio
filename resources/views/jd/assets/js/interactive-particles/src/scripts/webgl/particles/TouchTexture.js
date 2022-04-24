@@ -23,7 +23,7 @@ export default class TouchTexture {
 		this.texture = new THREE.Texture(this.canvas);
 
 		this.canvas.id = 'touchTexture';
-		// this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
+		this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
 	}
 
 	update(delta) {

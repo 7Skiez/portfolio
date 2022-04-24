@@ -26,9 +26,9 @@
 			</div>
 		</main>
 		<div class="max-w-7xl">
-			<div class="container"></div>
+			<div class="interactive-particles"></div>
 		</div>
 
-		<script src="{{ asset('/js/particles.js') }}"></script>
+		<script src="{{ asset('jd/js/particles.js') }}"></script>
 	</body>
 </html>

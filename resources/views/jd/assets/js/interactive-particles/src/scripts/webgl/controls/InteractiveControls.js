@@ -90,11 +90,17 @@ export default class InteractiveControls extends EventEmitter {
 	}
 
 	onMove(e) {
+		// const canvas = document.querySelector('.interactive-particles canvas')
 		const t = (e.touches) ? e.touches[0] : e;
-		const touch = { x: t.clientX, y: t.clientY };
+		const touch = { x: t.pageX , y: t.pageY};
 
-		this.mouse.x = ((touch.x + this.rect.x) / this.rect.width) * 2 - 1;
-		this.mouse.y = -((touch.y + this.rect.y) / this.rect.height) * 2 + 1;
+
+		this.mouse.x = ((touch.x - this.rect.x) / this.rect.width) * 2 - 1;
+		this.mouse.y = -((touch.y - this.rect.y) / this.rect.height) * 2 + 1;
+
+		// console.log(((touch.x + this.rect.x) / this.rect.width) * 2)
+
+		// console.log(this.mouse.x)
 
 		this.raycaster.setFromCamera(this.mouse, this.camera);
 

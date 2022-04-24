@@ -85,15 +85,33 @@ export default class WebGLView {
 	// ---------------------------------------------------------------------------------------------
 
 	resize() {
+
 		if (!this.renderer) return;
-		this.camera.aspect = window.innerWidth / window.innerHeight;
-		this.camera.updateProjectionMatrix();
 
-		this.fovHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 180 / 2) * this.camera.position.z;
+		const setSize = (imageWidth, imageHeight) => {
 
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+			const aspect = ((window.innerWidth / window.innerHeight) < 1 ? (window.innerWidth / window.innerHeight) * 4 : 4)
+				
+			this.camera.aspect = imageWidth / imageHeight;
+			this.camera.updateProjectionMatrix();
+	
+			this.fovHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 180 / 2) * this.camera.position.z;
+	
+			this.renderer.setSize(imageWidth*aspect, imageHeight*aspect);
+	
+			if (this.interactive) this.interactive.resize();
+			if (this.particles) this.particles.resize();
 
-		if (this.interactive) this.interactive.resize();
-		if (this.particles) this.particles.resize();
+		}
+		
+		setSize()
+		window.onresize = setSize
+		let img = new Image();
+		img.src = this.samples[0];
+		img.onload = function(){
+			setSize(img.width, img.height)
+		}
+
 	}
+
 }
