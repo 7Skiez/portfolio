@@ -5,6 +5,7 @@ namespace App;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use TCG\Voyager\Facades\Voyager;
 
 class Portfolio extends \TCG\Voyager\Voyager
 {

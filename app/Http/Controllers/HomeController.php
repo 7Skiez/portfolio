@@ -18,7 +18,6 @@ class HomeController extends \App\Http\Controllers\Controller
         $seo = Portfolio::seo(config('owner'));
         $sections = config('owner')->sections($modelsOrder);
 
-        // dd($sections);
         return view('app.main', compact('seo', 'sections'));
     }
 
@@ -26,6 +25,7 @@ class HomeController extends \App\Http\Controllers\Controller
     {
         return array_filter([
             'hero_items' => Portfolio::setting(config('ownerUsername') . '.hero_items_degree_rotation') | Portfolio::setting(config('ownerUsername') . '.hero_items_distance_center'),
+            'commands' => Portfolio::setting(config('ownerUsername') . '.command_palette'),
             'slider' => array_filter([
                 'activeSlide' => config('owner')->projects->search(fn ($i) => $i->active) + 1 ?? 0
             ]),

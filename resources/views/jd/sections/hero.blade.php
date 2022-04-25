@@ -39,7 +39,7 @@
 
 @section('content')
 
-    <div class="flex flex-row w-full justify-center">
+    <div class="flex flex-row w-full justify-center console">
         @if (isset($splitItems) && count($splitItems[0]))
             <div class="left basis-[30%] hidden xl:flex flex-col items-center justify-center">
                 @foreach ($splitItems[0] as $item)
@@ -49,9 +49,9 @@
                 @endforeach
             </div>
         @endif
-        <div class="basis-auto lg:basis-2/5 flex flex-col items-center mx-8 lg:mx-16">
+        <div class="basis-auto lg:basis-2/5 flex flex-col items-center mx-8">
 
-            <div class="interactive-particles flex items-center justify-center w-full aspect-square cursor-pointer mb-8"></div>
+            {{-- <div class="interactive-particles flex items-center justify-center w-full aspect-square cursor-pointer mb-8"></div> --}}
 
             {{-- <div class="relative flex justify-center items-center w-52 h-52 z-1 rounded-full overflow-hidden select-none">
                 <img id="profile_bg_img" src="{{ settingImage('profile_bg_image') }}" alt="profile_bg_image" class="w-[110%] h-[110%] max-w-none object-scale-down duration-500">
@@ -65,9 +65,45 @@
             </div>
             
             <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ Portfolio::setting('jd.subheadline') }}</h2>
-            <h2 class="text-lg lg:text-xl font-medium text-center text-accent mx-auto mb-12 space-y-2">
+
+            <div class="w-full px-5 py-5 shadow-lg text-gray-100 text-md font-mono subpixel-antialiased bg-gray-800  rounded-lg leading-normal overflow-hidden">
+
+                <div class="mb-2 flex flex-row-reverse space-x-2">
+                    <div class="h-3 w-3 ml-2 bg-red-500 rounded-full"></div>
+                    <div class="h-3 w-3 bg-orange-300 rounded-full"></div>
+                    <div class="h-3 w-3 bg-green-500 rounded-full"></div>
+                </div>
+
+                <div class="flex flex-col mt-4">
+
+                    <p class="flex-1 loadtime"></p>
+                    
+                    <div class="hidden flex-col dir">
+                        
+                        <div class="flex flex-row">
+                            <span class="flex w-max bg-white mb-1">
+                                <span class="arrow-left border-l-[#012b35]"></span>
+                                <span class="text-black leading-5 font-semibold">{{ config('ownerUsername') . '@' . preg_replace("(^https?://)", "", setting('jd.domain')) }}</span>
+                            </span>
+                            <span class="arrow-left border-l-white mr-2"></span>
+                        </div>
+
+                        <div class="flex w-full text-blue-600 leading-5">
+                            <span class="text-blue-600 mr-2">❯</span><span class="flex command text-gray-300 tracking-tight"></span>
+                        </div>
+
+                    </div>
+
+                    <p class="flex-1 items-center pl-2 text-gray-300 output">
+                        {{-- {!! Portfolio::setting('jd.description') !!} --}}
+                    </p>
+                </div>
+
+            </div>
+            
+            {{-- <h2 class="text-lg lg:text-xl font-medium text-center text-accent mx-auto mb-12 space-y-2">
                 {!! Portfolio::setting('jd.description') !!}
-            </h2>
+            </h2> --}}
             @if (count(config('owner')->certifications))
                 <div class="flex flex-row flex-wrap justify-center">
                     @foreach (config('owner')->certifications as $cert)

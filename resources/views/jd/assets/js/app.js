@@ -17,8 +17,9 @@ import { mySwiper } from "../../../app/assets/js/swiper";
 import { heroItems } from "../../../app/assets/js/heroItems";
 
 import * as THREE from 'three'
+import { commandHandler } from "../../../app/assets/js/commandHandler";
 
-import App from './interactive-particles/src/scripts/App';
+// import App from './interactive-particles/src/scripts/App';
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 fetch("/api/data").then(res => res.json()).then(response => {
     heroItems(response, 'displace');
+    commandHandler(response);
     mySwiper(response);
     createBarChart(response);
 })

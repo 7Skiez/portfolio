@@ -123,9 +123,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 9,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-04-17 06:51:20',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             9 => 
             array (
@@ -135,9 +135,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 10,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-04-17 06:51:33',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             10 => 
             array (
@@ -147,9 +147,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 11,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-04-17 06:51:34',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             11 => 
             array (
@@ -159,9 +159,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 12,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-04-17 06:51:32',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             12 => 
             array (
@@ -171,9 +171,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 13,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-03-14 14:14:57',
-                'updated_at' => '2022-04-17 06:51:20',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             13 => 
             array (
@@ -183,9 +183,9 @@ class SkillsTableSeeder extends Seeder
                 'image' => NULL,
                 'owner_id' => 2,
                 'order' => 14,
-                'featured' => 0,
+                'featured' => 1,
                 'created_at' => '2022-04-02 16:55:52',
-                'updated_at' => '2022-04-17 06:51:20',
+                'updated_at' => '2022-04-21 03:41:22',
             ),
             14 => 
             array (
@@ -209,7 +209,7 @@ class SkillsTableSeeder extends Seeder
                 'order' => 16,
                 'featured' => 0,
                 'created_at' => '2022-04-06 08:21:29',
-                'updated_at' => '2022-04-17 06:51:20',
+                'updated_at' => '2022-04-21 03:41:27',
             ),
             16 => 
             array (
@@ -221,7 +221,7 @@ class SkillsTableSeeder extends Seeder
                 'order' => 17,
                 'featured' => 0,
                 'created_at' => '2022-04-17 04:57:26',
-                'updated_at' => '2022-04-17 06:51:32',
+                'updated_at' => '2022-04-21 03:41:31',
             ),
         ));
         

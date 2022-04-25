@@ -34,7 +34,7 @@ fetch("/api/data").then(res => res.json()).then(response => {
     heroItems(response, 'rotate');
     mySwiper(response);
     drawRadarChart(response);
-})
+});
 
 /********** BLINK TEXT **********/
 

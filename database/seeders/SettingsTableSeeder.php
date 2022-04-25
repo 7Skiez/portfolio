@@ -123,7 +123,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 11,
                 'key' => 'ivno.domain',
                 'display_name' => 'Domain',
-                'value' => 'http://127.0.0.1:39',
+                'value' => 'https://young-sea-08998.herokuapp.com',
                 'details' => NULL,
                 'type' => 'text',
                 'order' => 6,
@@ -286,7 +286,7 @@ class SettingsTableSeeder extends Seeder
             23 => 
             array (
                 'id' => 25,
-                'key' => 'ivno.radar_area_gradient',
+                'key' => 'ivno.chart_gradient',
                 'display_name' => 'Radar Area Gradient',
             'value' => 'linear-gradient(315deg, rgb(84, 74, 219) 0.00%,rgb(245, 88, 166) 100.00%)',
                 'details' => NULL,
@@ -297,7 +297,7 @@ class SettingsTableSeeder extends Seeder
             24 => 
             array (
                 'id' => 26,
-                'key' => 'ivno.radar_area_roundstrokes',
+                'key' => 'ivno.chart_roundness',
                 'display_name' => 'Radar Area Stroke Type',
                 'value' => 'false',
                 'details' => '{"default":"true","options":{"true":"round","false":"jagged"}}',
@@ -360,7 +360,7 @@ class SettingsTableSeeder extends Seeder
             29 => 
             array (
                 'id' => 31,
-                'key' => 'ivno.radar_dot_radius',
+                'key' => 'ivno.chart_dot_radius',
                 'display_name' => 'Radar Dot Radius',
                 'value' => '7',
                 'details' => '',
@@ -371,7 +371,7 @@ class SettingsTableSeeder extends Seeder
             30 => 
             array (
                 'id' => 32,
-                'key' => 'ivno.radar_stroke_width',
+                'key' => 'ivno.chart_stroke_width',
                 'display_name' => 'Radar Stroke Width',
                 'value' => '4',
                 'details' => NULL,
@@ -389,6 +389,264 @@ class SettingsTableSeeder extends Seeder
                 'type' => 'text',
                 'order' => 24,
                 'group' => 'ivno',
+            ),
+            32 => 
+            array (
+                'id' => 34,
+                'key' => 'ivno.magnifier_size',
+                'display_name' => 'Cursor Magnifier Size',
+                'value' => '120',
+                'details' => NULL,
+                'type' => 'number',
+                'order' => 28,
+                'group' => 'ivno',
+            ),
+            33 => 
+            array (
+                'id' => 35,
+                'key' => 'jd.domain',
+                'display_name' => 'Domain',
+                'value' => 'http://127.0.0.1:40',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 29,
+                'group' => 'jd',
+            ),
+            34 => 
+            array (
+                'id' => 36,
+                'key' => 'jd.bg_color',
+                'display_name' => 'Background Color',
+            'value' => 'rgb(0, 0, 0)',
+                'details' => NULL,
+                'type' => 'gradient',
+                'order' => 30,
+                'group' => 'jd',
+            ),
+            35 => 
+            array (
+                'id' => 37,
+                'key' => 'jd.profile_bg_image',
+                'display_name' => 'Profile Background Image',
+                'value' => 'settings\\April2022\\CfV1T1PdDIL6ASjy5WWw.jpg',
+                'details' => NULL,
+                'type' => 'image',
+                'order' => 31,
+                'group' => 'jd',
+            ),
+            36 => 
+            array (
+                'id' => 38,
+                'key' => 'jd.accent_bg_color',
+                'display_name' => 'Accent Background Color',
+            'value' => 'rgba(255, 255, 255, 0.05)',
+                'details' => NULL,
+                'type' => 'color',
+                'order' => 32,
+                'group' => 'jd',
+            ),
+            37 => 
+            array (
+                'id' => 39,
+                'key' => 'jd.main_gradient',
+                'display_name' => 'Main Gradient',
+            'value' => 'linear-gradient(90deg, #CC0D69 0%, #830DCC 100%)',
+                'details' => NULL,
+                'type' => 'gradient',
+                'order' => 33,
+                'group' => 'jd',
+            ),
+            38 => 
+            array (
+                'id' => 40,
+                'key' => 'jd.accent_text_color',
+                'display_name' => 'Accent Text Color',
+                'value' => '#C9C9C9',
+                'details' => NULL,
+                'type' => 'color',
+                'order' => 34,
+                'group' => 'jd',
+            ),
+            39 => 
+            array (
+                'id' => 41,
+                'key' => 'jd.logo',
+                'display_name' => 'Logo',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'image',
+                'order' => 35,
+                'group' => 'jd',
+            ),
+            40 => 
+            array (
+                'id' => 42,
+                'key' => 'jd.logo_blink',
+                'display_name' => 'Logo Blink',
+                'value' => '0',
+                'details' => NULL,
+                'type' => 'checkbox',
+                'order' => 36,
+                'group' => 'jd',
+            ),
+            41 => 
+            array (
+                'id' => 43,
+                'key' => 'jd.headline',
+                'display_name' => 'Headline',
+                'value' => '7Codez',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 37,
+                'group' => 'jd',
+            ),
+            42 => 
+            array (
+                'id' => 44,
+                'key' => 'jd.subheadline',
+                'display_name' => 'Subheadline',
+                'value' => 'Web Developer',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 38,
+                'group' => 'jd',
+            ),
+            43 => 
+            array (
+                'id' => 45,
+                'key' => 'jd.description',
+                'display_name' => 'Description',
+                'value' => '<p>👨&zwj;💻 Creating, exploring, and learning</p>
+<p>↗️ Excited about new challenges</p>
+<p>⏳ Finding shortcuts and using packages</p>
+<p>⚖️ Optimizing written code</p>
+<p>💡 Automating routine tasks</p>',
+                'details' => NULL,
+                'type' => 'rich_text_box',
+                'order' => 39,
+                'group' => 'jd',
+            ),
+            44 => 
+            array (
+                'id' => 46,
+                'key' => 'jd.hero_items',
+                'display_name' => 'Hero Items',
+                'value' => '<p>&lt;-<img class="skill:list" src="https://drive.google.com/uc?id=12SxASQ3SlvMylltwhUnTjAaYIpXyu1Ea&amp;export=media" alt="pink" width="91" height="89" />-&gt;</p>
+<p>&lt;-<img class="project:list" src="https://drive.google.com/uc?id=13HBUuIdtfgmvbbuS_iM3u62QpKgzcpLI&amp;export=media" alt="purple" width="109" height="115" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1dUfCpg3t-clA3FNN3_-rN7-w6UVE74XZ&amp;export=media" alt="gray" width="81" height="75" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=13HBUuIdtfgmvbbuS_iM3u62QpKgzcpLI&amp;export=media" alt="purple" width="109" height="115" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=12SxASQ3SlvMylltwhUnTjAaYIpXyu1Ea&amp;export=media" alt="pink" width="91" height="89" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1OYUaWOC5hw-MZT3le2WuqS1IihzNjxls&amp;export=media" alt="green" width="148" height="145" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1dUfCpg3t-clA3FNN3_-rN7-w6UVE74XZ&amp;export=media" alt="gray" width="81" height="75" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1d7HarScyRbvlRiAz7OCGfc4UYp3IlUrS&amp;export=media" alt="yellow" width="111" height="118" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=12SxASQ3SlvMylltwhUnTjAaYIpXyu1Ea&amp;export=media" alt="pink" width="91" height="89" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1dUfCpg3t-clA3FNN3_-rN7-w6UVE74XZ&amp;export=media" alt="gray" width="81" height="75" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1OYUaWOC5hw-MZT3le2WuqS1IihzNjxls&amp;export=media" alt="green" width="148" height="145" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1d7HarScyRbvlRiAz7OCGfc4UYp3IlUrS&amp;export=media" alt="yellow" width="111" height="118" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=1dUfCpg3t-clA3FNN3_-rN7-w6UVE74XZ&amp;export=media" alt="gray" width="81" height="75" />-&gt;</p>
+<p>&lt;-<img src="https://drive.google.com/uc?id=13HBUuIdtfgmvbbuS_iM3u62QpKgzcpLI&amp;export=media" alt="purple" width="109" height="115" />-&gt;</p>',
+                'details' => '{"prepare":true}',
+                'type' => 'rich_text_box',
+                'order' => 40,
+                'group' => 'jd',
+            ),
+            45 => 
+            array (
+                'id' => 47,
+                'key' => 'jd.chart_roundness',
+                'display_name' => 'Barchart Round Corner Bars',
+                'value' => '0',
+                'details' => '{"default":"true","options":{"true":"round","false":"jagged"}}',
+                'type' => 'checkbox',
+                'order' => 41,
+                'group' => 'jd',
+            ),
+            46 => 
+            array (
+                'id' => 48,
+                'key' => 'jd.chart_gradient',
+                'display_name' => 'Barchart Bar Gradient',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'gradient',
+                'order' => 42,
+                'group' => 'jd',
+            ),
+            47 => 
+            array (
+                'id' => 49,
+                'key' => 'jd.google_analytics_tracking_id',
+                'display_name' => 'Google Analytics Tracking ID',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 43,
+                'group' => 'jd',
+            ),
+            48 => 
+            array (
+                'id' => 50,
+                'key' => 'jd.contacts',
+                'display_name' => 'Contact Me',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'rich_text_box',
+                'order' => 44,
+                'group' => 'jd',
+            ),
+            49 => 
+            array (
+                'id' => 51,
+                'key' => 'jd.footer_image',
+                'display_name' => 'Footer Image',
+                'value' => '',
+                'details' => '{
+"resize": {
+"width": "1000",
+"height": null
+},
+"quality": "70%",
+"upsize": false
+}',
+                'type' => 'image',
+                'order' => 45,
+                'group' => 'jd',
+            ),
+            50 => 
+            array (
+                'id' => 52,
+                'key' => 'jd.footer_bg_glow',
+                'display_name' => 'Footer Glow',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'gradient',
+                'order' => 46,
+                'group' => 'jd',
+            ),
+            51 => 
+            array (
+                'id' => 53,
+                'key' => 'jd.hero_items_distance_center',
+                'display_name' => 'Hero Items Distance From Center',
+                'value' => '50',
+                'details' => NULL,
+                'type' => 'number',
+                'order' => 47,
+                'group' => 'jd',
+            ),
+            52 => 
+            array (
+                'id' => 54,
+                'key' => 'jd.command_palette',
+                'display_name' => 'Command Palette',
+                'value' => '<p>&lt;-skill:list=php <br />laravel <br />html/css <br />tailwind <br />javascript <br />react <br />vue-&gt;</p>
+<p>&lt;-project:list=noorarvand <br />otqproducts <br />portfolio-&gt;</p>
+<p>&lt;-N=t-&gt;</p>
+<p>&lt;-O=r-&gt;</p>',
+                'details' => '{"prepare":true,"split":true}',
+                'type' => 'rich_text_box',
+                'order' => 48,
+                'group' => 'jd',
             ),
         ));
         

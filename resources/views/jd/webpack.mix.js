@@ -19,7 +19,6 @@ let path = require("path");
     .js("./assets/js/app.js", "js")
     .js("../app/assets/js/settings.js", "js")
     .tailwind("./tailwind.config.js")
-    .js("./assets/js/particles.js", "js")
     .webpackConfig({
         module: {
             rules: [
