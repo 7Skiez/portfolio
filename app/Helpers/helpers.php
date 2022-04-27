@@ -14,6 +14,13 @@ if (!function_exists('removeTags')) {
     }
 }
 
+if (!function_exists('removeProtocol')) {
+    function removeProtocol($string)
+    {
+        return preg_replace('(^https?://)', '', $string);
+    }
+}
+
 if (!function_exists('seo')) {
     function seo(App\Models\User $owner)
     {

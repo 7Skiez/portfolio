@@ -89,17 +89,13 @@ class Portfolio extends \TCG\Voyager\Voyager
     {
         if (!empty($file)) {
             return Cache::rememberForever($file, function () use ($file, $default) {
-
                 try {
                     return Storage::disk(config('voyager.storage.disk'))->url(str_replace('\\', '/', $file));
                 } catch (\Exception $e) {
                     return $default;
                 }
             });
-
-            // return Cache::get($file);
         }
-
         return $default;
     }
 

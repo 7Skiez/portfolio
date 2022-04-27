@@ -14,6 +14,8 @@ class HomeController extends \App\Http\Controllers\Controller
 
     public function index()
     {
+        !config('portfolioExists') ? abort(404) : null;
+        
         $modelsOrder = array_filter(myMenu(config('ownerUsername'), '_json')->map(fn ($i) => $i->featured ? $i->icon_class : null)->toArray());
         $seo = Portfolio::seo(config('owner'));
         $sections = config('owner')->sections($modelsOrder);

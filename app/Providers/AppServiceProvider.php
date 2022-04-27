@@ -51,9 +51,13 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (Schema::hasTable('settings')) {
-            $url = request()->root();
-            $portfolio = Voyager::model('Setting')->where('key', 'like', '%.domain')->where('value', 'like', $url)->first();
-            if ($portfolio) {
+            $url = removeProtocol(request()->root());
+            $possibleUrls = ['https://'.$url, 'http://'.$url, $url];
+            $portfolio = Voyager::model('Setting')->where('key', 'like', '%.domain')->whereIn('value', $possibleUrls)->first();
+
+            config(['portfolioExists' => !empty($portfolio)]);
+            
+            if (config('portfolioExists')) {
                 config(['owner' => User::where('username', '=', $portfolio->group)->first()]);
                 config(['ownerUsername' => config('owner')->username]);
                 config(['ownerMenu' => myMenu(config('ownerUsername'), '_json')]);
