@@ -24,20 +24,20 @@
                 <img src="{{ image(config('owner')->avatar) }}" alt="IVNO" class="absolute w-52 h-52 object-cover z-10">
             </div>
 
-            <h1 class="headline flex flex-row w-max items-baseline -mr-6 bg-gradient text-gradient my-6 invisible font-black text-6xl leading-10 tracking-[1.5rem] hover:tracking-wider transition-none duration-700 ease-out delay-150 transform translate-y-12 opacity-0 scale-10 sm:leading-none" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>
+            <h1 class="headline flex flex-row w-max items-baseline -mr-6 bg-gradient text-gradient my-8 invisible font-black text-6xl leading-10 tracking-[1.5rem] hover:tracking-wider transition-none duration-700 ease-out delay-150 transform translate-y-12 opacity-0 scale-10 sm:leading-none" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>
                 @foreach (Portfolio::setting('ivno.headline') as $combo)
                     <span>{{ $combo[0] }}</span><span>{{ $combo[1] }}</span>
                 @endforeach
             </h1>
             
-            <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ Portfolio::setting('ivno.subheadline') }}</h2>
-            <h2 class="text-xl lg:text-2xl font-medium text-center text-accent mx-auto mb-12">
+            <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "opacity-0": "opacity-100" }'>{{ Portfolio::setting('ivno.subheadline') }}</h2>
+            <h2 class="invisible font-medium text-xl lg:text-2xl text-center text-accent mx-auto mb-12 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "opacity-0": "opacity-100" }'>
                 {!! Portfolio::setting('ivno.description') !!}
             </h2>
             @if (count(config('owner')->certifications))
                 <div class="flex flex-row flex-wrap justify-center">
                     @foreach (config('owner')->certifications as $cert)
-                        <a href="{{ $cert->link }}" target="_blank" class="mx-2 my-2">
+                        <a href="{{ $cert->link }}" target="_blank" class="mx-2 my-2 hidden" data-replace='{"hidden": "block"}'>
                             <img class="w-16 h-16 xl:w-20 xl:h-20 object-scale-down rounded-lg invert hover:scale-110 duration-300" src="{{ image($cert->image) }}" alt="{{ $cert->name }}">
                         </a>
                     @endforeach

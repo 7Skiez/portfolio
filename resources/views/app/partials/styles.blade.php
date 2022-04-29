@@ -18,7 +18,8 @@
     }
 
     .text-accent {
-        color: {{ Portfolio::setting(config('ownerUsername').'.accent_text_color') }}
+        --tw-text-opacity: 1;
+        color: {{ substr(str_replace(',', ' ',Portfolio::setting(config('ownerUsername').'.accent_text_color')),0,-1) . " / var(--tw-text-opacity))" }}
     }
 
     text {

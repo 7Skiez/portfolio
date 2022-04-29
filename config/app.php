@@ -179,6 +179,7 @@ return [
         // Faker Service Providers...
         App\Providers\FakerServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
+        App\Providers\HTMLMinServiceProvider::class
     ],
 
     /*

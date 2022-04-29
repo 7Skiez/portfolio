@@ -14,10 +14,14 @@ window.debounce = debounce;
 import { replaceClasses } from "../../../app/assets/js/replaceClasses";
 import { createBarChart } from "../../../app/assets/js/barChart";
 import { mySwiper } from "../../../app/assets/js/swiper";
-import { heroItems } from "../../../app/assets/js/heroItems";
 
-import * as THREE from 'three'
-import { commandHandler } from "../../../app/assets/js/commandHandler";
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import {terminal} from 'jquery.terminal'
+// import { heroItems } from "../../../app/assets/js/heroItems";
+
+// import * as THREE from 'three'
+// import { commandHandler } from "../../../app/assets/js/commandHandler";
 
 // import App from './interactive-particles/src/scripts/App';
 
@@ -25,18 +29,41 @@ import { commandHandler } from "../../../app/assets/js/commandHandler";
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
  */
 
+//  jQuery(function($, undefined) {
+    $('.terminal').terminal({
+        add: function(a, b) {
+            this.echo(a + b);
+        },
+        re: function(re, str) {
+           if (re instanceof RegExp && re.test(str)) {
+              this.echo(str + ' [[;green;]match]');
+           }
+        },
+        foo: 'foo.php',
+        bar: {
+            sub: function(a, b) {
+                this.echo(a - b);
+            }
+        }
+    }, {
+        height: 200,
+        width: 450,
+        prompt: 'demo> '
+    });
+// });
+
 replaceClasses();
 
-document.addEventListener('DOMContentLoaded', () => {
-    window.app = new App();
-	window.app.init();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     window.app = new App();
+// 	window.app.init();
+// });
 
 /********** SWIPER **********/
 
 fetch("/api/data").then(res => res.json()).then(response => {
-    heroItems(response, 'displace');
-    commandHandler(response);
+    // heroItems(response, 'displace');
+    // commandHandler(response);
     mySwiper(response);
     createBarChart(response);
 })

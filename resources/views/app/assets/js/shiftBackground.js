@@ -1,9 +1,9 @@
-import { throttle } from "throttle-debounce";
+import { throttle } from "lodash";
 
 export function shiftBackground() {
     // Init
     var inner = document.querySelector("#profile_bg_img"),
-        container = inner.parentNode.parentNode;
+        container = document.querySelector("#hero");
 
     // Mouse
     var mouse = {
@@ -64,7 +64,7 @@ export function shiftBackground() {
 
     //--------------------------------------------------------
 
-    container.onmousemove = throttle(30, onMouseMoveHandler);
+    container.onmousemove = throttle(onMouseMoveHandler, 100);
     container.onmouseleave = onMouseLeaveHandler;
     container.onmouseenter = onMouseEnterHandler;
 }

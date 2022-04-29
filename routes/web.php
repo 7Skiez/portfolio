@@ -84,13 +84,13 @@ Route::get('/nebula', function () {
     //     'url' => 'linkedin.com/in/amir-ivno-9034b0163',
     // ]);
 
-    // $response = Http::get('https://api.peopledatalabs.com/v5/person/enrich', [
-    //     'api_key' => '5310710d18e0a1992d2d71335cefe73441e9546708be6b0be442a5fc15c4bb5f',
-    //     'pretty' => True,
-    //     'profile' => 'linkedin.com/in/amir-ivno-9034b0163'
-    // ]);
+    $response = Http::get('https://api.peopledatalabs.com/v5/person/enrich', [
+        'api_key' => '5310710d18e0a1992d2d71335cefe73441e9546708be6b0be442a5fc15c4bb5f',
+        'pretty' => True,
+        'profile' => 'linkedin.com/in/amir-ivno-9034b0163'
+    ]);
     
-    // return $response->json();
+    return $response->json();
 
-    dd(Illuminate\Foundation\Application::VERSION, PHP_VERSION);
+    return view('nebula');
 });

@@ -25,7 +25,6 @@
         background-image: {{ Portfolio::setting(config('ownerUsername').'.bg_color') }};
         width: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size') }}px;
         height: {{ Portfolio::setting(config('ownerUsername').'.magnifier_size') }}px;
-        {{-- visibility: hidden; --}}
         display: flex;
         align-items: center;
         justify-content: center;

@@ -66,7 +66,10 @@
             
             <h2 class="invisible font-bold text-xl tracking-wide text-gray-500 mb-4 transition-none duration-700 ease-out transform translate-y-12 opacity-0" data-replace='{ "transition-none": "transition-all", "invisible": "visible", "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }'>{{ Portfolio::setting('jd.subheadline') }}</h2>
 
-            <div class="w-full px-5 py-5 shadow-lg text-gray-100 text-md font-mono subpixel-antialiased bg-gray-800  rounded-lg leading-normal overflow-hidden">
+            <div class="bg-blue-500">
+                <div class="terminal"></div>
+            </div>
+            {{-- <div class="w-full px-5 py-5 shadow-lg text-gray-100 text-md font-mono subpixel-antialiased bg-gray-800  rounded-lg leading-normal overflow-hidden">
 
                 <div class="mb-2 flex flex-row-reverse space-x-2">
                     <div class="h-3 w-3 ml-2 bg-red-500 rounded-full"></div>
@@ -95,11 +98,12 @@
                     </div>
 
                     <p class="flex-1 items-center pl-2 text-gray-300 output">
-                        {{-- {!! Portfolio::setting('jd.description') !!} --}}
                     </p>
                 </div>
 
-            </div>
+            </div> --}}
+
+            
             
             {{-- <h2 class="text-lg lg:text-xl font-medium text-center text-accent mx-auto mb-12 space-y-2">
                 {!! Portfolio::setting('jd.description') !!}

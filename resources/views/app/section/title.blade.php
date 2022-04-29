@@ -1,1 +1,1 @@
-<h2 class="mb-6 text-2xl xl:text-4xl font-bold leading-none text-white text-opacity-80 text-center">{{ $title }}</h2>
+<h2 class="mb-6 text-3xl md:text-4xl font-bold leading-none text-white text-opacity-80 text-center">{{ $title }}</h2>

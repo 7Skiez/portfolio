@@ -38,9 +38,10 @@
         <meta name="description" content="{{ $seo->description }}">
     @endif
 
+    @include(config('ownerUsername').'.partials.styles')
+
     <link href="{{ asset(config('ownerUsername').'/css/app.css') }}" rel="stylesheet">
 
-    @include(config('ownerUsername').'.partials.styles')
 </head>
 
 <body class="flex flex-col min-h-screen bg-color cursor-default">
