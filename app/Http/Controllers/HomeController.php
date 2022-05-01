@@ -40,7 +40,7 @@ class HomeController extends \App\Http\Controllers\Controller
                 'dotRadius' => Portfolio::setting(config('ownerUsername') . '.chart_dot_radius')
             ]),
             'footer' => [
-                'flying_icon' => settingImage('logo')
+                'flyingIcon' => settingImage('logo')
             ]
         ]);
     }

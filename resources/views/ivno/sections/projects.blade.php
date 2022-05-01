@@ -1,23 +1,20 @@
 @extends('app.section.wrapper', compact('section'))
 
 @section('body')
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            @foreach ($section->items as $project)
-                <div class="swiper-slide">
-                    <div class="relative invisible opacity-0 transition-none duration-300">
-                        <img data-src="{{ image($project->image) }}" class="relative w-full -mb-8 rounded-3xl z-10 shadow text-accent swiper-lazy transition-none transform translate-y-4 delay-300 duration-700">
 
-                        <div class="slide-details-container pt-12 p-6 bg-accent rounded-3xl z-1 invisible transition-none transform -translate-y-full delay-300 duration-700">
-                            <h3 class="text-base sm:text-2xl font-semibold leading-6 text-accent text-opacity-80"><span class="text-amber-500"></span>{{ $project->title }}<span class="text-amber-500"></span></h3>
-                            <div class="slide-details">
-                                <p class="mt-4 text-sm sm:text-base text-accent text-opacity-60">{{ Illuminate\Support\Str::limit($project->description, 150, '...') }}</p>
-                                <div class="flex items-center justify-start space-x-6 mt-4">
-                                    <a href="{{ $project->link }}" target="_blank" class="flex items-center justify-center transition-all duration-1000 ease-out transform text-xs sm:text-base leading-none font-bold text-white/20">
-                                        <img src="{{ image('projects/link.png') }}" alt="link icon" class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"> {{ $project->link_title }}
-                                    </a>
-                                </div>
-                            </div>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper flex items-center max-w-7xl">
+            @foreach ($section->items as $project)
+                <div class="swiper-slide relative mx-[6%]">
+                    <img data-src="{{ image($project->image) }}" class="relative w-full -mb-4 rounded-3xl z-10 shadow text-accent swiper-lazy transition-none transform translate-y-4 delay-300 duration-700">
+
+                    <div class="slide-details-container pt-12 p-6 bg-accent rounded-3xl z-1 invisible transition-none transform -translate-y-full delay-300 duration-700">
+                        <h3 class="text-base sm:text-2xl font-semibold leading-6 text-accent text-opacity-80"><span class="text-amber-500"></span>{{ $project->title }}<span class="text-amber-500"></span></h3>
+                        <div class="slide-details overflow-hidden duration-150">
+                            <p class="mt-4 text-sm sm:text-base text-accent text-opacity-60">{{ Illuminate\Support\Str::limit($project->description, 100, '...') }}</p>
+                            <a href="{{ $project->link }}" target="_blank" class="flex items-center justify-start space-x-6 mt-4 transition-all duration-1000 ease-out transform text-xs sm:text-base leading-none font-bold text-white/20">
+                                <img src="{{ image('projects/link.png') }}" alt="link icon" class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"> {{ $project->link_title }}
+                            </a>
                         </div>
                     </div>
                 </div>

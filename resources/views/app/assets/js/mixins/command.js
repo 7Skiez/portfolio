@@ -1,7 +1,8 @@
 import Typewriter from "typewriter-effect/dist/core";
 
-export function commandHandler(response) {
-    const triggerers = document.querySelectorAll(".console img");
+export default {
+    handle: function(response) {
+        const triggerers = document.querySelectorAll(".console img");
     const loadTime = document.querySelector(".console .loadtime");
     const commandBox = document.querySelector(".console .command");
     const outputBox = document.querySelector(".console .output");
@@ -46,13 +47,15 @@ export function commandHandler(response) {
                 // const output = outputArr.map((v, i) => (i + 1 < outputArr.length) ? v + "<br>" : v).join("")
     
                 commandWriter.typeString('<span class="text-orange-300">php</span> artisan ' + triggererCommand).start().pauseFor(750).callFunction(() =>
-    
                     new Typewriter(outputBox, { cursor: "", delay: 3 }).pasteString(output).start()
-    
                 )
             })
         );
 
     }, 0)
+    }
+}
+export function commandHandler(response) {
+    
 
 }

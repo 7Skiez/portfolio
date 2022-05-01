@@ -509,7 +509,9 @@
 
 @section('javascript')
 
-    <script src="{{ asset(config('ownerUsername').'/js/settings.js') }}"></script>
+    <script src="{{ mix('js/manifest.js', 'vendor/voyager') }}"></script>
+    <script src="{{ mix('js/vendor.js', 'vendor/voyager') }}"></script>
+    <script src="{{ mix('js/settings.js', 'vendor/voyager') }}"></script>
 
     <script>
         $('document').ready(function () {

@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-export function svgLinearGradient(gradient, options = { id: "", string: "" }) {
+export default function(gradient, options = { id: "", string: "" }) {
     let svg = d3.select(options.id).append("svg").attr("height", 0);
 
     const angle = gradient.match(

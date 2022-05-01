@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "dependencies": {
+        "@babel/preset-react": "^7.16.7",
+        "create-react-class": "^15.7.0",
+        "laravel-mix": "^6.0.43",
+        "react": "^18.0.0",
+        "react-gcolor-picker": "^1.2.4"
+    },
+    "name": "admin"
+}

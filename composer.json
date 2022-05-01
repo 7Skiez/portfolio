@@ -13,9 +13,12 @@
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "league/mime-type-detection": "^1.11",
         "masbug/flysystem-google-drive-ext": "^2.1",
         "orangehill/iseed": "^3.0",
-        "tcg/voyager": "^1.5"
+        "tcg/voyager": "^1.5",
+        "ext-gd": "*",
+        "ext-imagick": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

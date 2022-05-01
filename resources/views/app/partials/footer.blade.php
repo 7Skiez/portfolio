@@ -1,10 +1,8 @@
-<footer x-data="{ 'showModal': false }" @keydown.escape="showModal = false">
-    
+<footer id="footer" x-data="{ 'showModal': false }" @keydown.escape="showModal = false">
     @yield('footer')
-
 </footer>
 
-    @yield('javascript')
+@yield('javascript')
 
 @if (Portfolio::setting(config('ownerUsername').'.google_analytics_tracking_id', ''))
     <!-- Global site tag (gtag.js) - Google Analytics -->

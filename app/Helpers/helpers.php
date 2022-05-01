@@ -73,3 +73,12 @@ if (!function_exists('listCachedKeys')) {
         return $keys;
     }
 }
+
+if (!function_exists('api_endpoint')) {
+    function api_endpoint($view)
+    {
+        return \Cache::remember('api.'.$view, now()->addMinutes(60), function () {
+            return \Str::random(32);
+        });
+    }
+}

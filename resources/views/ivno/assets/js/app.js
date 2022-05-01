@@ -9,32 +9,43 @@ window.url = document.querySelector("meta[name='url']").getAttribute("content");
 window.csrf = document
     .querySelector("meta[name='csrf-token']")
     .getAttribute("content");
-import { replaceClasses } from "../../../app/assets/js/replaceClasses";
-import { drawRadarChart } from "../../../app/assets/js/radarChart";
-import { mySwiper } from "../../../app/assets/js/swiper";
-import { shiftBackground } from '../../../app/assets/js/shiftBackground'
-import { heroItems } from "../../../app/assets/js/heroItems";
-import { magnifyCursor } from "../../../app/assets/js/magnifyCursor";
-import { blinkText } from "../../../app/assets/js/blinkText";
-window.bt = _.debounce(blinkText, 1000)
-import { updateUrl } from "../../../app/assets/js/updateUrl";
-// import { flyingIcon } from "../../../app/assets/js/flyingIcon";
+window.api = document.querySelector("meta[name='api']").getAttribute("content");
+import cssClasses from "../../../app/assets/js/mixins/cssClasses";
+import cursor from "../../../app/assets/js/mixins/cursor";
+import profileBG from "../../../app/assets/js/mixins/profileBG";
+import sectionTitle from "../../../app/assets/js/mixins/sectionTitle";
+window.bt = _.debounce(sectionTitle.blink, 1000);
+import heroItems from "../../../app/assets/js/mixins/heroItems";
+import swiper from "../../../app/assets/js/mixins/swiper";
+import radarChart from "../../../app/assets/js/mixins/radarChart";
+import url from "../../../app/assets/js/mixins/url";
+import flyingIcons from "../../../app/assets/js/mixins/flyingIcons";
 
 /** Adds some simple class replacers, see the following article to learn more:
  * https://devdojo.com/tnylea/animating-tailwind-transitions-on-page-load
  */
 
-replaceClasses();
+cssClasses.replace();
+
+/********** MAGNIFY AROUND CURSOR **********/
+
+cursor.magnifyAround();
+
 /********** SHIFT BACKGROUND **********/
-shiftBackground();
-/********** SWIPER **********/
-fetch("/api/data").then(res => res.json()).then(response => {
-    heroItems(response, 'rotate');
-    mySwiper(response);
-    drawRadarChart(response);
-    // flyingIcon(response)
-});
+
+profileBG.shift("#profile_bg_img", "#hero");
+
+/********** HANDLE SECTIONS **********/
+
+fetch("/api/" + api)
+    .then((res) => res.json())
+    .then((response) => {
+        heroItems.handle(response, "rotate");
+        swiper.create(response);
+        radarChart.draw(".radarChart", response);
+        flyingIcons.handle(response);
+    });
+
 /********** UPDATE URL **********/
-updateUrl()
-/********** Magnify Around Cursor **********/
-magnifyCursor()
+
+url.update();

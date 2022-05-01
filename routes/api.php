@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/data', 'App\Http\Controllers\HomeController@data');
+Route::get('/'.cache()->get('api.home'), 'App\Http\Controllers\HomeController@data');

@@ -1,20 +1,17 @@
 import * as d3 from "d3";
-import { svgLinearGradient } from "./svgLinearGradient";
+import linearGradientToSvg from "./gradientToSvg";
 
-export function drawRadarChart(response) {
-    if (!document.querySelector(".radarChart")) {return;}
-
+let Obj = {
     /********** RADAR CHART **********/
-
-    function RadarChart(id, data, options) {
+    RadarChart: (id, data, options) => {
         var cfg = {
             maxValue: 0, //What is the value that the biggest circle will represent
             labelFactor: 1.25, //How much farther than the radius of the outer circle should the labels be placed
             wrapWidth: 60, //The number of pixels after which a label needs to be given a new line
             opacityArea: 0.35, //The opacity of the area of the blob
-            dotRadius: parseFloat(response.chart.dotRadius), //The size of the colored circles of each blog
             opacityCircles: 0.1, //The opacity of the circles of each blob
-            strokeWidth: parseFloat(response.chart.strokeWidth), //The width of the stroke around each blob
+            maxValue: 1.5,
+            levels: 0,
         };
 
         //Put all of the options into a variable called cfg
@@ -163,7 +160,6 @@ export function drawRadarChart(response) {
         ///////////// Draw the radar chart blobs ////////////////
         /////////////////////////////////////////////////////////
 
-        // console.log(cfg.roundStrokes ? 'd3.curveCardinalClosed' : 'd3.curveLinearClosed')
         //The radial line function
         var radarLine = d3
             .lineRadial()
@@ -177,10 +173,6 @@ export function drawRadarChart(response) {
             .angle(function (d, i) {
                 return i * angleSlice;
             });
-
-        // if (cfg.roundStrokes) {
-        //     radarLine.curve(d3.curveCardinalClosed);
-        // }
 
         //Create a wrapper for the blobs
         var blobWrapper = g
@@ -294,7 +286,7 @@ export function drawRadarChart(response) {
                     .attr("x", newX)
                     .attr("y", newY)
                     .text(
-                        roundStrokes
+                        cfg.roundStrokes
                             ? d3.format(".0%")(i.value * 1.1 + 0.01)
                             : d3.format(".0%")(i.value)
                     )
@@ -311,123 +303,127 @@ export function drawRadarChart(response) {
             .append("text")
             .attr("class", "tooltip")
             .style("opacity", 0);
-    } //RadarChart
 
+        var texts = document.querySelectorAll("g.axis > text");
+        texts.forEach((t) => Obj.helpers.makeBG(t));
+    },
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
-    //////////////////////////////////////////////////////////////
-    //////////////////////// Set-Up //////////////////////////////
-    //////////////////////////////////////////////////////////////
-
-    var margin = { top: 110, right: 110, bottom: 110, left: 110 },
-        width = 635 - margin.left - margin.right,
-        height = width;
-
-    //////////////////////////////////////////////////////////////
-    ////////////////////////// Data //////////////////////////////
-    //////////////////////////////////////////////////////////////
-
-    const radarItems = response.chart.items;
-
-    var data = [[]];
-
-    let roundStrokes = response.chart.roundness
-        ? JSON.parse(response.chart.roundness.toLowerCase())
-        : false;
-
-    Object.keys(radarItems).forEach((item) => {
-        data[0].push({
-            axis: item,
-            value: roundStrokes
-                ? radarItems[item] * 0.009
-                : radarItems[item] * 0.01,
-        });
-    });
-
-    /////////////////////////////////////////////////////////
-    /////////////////// Helper Function /////////////////////
-    /////////////////////////////////////////////////////////
-
-    // Taken from http://bl.ocks.org/mbostock/7555321
-    // Wraps SVG text
-    function wrap(text, width) {
-        text.each(function () {
-            var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = 1.4, // ems
-                y = text.attr("y"),
-                x = text.attr("x"),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text
-                    .text(null)
-                    .append("tspan")
-                    .attr("x", x)
-                    .attr("y", y)
-                    .attr("dy", dy + "em");
-
-            while ((word = words.pop())) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
+    /********** Helper Function **********/
+    helpers: {
+        // Taken from http://bl.ocks.org/mbostock/7555321
+        // Wraps SVG text
+        wrap: (text, width) => {
+            text.each(function () {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.4, // ems
+                    y = text.attr("y"),
+                    x = text.attr("x"),
+                    dy = parseFloat(text.attr("dy")),
                     tspan = text
+                        .text(null)
                         .append("tspan")
                         .attr("x", x)
                         .attr("y", y)
-                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                        .text(word);
+                        .attr("dy", dy + "em");
+
+                while ((word = words.pop())) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text
+                            .append("tspan")
+                            .attr("x", x)
+                            .attr("y", y)
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                            .text(word);
+                    }
                 }
-            }
+            });
+        },
+
+        // Creates background for radar items text
+        makeBG: (e) => {
+            var svgns = "http://www.w3.org/2000/svg";
+            var bounds = e.getBBox();
+            var bg = document.createElementNS(svgns, "rect");
+            var style = getComputedStyle(e);
+            var padding_top = parseInt(style["padding-top"]);
+            var padding_left = parseInt(style["padding-left"]);
+            var padding_right = parseInt(style["padding-right"]);
+            var padding_bottom = parseInt(style["padding-bottom"]);
+            bg.setAttribute("x", bounds.x - parseInt(style["padding-left"]));
+            bg.setAttribute("y", bounds.y - parseInt(style["padding-top"]));
+            bg.setAttribute(
+                "width",
+                bounds.width + padding_left + padding_right
+            );
+            bg.setAttribute(
+                "height",
+                bounds.height + padding_top + padding_bottom
+            );
+            bg.setAttribute("fill", style["background-color"]);
+            bg.setAttribute("rx", style["border-radius"]);
+            e.parentNode.insertBefore(bg, e);
+        },
+    },
+
+    draw: (id, response) => {
+        if (!document.querySelector(id)) return;
+
+        /********** Set-Up **********/
+
+        var margin = { top: 110, right: 110, bottom: 110, left: 110 },
+            width = 635 - margin.left - margin.right,
+            height = width;
+
+        /********** Data **********/
+
+        const radarItems = response.chart.items;
+
+        var data = [[]];
+
+        let roundStrokes = response.chart.roundness
+            ? JSON.parse(response.chart.roundness.toLowerCase())
+            : false;
+
+        Object.keys(radarItems).forEach((item) => {
+            data[0].push({
+                axis: item,
+                value: roundStrokes
+                    ? radarItems[item] * 0.009
+                    : radarItems[item] * 0.01,
+            });
         });
-    } //wrap
 
-    //////////////////////////////////////////////////////////////
-    //////////////////// Draw the Chart //////////////////////////
-    //////////////////////////////////////////////////////////////
+        /********** Draw the Chart **********/
 
-    svgLinearGradient(response.chart.gradient, {
-        id: "#" + response.chart.id,
-    });
+        linearGradientToSvg(response.chart.gradient, {
+            id: "#" + response.chart.id,
+        });
 
-    var color = d3.scaleOrdinal().range(["url(#grad)"]);
+        var color = d3.scaleOrdinal().range(["url(#grad)"]);
 
-    var radarChartOptions = {
-        w: width,
-        h: height,
-        margin: margin,
-        maxValue: 1.5,
-        levels: 0,
-        roundStrokes: roundStrokes,
-        color: color,
-    };
+        var radarChartOptions = {
+            dotRadius: parseFloat(response.chart.dotRadius), //The size of the colored circles of each blog
+            strokeWidth: parseFloat(response.chart.strokeWidth), //The width of the stroke around each blob
+            w: width,
+            h: height,
+            margin: margin,
+            roundStrokes: roundStrokes,
+            color: color,
+        };
 
-    //Call function to draw the Radar chart
-    RadarChart(".radarChart", data, radarChartOptions);
+        //Call function to draw the Radar chart
+        Obj.RadarChart(id, data, radarChartOptions);
+    },
+};
 
-    function makeBG(e) {
-        var svgns = "http://www.w3.org/2000/svg";
-        var bounds = e.getBBox();
-        var bg = document.createElementNS(svgns, "rect");
-        var style = getComputedStyle(e);
-        var padding_top = parseInt(style["padding-top"]);
-        var padding_left = parseInt(style["padding-left"]);
-        var padding_right = parseInt(style["padding-right"]);
-        var padding_bottom = parseInt(style["padding-bottom"]);
-        bg.setAttribute("x", bounds.x - parseInt(style["padding-left"]));
-        bg.setAttribute("y", bounds.y - parseInt(style["padding-top"]));
-        bg.setAttribute("width", bounds.width + padding_left + padding_right);
-        bg.setAttribute("height", bounds.height + padding_top + padding_bottom);
-        bg.setAttribute("fill", style["background-color"]);
-        bg.setAttribute("rx", style["border-radius"]);
-        e.parentNode.insertBefore(bg, e);
-    }
-
-    var texts = document.querySelectorAll("g.axis > text");
-
-    texts.forEach((t) => makeBG(t));
-}
+export default Obj;

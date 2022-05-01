@@ -1,7 +1,4 @@
 const mix = require("laravel-mix");
-
-require("laravel-mix-tailwind");
-require("laravel-mix-purgecss");
 let path = require("path");
 /*
  |--------------------------------------------------------------------------
@@ -14,10 +11,8 @@ let path = require("path");
  |
  */
 
-mix.setPublicPath("../../../public/ivno")
-    .sass("./assets/sass/app.scss", "css")
-    .js("./assets/js/app.js", "js")
-    .tailwind("./tailwind.config.js")
+mix.setPublicPath("../../../../../public/vendor/voyager")
+    .js("./js/settings.js", "js")
     .webpackConfig({
         resolve: {
             modules: [path.resolve(__dirname, "node_modules")],
