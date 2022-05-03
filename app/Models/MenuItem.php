@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Featureable;
+use App\Traits\Featureable;
 use Illuminate\Support\Facades\Auth;
 
 /**

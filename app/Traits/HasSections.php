@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Traits;
 
 use App\Facades\Portfolio;
 use ErrorException;

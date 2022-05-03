@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Featureable;
-use App\Models\Traits\HasOwner;
+use App\Traits\Featureable;
+use App\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;

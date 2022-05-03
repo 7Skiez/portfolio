@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Traits;
 
-use App\Facades\Portfolio;
 use ErrorException;
 use Exception;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -45,8 +44,6 @@ trait HasBelongings
             try {
                 $model = app($model);
 
-                $relationships = [];
-
                 foreach ((new ReflectionClass($model))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
                     if (
                         $method->class != get_class($model) ||
@@ -65,20 +62,6 @@ trait HasBelongings
                             if (str_starts_with($type, 'Belongs') && $related == get_class($this)) {
                                 $modelInstances[] = $model->whereBelongsTo($this)->get();
                             }
-
-                            /** 
-                             * Using Collection:  
-                             * 
-                                $relationships[] = [
-                                    'model' => get_class($model),
-                                    'name' => $method->getName(),
-                                    'type' => (new ReflectionClass($return))->getShortName(),
-                                    'related' => (new ReflectionClass($return->getRelated()))->getName()
-                                ];
-                                $belongingModel = collect($relationships)->where('type', 'like', 'BelongsTo')->where('related', get_class($this))->first()['model'];
-                                $modelInstances[] = app($belongingModel)->all();
-                            */
-
                         }
                     } catch (ErrorException $e) {}
                 }

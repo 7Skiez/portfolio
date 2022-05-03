@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasSections;
+use App\Traits\HasSections;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
