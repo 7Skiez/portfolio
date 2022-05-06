@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-gd": "*",
+        "crocodile2u/imgproxy-php": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "htmlmin/htmlmin": "^9.0",
         "intervention/image": "^2.7",
@@ -16,9 +18,7 @@
         "league/mime-type-detection": "^1.11",
         "masbug/flysystem-google-drive-ext": "^2.1",
         "orangehill/iseed": "^3.0",
-        "tcg/voyager": "^1.5",
-        "ext-gd": "*",
-        "ext-imagick": "*"
+        "tcg/voyager": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

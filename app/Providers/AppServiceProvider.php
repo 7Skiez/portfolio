@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         Voyager::useModel('Menu', \App\Models\Menu::class);
         Voyager::useModel('MenuItem', \App\Models\MenuItem::class);
 
-        if (config('voyager.storage.disk') === 'public') {
+        if (config('filesystems.default') === 'public') {
             try {
                 readlink(public_path('\storage\\'));
             } catch (Exception $e) {

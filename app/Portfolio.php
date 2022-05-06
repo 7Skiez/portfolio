@@ -5,7 +5,7 @@ namespace App;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use TCG\Voyager\Facades\Voyager;
+use League\Flysystem\UnableToReadFile;
 
 class Portfolio extends \TCG\Voyager\Voyager
 {
@@ -91,9 +91,7 @@ class Portfolio extends \TCG\Voyager\Voyager
             return Cache::rememberForever($file, function () use ($file, $default) {
                 try {
                     return Storage::disk(config('voyager.storage.disk'))->url(str_replace('\\', '/', $file));
-                } catch (\Exception $e) {
-                    return $default;
-                }
+                } catch (UnableToReadFile $e) {}
             });
         }
         return $default;
