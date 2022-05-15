@@ -88,7 +88,7 @@ class Portfolio extends \TCG\Voyager\Voyager
     public function image($file, $default = '')
     {
         if (!empty($file)) {
-            return Cache::rememberForever($file, function () use ($file, $default) {
+            return Cache::rememberForever($file, function () use ($file) {
                 try {
                     return Storage::disk(config('voyager.storage.disk'))->url(str_replace('\\', '/', $file));
                 } catch (UnableToReadFile $e) {}
@@ -122,7 +122,7 @@ class Portfolio extends \TCG\Voyager\Voyager
     function fixPostgresSequence()
     {
         if (config('database.default') === 'pgsql') {
-            $tables = \DB::select('SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\' ORDER BY table_name;');
+            $tables = \DB::connection()->getDoctrineSchemaManager()->listTableNames();
             foreach ($tables as $table) {
                 if (\Schema::hasColumn($table->table_name, 'id')) {
                     $seq = \DB::table($table->table_name)->max('id') + 1;
