@@ -46,8 +46,7 @@ class convertImages extends Command
             $hasSameMT = ($detectMT($file) === $detectMT('.' . $this->argument('format')));
             $desiredCopyExists = $fileNames->contains(rtrim($file, '.' . File::extension($file)) . $this->argument('format'));
             return ($fileIsImg && !$hasSameMT && !$desiredCopyExists);
-
-        })->transform(fn ($oldName) => str_replace('/', '\\', $oldName));
+        });
 
         $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
 
@@ -74,25 +73,29 @@ class convertImages extends Command
                         // $columns = \Schema::getColumnListing($table);
                         $records = DB::table($table)->get()->filter(function ($record) use ($oldNames) {
                             $contains = [];
-                            foreach ($record as $feild) $contains[] = $oldNames->containsStrict($feild);
+                            foreach ($record as $feild) $contains[] = $oldNames->containsStrict(str_replace('\\', '/', $feild));
                             return count(array_filter($contains));
                         });
+
+                        if ($records->isEmpty()) continue;
+
+                        $records->transform(fn ($record) => str_replace('\\', '/', (array)$record));
+
                         foreach ($records as $record) {
-                            $feilds = array_filter((array)$record, fn ($f) => $f === $oldName);
+                            $feilds = array_filter((array)$record, fn ($feild) => str_replace('\\', '/', $feild) === $oldName);
                             if (!$feilds) continue;
                             $update = [];
                             foreach ($feilds as $k => $v) $update[$k] = $newName;
-                            DB::table($table)->where(array_search($oldName, $feilds), $oldName)->update($update);
+                            $feildName = array_search($oldName, $feilds);
+                            DB::table($table)->where($feildName, 'like', '%' . File::name($oldName) . '.' . File::extension($oldName))->update($update);
                         }
                     }
                     Storage::disk(config('voyager.storage.disk'))->delete($oldName);
                     dump([$oldName => 'Conversion Successful']);
-
                 } else {
                     dump([$newName => 'Saving Failed']);
                     continue;
                 }
-                
             } else dump([
                 $oldName => 'Conversion Failed',
                 'builtUrl' => $builtUrl,

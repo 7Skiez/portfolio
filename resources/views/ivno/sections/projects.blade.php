@@ -13,7 +13,7 @@
                         <div class="slide-details overflow-hidden duration-150">
                             <p class="mt-4 text-sm sm:text-base text-accent text-opacity-60">{{ Illuminate\Support\Str::limit($project->description, 100, '...') }}</p>
                             <a href="{{ $project->link }}" target="_blank" class="flex items-center justify-start space-x-6 mt-4 transition-all duration-1000 ease-out transform text-xs sm:text-base leading-none font-bold text-white/20">
-                                <img src="{{ image('projects/link.png') }}" alt="link icon" class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"> {{ $project->link_title }}
+                                <img src="{{ image('projects/link.avif') }}" alt="link icon" class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"> {{ $project->link_title }}
                             </a>
                         </div>
                     </div>
