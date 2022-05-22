@@ -1,0 +1,125 @@
+@import "../../../app/assets/sass/app.scss";
+
+@font-face {
+    font-family: IRANYekan;
+    font-style: normal;
+    font-weight: 300;
+    src: url("fonts/woff/iranyekanweblight.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url("fonts/ttf/iranyekanweblight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: IRANYekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url("fonts/woff/iranyekanwebregular.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url("fonts/ttf/iranyekanwebregular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: IRANYekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url("fonts/woff/iranyekanwebbold.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url("fonts/ttf/iranyekanwebbold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Peyda;
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/woff/PeydaWeb-Regular.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("fonts/ttf/Peyda-Regular.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: Peyda;
+    font-style: normal;
+    font-weight: 500;
+    src: url("fonts/woff/PeydaWeb-Medium.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("fonts/ttf/Peyda-Medium.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: Peyda;
+    font-style: normal;
+    font-weight: 700;
+    src: url("fonts/woff/PeydaWeb-Bold.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("fonts/ttf/Peyda-Bold.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: Peyda;
+    font-style: normal;
+    font-weight: 800;
+    src: url("fonts/woff/PeydaWeb-ExtraBold.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("fonts/ttf/Peyda-ExtraBold.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: Peyda;
+    font-style: normal;
+    font-weight: 900;
+    src: url("fonts/woff/PeydaWeb-Black.woff") format("woff"),
+        /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("fonts/ttf/Peyda-Black.ttf")
+            format("truetype");
+}
+
+#hero {
+    .fade-edge {
+        -webkit-mask-image: radial-gradient(
+            rgba(0, 0, 0, 1) 30%,
+            rgba(0, 0, 0, 0) 75%
+        );
+    }
+}
+
+@layer utilities {
+    header .overlay {
+        -webkit-mask-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 1) 20%,
+            rgba(0, 0, 0, 0.75) 80%,
+            rgba(0, 0, 0, 0) 100%
+        );
+    }
+}
+
+.shine {
+    background: transparent -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from(transparent),
+            to(transparent),
+            color-stop(0.5, rgba(255, 255, 255, 0.5))
+        ) 0 0 no-repeat;
+    // -webkit-background-size: 200px;
+    // color: $text-color;
+    -webkit-background-clip: text;
+    -webkit-animation-name: shine;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    // text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+@-webkit-keyframes shine {
+    0% {
+        background-position: -1000px;
+    }
+    100% {
+        background-position: 1000px;
+    }
+}
+
+/*referred from https://www.codeseek.co/wdmg/heart-flying-animation-with-css-MvvYQO 
+
+changed keyframes a bit and reduced scaling
+*/

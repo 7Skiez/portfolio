@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {        
+    {
         $this->loadHelpers();
 
         $loader = AliasLoader::getInstance();
@@ -52,11 +52,12 @@ class AppServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('settings')) {
             $url = removeProtocol(request()->root());
-            $possibleUrls = ['https://'.$url, 'http://'.$url, $url];
+            $possibleUrls = ['https://' . $url, 'http://' . $url, $url];
+
             $portfolio = Voyager::model('Setting')->where('key', 'like', '%.domain')->whereIn('value', $possibleUrls)->first();
 
             config(['portfolioExists' => !empty($portfolio)]);
-            
+
             if (config('portfolioExists')) {
                 config(['owner' => User::where('username', '=', $portfolio->group)->first()]);
                 config(['ownerUsername' => config('owner')->username]);

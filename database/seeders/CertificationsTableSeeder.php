@@ -23,7 +23,7 @@ class CertificationsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'title' => 'Certified Designer On IDF',
-                'image' => 'certifications\\March2022\\Fre6dabYmp1N61LvQ05Q.png',
+                'image' => 'certifications/March2022/Fre6dabYmp1N61LvQ05Q.avif',
                 'link' => 'http://www.mueller.biz/magnam-voluptatem-sint-aliquam-nihil.html',
                 'bg_rotation' => 245,
                 'owner_id' => 2,
@@ -36,7 +36,7 @@ class CertificationsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'title' => 'Verified Designer On Uxcel',
-                'image' => 'certifications\\March2022\\HFNRQnc20IgJxlePNgvO.png',
+                'image' => 'certifications/March2022/HFNRQnc20IgJxlePNgvO.avif',
                 'link' => 'http://www.lind.com/aliquam-dicta-nobis-ipsa',
                 'bg_rotation' => 14,
                 'owner_id' => 2,

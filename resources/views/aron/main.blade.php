@@ -45,7 +45,7 @@
 
 </head>
 
-<body class="flex flex-col min-h-screen bg-color cursor-default">
+<body class="flex flex-col min-h-screen bg-color cursor-default" style="direction: rtl">
 
     @include(config('ownerUsername').'.partials.header')
 

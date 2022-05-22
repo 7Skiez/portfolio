@@ -23,7 +23,7 @@ class ToolsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'name' => 'Et sunt.',
-                'image' => 'tools\\March2022\\40TT0PvzF0WKk4UacumH.png',
+                'image' => 'tools/March2022/40TT0PvzF0WKk4UacumH.avif',
                 'link' => 'http://www.haag.com/vero-quas-et-laboriosam.html',
                 'owner_id' => 2,
                 'order' => 1,
@@ -35,7 +35,7 @@ class ToolsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'name' => 'Quo.',
-                'image' => 'tools\\March2022\\KZEx1bTBR0Y5xLZb0ZrU.png',
+                'image' => 'tools/March2022/KZEx1bTBR0Y5xLZb0ZrU.avif',
                 'link' => 'http://www.ondricka.com/voluptatem-debitis-atque-facilis-tempore-non-neque.html',
                 'owner_id' => 2,
                 'order' => 2,
@@ -47,7 +47,7 @@ class ToolsTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'name' => 'Fuga et.',
-                'image' => 'tools\\March2022\\AXyoEhhYAvneswdg6Ic2.png',
+                'image' => 'tools/March2022/AXyoEhhYAvneswdg6Ic2.avif',
                 'link' => 'http://www.volkman.com/consectetur-sequi-sint-et.html',
                 'owner_id' => 2,
                 'order' => 3,

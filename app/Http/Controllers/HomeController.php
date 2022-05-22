@@ -20,7 +20,7 @@ class HomeController extends \App\Http\Controllers\Controller
         $seo = Portfolio::seo(config('owner'));
         $sections = config('owner')->sections($modelsOrder);
 
-        return view('app.main', compact('seo', 'sections'));
+        return view((config('ownerUsername')=='aron'?'aron.main':'app.main'), compact('seo', 'sections'));
     }
 
     public function data()

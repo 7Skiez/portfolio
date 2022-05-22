@@ -23,7 +23,7 @@ class MediaTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'name' => 'Nobis.',
-                'image' => 'social_media\\March2022\\PfwdZdEaOkHeXkyALio9.png',
+                'image' => 'social_media/March2022/PfwdZdEaOkHeXkyALio9.avif',
                 'link' => 'http://www.reilly.com/quae-quo-mollitia-sunt-doloribus-hic-tenetur',
                 'owner_id' => 2,
                 'order' => 1,
@@ -35,7 +35,7 @@ class MediaTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'name' => 'Rerum.',
-                'image' => 'social_media\\March2022\\SVYVtRgnITVXrORrbxQh.png',
+                'image' => 'social_media/March2022/SVYVtRgnITVXrORrbxQh.avif',
                 'link' => 'http://www.gulgowski.biz/consequatur-blanditiis-tenetur-dolor-provident-aliquam',
                 'owner_id' => 2,
                 'order' => 2,
@@ -47,7 +47,7 @@ class MediaTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'name' => 'Quo.',
-                'image' => 'social_media\\March2022\\8V8dZjgMswLrrVrde0Ma.png',
+                'image' => 'social_media/March2022/8V8dZjgMswLrrVrde0Ma.avif',
                 'link' => 'http://www.brakus.biz/doloribus-pariatur-ipsa-tenetur-temporibus-explicabo-esse-et',
                 'owner_id' => 2,
                 'order' => 3,
